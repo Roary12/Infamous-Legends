@@ -1,0 +1,177 @@
+buildscript {
+    repositories {
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+    }
+    dependencies {
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+    }
+}
+
+plugins {
+    id 'eclipse'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '5.1.+'
+}
+
+apply plugin: 'org.spongepowered.mixin'
+
+mixin {
+    add sourceSets.main, "infamous_legends.refmap.json"
+
+    config "infamous_legends.mixins.json"
+}
+
+dependencies {
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+version = '1.0'
+group = 'com.infamous.infamous_legends'
+archivesBaseName = 'modid'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
+minecraft {
+    mappings channel: 'official', version: '1.19.2'
+
+    //accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'infamous_legends'
+
+            mods {
+                infamous_legends {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'infamous_legends'
+
+            mods {
+                infamous_legends {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        gameTestServer {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            property 'forge.enabledGameTestNamespaces', 'infamous_legends'
+
+            mods {
+                infamous_legends {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'infamous_legends', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                infamous_legends {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        name = "CurseForge Maven" //Base
+		url = "https://www.cursemaven.com"
+        content {
+            includeGroup "curse.maven"
+        }
+	}
+   	maven {
+		name = "GeckoLib Maven" //Geckolib
+		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+	}
+    maven { 
+        name = "IllusiveC4 Maven" //Curios
+        url = "https://maven.theillusivec4.top/" 
+    }
+    flatDir {
+        dirs 'mods'
+    }
+}
+	
+dependencies {
+    minecraft 'net.minecraftforge:forge:1.19.2-43.2.8'
+    
+    //implementation fg.deobf("dungeons_libraries:dungeons_libraries:${mc_version}-${libraries_version}")
+    
+    implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.19:${geckolib_version}")
+    
+    runtimeOnly    fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
+    compileOnly    fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
+    
+    
+    
+    runtimeOnly fg.deobf("curse.maven:mob-battle-mod-version-268746:${mob_battle_mod_version}")
+    
+}
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "Infamous Legends",
+                "Specification-Vendor"    : "Infamous Mods",
+                "Specification-Version"   : "1",
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "Infamous Mods",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}

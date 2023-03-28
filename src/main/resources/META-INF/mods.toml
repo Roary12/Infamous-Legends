@@ -1,0 +1,33 @@
+
+modLoader="javafml"
+loaderVersion="[43,)"
+license="MIT License"
+[[mods]]
+modId="infamous_legends"
+version="${file.jarVersion}"
+displayName="Infamous Legends"
+logoFile="examplemod.png"
+credits="Infamous Mods"
+authors="the_infamous_1, Alexander's Fun And Games, Patrigan, Meme Man"
+
+description='''
+Infamous Legends is a mod that adds features from Minecraft Legends to Minecraft: Java Edition!
+'''
+[[dependencies.infamous_legends]]
+    modId="forge"
+    mandatory=true
+    versionRange="[43,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.infamous_legends]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.19,1.19.3)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.infamous_legends]]
+    modId="dungeons_libraries"
+    mandatory=false #SWITCH TO MANDATORY ONCE DUNGEONS LIBRARIES IS RE-ADDED TO THE PROJECT
+    versionRange="[1.19.2-3.0.7-alpha,)"
+    ordering="NONE"
+    side="BOTH"

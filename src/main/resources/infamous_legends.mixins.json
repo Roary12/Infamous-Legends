@@ -1,0 +1,13 @@
+  {
+	"required": true,
+	"package": "com.infamous.infamous_legends.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"refmap": "infamous_legends.refmap.json",
+	"mixins": [
+
+	],
+	"client": [
+
+	],
+	"minVersion": "0.8"
+  }
