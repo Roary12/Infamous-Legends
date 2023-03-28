@@ -1,4 +1,8 @@
 {
+	"entity.infamous_legends.piglin_runt" : "Piglin Runt",
+	
+	"item.infamous_legends.piglin_runt_spawn_egg" : "Piglin Runt Spawn Egg",
+	
 	"itemGroup.infamous_legends_mobs": "Infamous Legends Mobs",
 	"itemGroup.infamous_legends_items": "Infamous Legends Items",
 	"itemGroup.infamous_legends_blocks": "Infamous Legends Blocks"

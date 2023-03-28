@@ -4,11 +4,9 @@ package com.infamous.infamous_legends.models;
 // Paste this class into your mod and generate all required imports
 
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.PiglinRuntSineWaveAnimations;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.infamous.infamous_legends.entities.PiglinRunt;
 
 import net.minecraft.client.model.HierarchicalModel;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeDeformation;
@@ -17,12 +15,8 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 
-public class PiglinRuntModel<T extends Entity> extends HierarchicalModel<T> {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("modid", "piglin_runt"), "main");
+public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> {
 	private final ModelPart root;
 	public final ModelPart everything;
 	public final ModelPart body;
@@ -46,7 +40,7 @@ public class PiglinRuntModel<T extends Entity> extends HierarchicalModel<T> {
 		this.rightEar = this.head.getChild("rightEar");
 		this.leftArm = this.body.getChild("leftArm");
 		this.rightArm = this.body.getChild("rightArm");
-		this.rightHand = this.body.getChild("rightHand");
+		this.rightHand = this.rightArm.getChild("rightHand");
 		this.leftLeg = this.everything.getChild("leftLeg");
 		this.rightLeg = this.everything.getChild("rightLeg");
 	}

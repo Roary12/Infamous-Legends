@@ -1,5 +1,6 @@
 package com.infamous.infamous_legends;
 
+import com.infamous.infamous_legends.entities.PiglinRunt;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.network.Messages;
@@ -35,7 +36,7 @@ public class InfamousLegends {
 		}
 
 	private void addAttributes(final EntityAttributeCreationEvent event) {
-	        //event.put(EntityTypeInit.MOB.get(), Mob.createAttributes().build());
+	        event.put(EntityTypeInit.PIGLIN_RUNT.get(), PiglinRunt.createAttributes().build());
 	}
 	
     public void commonSetup(final FMLCommonSetupEvent event) {    
