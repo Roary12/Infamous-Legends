@@ -1,11 +1,14 @@
 package com.infamous.infamous_legends;
 
+import com.infamous.infamous_legends.network.Messages;
+
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod("infamous_legends")
@@ -22,6 +25,8 @@ public class InfamousLegends {
 
 			//EntityTypeInit.ENTITY_TYPES.register(bus);
 
+			bus.addListener(this::commonSetup);
+			
 			MinecraftForge.EVENT_BUS.register(this);
 
 		}
@@ -29,4 +34,8 @@ public class InfamousLegends {
 	private void addAttributes(final EntityAttributeCreationEvent event) {
 	        //event.put(EntityTypeInit.MOB.get(), Mob.createAttributes().build());
 	}
+	
+    public void commonSetup(final FMLCommonSetupEvent event) {    
+    	Messages.register();
+    }
 }
