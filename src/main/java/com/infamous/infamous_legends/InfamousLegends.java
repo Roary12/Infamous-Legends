@@ -1,5 +1,7 @@
 package com.infamous.infamous_legends;
 
+import com.infamous.infamous_legends.init.EntityTypeInit;
+import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.network.Messages;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -22,9 +24,10 @@ public class InfamousLegends {
 			IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 			
 			bus.addListener(this::addAttributes);
-
-			//EntityTypeInit.ENTITY_TYPES.register(bus);
-
+		
+			EntityTypeInit.ENTITY_TYPES.register(bus);
+			ItemInit.ITEMS.register(bus);
+			
 			bus.addListener(this::commonSetup);
 			
 			MinecraftForge.EVENT_BUS.register(this);
