@@ -3,9 +3,12 @@ package com.infamous.infamous_legends.models;
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
+import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.PiglinRuntSineWaveAnimations;
 import com.infamous.infamous_legends.entities.PiglinRunt;
+import com.infamous.infamous_legends.utils.MiscUtils;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -82,7 +85,7 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, this.partialTicks, 1, true);
+		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, true);
 	}
 	
 	@Override

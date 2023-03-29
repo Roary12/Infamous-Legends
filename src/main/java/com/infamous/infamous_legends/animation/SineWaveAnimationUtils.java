@@ -2,13 +2,15 @@ package com.infamous.infamous_legends.animation;
 
 import com.infamous.infamous_legends.utils.MiscUtils;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 
 public class SineWaveAnimationUtils {
 
-	public static void addSineWaveMotionToModelPart(ModelPart modelPart, float amount, float speed, float partialTick, float min, float max, float offset, float speedMultiplier, SineWaveMotionTypes motionType, boolean shouldPlay) {
-		float motion = shouldPlay ? Mth.cos(partialTick * MiscUtils.degToRad(speed)) * MiscUtils.degToRad(amount) : 0;
+	public static void addSineWaveMotionToModelPart(ModelPart modelPart, float amount, float speed, float tick, float min, float max, float offset, float speedMultiplier, SineWaveMotionTypes motionType, boolean shouldPlay) {
+		float motion = shouldPlay ? Mth.cos(tick * (speedMultiplier + speed) + MiscUtils.degToRad(offset)) * MiscUtils.degToRad(amount) : 0;
 		
 		switch(motionType) {
 			case ROTATION_X: {
@@ -50,6 +52,10 @@ public class SineWaveAnimationUtils {
 				break;
 			}	
 		}
+	}
+	
+	public static float getTick(Entity entity) {
+		return MiscUtils.degToRad((entity.tickCount + Minecraft.getInstance().getFrameTime())) / 20;
 	}
 	
 }

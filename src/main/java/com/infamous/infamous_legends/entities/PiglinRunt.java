@@ -15,7 +15,7 @@ public class PiglinRunt extends PiglinBrute {
 	
 	@Override
 	public float getVoicePitch() {
-		return super.getVoicePitch() * 2;
+		return super.getVoicePitch() * 1.5F;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
