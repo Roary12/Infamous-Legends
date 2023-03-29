@@ -1,12 +1,14 @@
 package com.infamous.infamous_legends.animation;
 
+import com.infamous.infamous_legends.utils.MiscUtils;
+
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.util.Mth;
 
 public class SineWaveAnimationUtils {
 
 	public static void addSineWaveMotionToModelPart(ModelPart modelPart, float amount, float speed, float partialTick, float min, float max, float offset, float speedMultiplier, SineWaveMotionTypes motionType, boolean shouldPlay) {
-		float motion = shouldPlay ? Mth.clamp(Mth.cos(partialTick * (speedMultiplier * speed) + offset) * (1 * amount), min, max) : 0;
+		float motion = shouldPlay ? Mth.cos(partialTick * MiscUtils.degToRad(speed)) * MiscUtils.degToRad(amount) : 0;
 		
 		switch(motionType) {
 			case ROTATION_X: {

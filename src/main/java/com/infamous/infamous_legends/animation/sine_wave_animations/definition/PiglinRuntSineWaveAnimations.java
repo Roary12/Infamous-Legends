@@ -3,6 +3,7 @@ package com.infamous.infamous_legends.animation.sine_wave_animations.definition;
 import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.SineWaveMotionTypes;
 import com.infamous.infamous_legends.models.PiglinRuntModel;
+import com.infamous.infamous_legends.utils.MiscUtils;
 
 public class PiglinRuntSineWaveAnimations {
 
@@ -10,37 +11,37 @@ public class PiglinRuntSineWaveAnimations {
 	
 	public static void piglinRuntIdleAnimation(PiglinRuntModel model, float partialTick, float speedMultiplier, boolean shouldPlay) {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, 1, 150, partialTick, floatMax, floatMax, 0, speedMultiplier, SineWaveMotionTypes.ROTATION_X, shouldPlay);
-		model.body.xRot += 25.6187;
-		model.body.yRot += -14.2008;
-		model.body.zRot += -4.8114;
+		model.body.xRot += MiscUtils.degToRad(25.6187F);
+		model.body.yRot += MiscUtils.degToRad(-14.2008F);
+		model.body.zRot += MiscUtils.degToRad(-4.8114F);
 		
-		model.rightLeg.xRot += 12.5;
-		model.rightLeg.zRot += 7.5;
+		model.rightLeg.xRot += MiscUtils.degToRad(12.5F);
+		model.rightLeg.zRot += MiscUtils.degToRad(7.5F);
 		
-		model.leftLeg.zRot += -10;
+		model.leftLeg.zRot += MiscUtils.degToRad(-10F);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.head, 2.5F, 150, partialTick, floatMax, floatMax, -150, speedMultiplier, SineWaveMotionTypes.ROTATION_X, shouldPlay);
-		model.head.xRot += -22.6852;
-		model.head.yRot += 15.3038;
-		model.head.zRot += -1.8076;
+		model.head.xRot += MiscUtils.degToRad(-22.6852F);
+		model.head.yRot += MiscUtils.degToRad(15.3038F);
+		model.head.zRot += MiscUtils.degToRad(-1.8076F);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightEar, -2.5F, 150, partialTick, floatMax, floatMax, -200, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftEar, 2.5F, 150, partialTick, floatMax, floatMax, -200, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightArm, -1.0F, 150, partialTick, floatMax, floatMax, 0, speedMultiplier, SineWaveMotionTypes.ROTATION_X, shouldPlay);
-		model.rightArm.xRot += -46.5424;
-		model.rightArm.yRot += -25.7047;
-		model.rightArm.zRot += -18.6055;
+		model.rightArm.xRot += MiscUtils.degToRad(-46.5424F);
+		model.rightArm.yRot += MiscUtils.degToRad(-25.7047F);
+		model.rightArm.zRot += MiscUtils.degToRad(-18.6055F);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftArm, -1.0F, 150, partialTick, floatMax, floatMax, 0, speedMultiplier, SineWaveMotionTypes.ROTATION_X, shouldPlay);
-		model.leftArm.xRot += -40.8858;
-		model.leftArm.yRot += 26.6684;
-		model.leftArm.zRot += 27.4022;
+		model.leftArm.xRot += MiscUtils.degToRad(-40.8858F);
+		model.leftArm.yRot += MiscUtils.degToRad(26.6684F);
+		model.leftArm.zRot += MiscUtils.degToRad(27.4022F);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightHand, -1.0F, 150, partialTick, floatMax, floatMax, 0, speedMultiplier, SineWaveMotionTypes.ROTATION_Y, shouldPlay);
-		model.rightHand.xRot += 56.75;
-		model.rightHand.yRot += -33.0855;
-		model.rightHand.zRot += -2.3738;
+		model.rightHand.xRot += MiscUtils.degToRad(56.75F);
+		model.rightHand.yRot += MiscUtils.degToRad(-33.0855F);
+		model.rightHand.zRot += MiscUtils.degToRad(-2.3738F);
 	}
 }
