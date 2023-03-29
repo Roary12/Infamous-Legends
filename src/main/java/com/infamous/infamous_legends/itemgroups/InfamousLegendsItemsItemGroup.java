@@ -1,5 +1,7 @@
 package com.infamous.infamous_legends.itemgroups;
 
+import com.infamous.infamous_legends.init.ItemInit;
+
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -14,7 +16,7 @@ public class InfamousLegendsItemsItemGroup extends CreativeModeTab {
 
 	@Override
 	public ItemStack makeIcon() {
-		return new ItemStack(Items.BLUE_BANNER);
+		return new ItemStack(ItemInit.PIGLIN_MACE.get());
 	}
 
 }
