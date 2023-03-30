@@ -6,9 +6,10 @@ package com.infamous.infamous_legends.models;
 import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.PiglinRuntSineWaveAnimations;
 import com.infamous.infamous_legends.entities.PiglinRunt;
-import com.infamous.infamous_legends.utils.MiscUtils;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -18,8 +19,11 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.phys.Vec3;
 
-public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> {
+public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> implements ArmedModel {
 	private final ModelPart root;
 	public final ModelPart everything;
 	public final ModelPart body;
@@ -31,7 +35,6 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 	public final ModelPart rightEar;
 	public final ModelPart leftLeg;
 	public final ModelPart rightLeg;
-	private float partialTicks;
 
 	public PiglinRuntModel(ModelPart root) {
 		super(RenderType::entityTranslucent);
@@ -84,13 +87,20 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		this.root().getAllParts().forEach(ModelPart::resetPose);
+		
+		Vec3 velocity = entity.getDeltaMovement();
+		float speed = Mth.sqrt((float) ((velocity.x * velocity.x) + (velocity.z * velocity.z)));				
+		
+		System.out.print("\r\n" + speed);
+		
+		boolean shouldPlayRunAnimation = speed > 0.05;
+		
+		boolean shouldPlayWalkAnimation = !shouldPlayRunAnimation && speed > 0;
+		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, true);
-	}
-	
-	@Override
-	public void prepareMobModel(T entity, float animPos, float lerpAnimSpeed, float partialTicks) {
-		this.partialTicks = partialTicks;
+		PiglinRuntSineWaveAnimations.piglinRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayRunAnimation);
+		PiglinRuntSineWaveAnimations.piglinRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation);
+		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, !shouldPlayWalkAnimation && !shouldPlayRunAnimation);
 	}
 	
 	private void animateHeadLookTarget(float yRot, float xRot) {
@@ -102,4 +112,18 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 	public ModelPart root() {
 		return this.root;
 	}
+
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftArm : this.rightHand;
+	}
+	   
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack stack) {
+		this.everything.translateAndRotate(stack);
+		this.body.translateAndRotate(stack);
+		this.rightArm.translateAndRotate(stack);
+		this.getArm(arm).translateAndRotate(stack);
+        stack.translate(-4 / 16.0F, 11.5 / 16.0F, -3.5 / 16.0F);
+	}
+
 }

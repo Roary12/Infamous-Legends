@@ -1,6 +1,5 @@
 {
 	"credit": "Made with Blockbench",
-	"gui_light": "front",
 	"texture_size": [
 		64,
 		64
@@ -1147,7 +1146,7 @@
 			],
 			"translation": [
 				0,
-				4,
+				6,
 				0.25
 			],
 			"scale": [
