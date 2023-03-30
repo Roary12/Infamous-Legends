@@ -4,6 +4,7 @@ package com.infamous.infamous_legends.models;
 // Paste this class into your mod and generate all required imports
 
 import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
+import com.infamous.infamous_legends.animation.keyframe_animations.definition.PiglinRuntKeyframeAnimations;
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.PiglinRuntSineWaveAnimations;
 import com.infamous.infamous_legends.entities.PiglinRunt;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -91,16 +92,15 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 		Vec3 velocity = entity.getDeltaMovement();
 		float speed = Mth.sqrt((float) ((velocity.x * velocity.x) + (velocity.z * velocity.z)));				
 		
-		System.out.print("\r\n" + speed);
+		boolean shouldPlayRunAnimation = speed > 0.1 && entity.attackAnimationTick <= 0;
 		
-		boolean shouldPlayRunAnimation = speed > 0.05;
-		
-		boolean shouldPlayWalkAnimation = !shouldPlayRunAnimation && speed > 0;
+		boolean shouldPlayWalkAnimation = !shouldPlayRunAnimation && speed > 0 && entity.attackAnimationTick <= 0;
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		PiglinRuntSineWaveAnimations.piglinRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayRunAnimation);
+		PiglinRuntSineWaveAnimations.piglinRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 25, shouldPlayRunAnimation);
 		PiglinRuntSineWaveAnimations.piglinRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation);
-		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, !shouldPlayWalkAnimation && !shouldPlayRunAnimation);
+		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, !shouldPlayWalkAnimation && !shouldPlayRunAnimation && entity.attackAnimationTick <= 0);
+		this.animate(entity.attackAnimationState, PiglinRuntKeyframeAnimations.RUNT_ATTACK, ageInTicks);
 	}
 	
 	private void animateHeadLookTarget(float yRot, float xRot) {
