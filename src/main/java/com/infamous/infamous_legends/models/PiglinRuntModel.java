@@ -7,8 +7,8 @@ import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.keyframe_animations.definition.PiglinRuntKeyframeAnimations;
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.PiglinRuntSineWaveAnimations;
 import com.infamous.infamous_legends.entities.PiglinRunt;
+import com.infamous.infamous_legends.models.modelparts.CustomModelPart;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Vector3f;
 
 import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
@@ -116,9 +116,10 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 	private ModelPart getArm(HumanoidArm arm) {
 		return arm == HumanoidArm.LEFT ? this.leftArm : this.rightHand;
 	}
-	   
+   
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack stack) {
+		//stack = this.getArm(arm).stack;
 		this.everything.translateAndRotate(stack);
 		this.body.translateAndRotate(stack);
 		this.rightArm.translateAndRotate(stack);
