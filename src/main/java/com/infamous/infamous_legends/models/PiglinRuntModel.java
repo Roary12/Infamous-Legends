@@ -96,10 +96,12 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 		
 		boolean shouldPlayWalkAnimation = !shouldPlayRunAnimation && speed > 0 && entity.attackAnimationTick <= 0;
 		
+		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && !shouldPlayRunAnimation && entity.attackAnimationTick <= 0;	
+		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
 		PiglinRuntSineWaveAnimations.piglinRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 25, shouldPlayRunAnimation);
 		PiglinRuntSineWaveAnimations.piglinRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation);
-		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, !shouldPlayWalkAnimation && !shouldPlayRunAnimation && entity.attackAnimationTick <= 0);
+		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation);
 		this.animate(entity.attackAnimationState, PiglinRuntKeyframeAnimations.RUNT_ATTACK, ageInTicks);
 	}
 	

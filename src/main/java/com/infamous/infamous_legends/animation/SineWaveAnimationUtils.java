@@ -8,7 +8,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 
 public class SineWaveAnimationUtils {
-
+	   
 	public static void addSineWaveMotionToModelPart(ModelPart modelPart, float amount, float speed, float tick, float min, float max, float offset, float speedMultiplier, SineWaveMotionTypes motionType, boolean shouldPlay) {
 		float rotationMotion = shouldPlay ? Mth.clamp(Mth.cos(tick * (speedMultiplier * speed) + MiscUtils.degToRad(offset)) * MiscUtils.degToRad(amount), MiscUtils.degToRad(min), MiscUtils.degToRad(max)) : 0;
 		
