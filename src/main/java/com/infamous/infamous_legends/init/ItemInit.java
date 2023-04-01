@@ -32,6 +32,6 @@ public class ItemInit {
 	
 	public static final RegistryObject<Item> THROWABLE_BLAZE_ROD = ITEMS.register("throwable_blaze_rod",
 			() -> new ThrowableBlazeRodItem(
-					new Item.Properties().durability(200).tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
+					new Item.Properties().stacksTo(16).tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
 
 }

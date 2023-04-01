@@ -2,6 +2,7 @@ package com.infamous.infamous_legends.init;
 
 import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.entities.PiglinRunt;
+import com.infamous.infamous_legends.entities.ThrownBlazeRod;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -20,5 +21,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PiglinRunt>> PIGLIN_RUNT = ENTITY_TYPES.register("piglin_runt",
 			() -> EntityType.Builder.<PiglinRunt>of(PiglinRunt::new, MobCategory.MISC).sized(0.6F, 1.3F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "piglin_runt").toString()));
+	
+	// PROJECTILES
 
+	public static final RegistryObject<EntityType<ThrownBlazeRod>> THROWN_BLAZE_ROD = ENTITY_TYPES.register("thrown_blaze_rod",
+			() -> EntityType.Builder.<ThrownBlazeRod>of(ThrownBlazeRod::new, MobCategory.MISC).sized(0.5F, 0.5F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "thrown_blaze_rod").toString()));
 }

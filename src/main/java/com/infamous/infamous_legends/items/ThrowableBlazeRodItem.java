@@ -2,6 +2,7 @@ package com.infamous.infamous_legends.items;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.infamous.infamous_legends.entities.ThrownBlazeRod;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
@@ -30,9 +31,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class ThrowableBlazeRodItem extends Item implements Vanishable {
-   public static final int THROW_THRESHOLD_TIME = 10;
-   public static final float BASE_DAMAGE = 8.0F;
-   public static final float SHOOT_POWER = 2.5F;
    private final Multimap<Attribute, AttributeModifier> defaultModifiers;
 
    public ThrowableBlazeRodItem(Item.Properties p_43381_) {
@@ -60,21 +58,15 @@ public class ThrowableBlazeRodItem extends Item implements Vanishable {
 			int i = this.getUseDuration(p_43394_) - p_43397_;
 			if (i >= 10) {
 				if (!p_43395_.isClientSide) {
-					p_43394_.hurtAndBreak(1, player, (p_43388_) -> {
-						p_43388_.broadcastBreakEvent(p_43396_.getUsedItemHand());
-					});
-					ThrownTrident throwntrident = new ThrownTrident(p_43395_, player, p_43394_);
-					throwntrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F,
+					ThrownBlazeRod thrownBlazeRod = new ThrownBlazeRod(p_43395_, player);
+					thrownBlazeRod.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F,
 							2.0F, 1.5F);
-					if (player.getAbilities().instabuild) {
-						throwntrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-					}
 
-					p_43395_.addFreshEntity(throwntrident);
-					p_43395_.playSound((Player) null, throwntrident, SoundEvents.FIRECHARGE_USE, SoundSource.PLAYERS,
+					p_43395_.addFreshEntity(thrownBlazeRod);
+					p_43395_.playSound((Player) null, thrownBlazeRod, SoundEvents.SNOWBALL_THROW, SoundSource.PLAYERS,
 							1.0F, 1.0F);
 					if (!player.getAbilities().instabuild) {
-						player.getInventory().removeItem(p_43394_);
+						p_43394_.shrink(1);
 					}
 				}
 
@@ -86,39 +78,16 @@ public class ThrowableBlazeRodItem extends Item implements Vanishable {
 
    public InteractionResultHolder<ItemStack> use(Level p_43405_, Player p_43406_, InteractionHand p_43407_) {
       ItemStack itemstack = p_43406_.getItemInHand(p_43407_);
-      if (itemstack.getDamageValue() >= itemstack.getMaxDamage() - 1) {
-         return InteractionResultHolder.fail(itemstack);
-      } else if (EnchantmentHelper.getRiptide(itemstack) > 0 && !p_43406_.isInWaterOrRain()) {
-         return InteractionResultHolder.fail(itemstack);
-      } else {
-         p_43406_.startUsingItem(p_43407_);
-         return InteractionResultHolder.consume(itemstack);
-      }
+		p_43406_.startUsingItem(p_43407_);
+		return InteractionResultHolder.consume(itemstack);
    }
 
    public boolean hurtEnemy(ItemStack p_43390_, LivingEntity p_43391_, LivingEntity p_43392_) {
-	  p_43391_.setSecondsOnFire(2);
-      p_43390_.hurtAndBreak(1, p_43392_, (p_43414_) -> {
-         p_43414_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-      });
-      return true;
-   }
-
-   public boolean mineBlock(ItemStack p_43399_, Level p_43400_, BlockState p_43401_, BlockPos p_43402_, LivingEntity p_43403_) {
-      if ((double)p_43401_.getDestroySpeed(p_43400_, p_43402_) != 0.0D) {
-         p_43399_.hurtAndBreak(2, p_43403_, (p_43385_) -> {
-            p_43385_.broadcastBreakEvent(EquipmentSlot.MAINHAND);
-         });
-      }
-
+	  p_43391_.setSecondsOnFire(2);  
       return true;
    }
 
    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot p_43383_) {
       return p_43383_ == EquipmentSlot.MAINHAND ? this.defaultModifiers : super.getDefaultAttributeModifiers(p_43383_);
-   }
-
-   public int getEnchantmentValue() {
-      return 1;
    }
 }

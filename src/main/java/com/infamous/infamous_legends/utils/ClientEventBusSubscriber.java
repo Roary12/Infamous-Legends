@@ -4,7 +4,9 @@ import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ModelLayerInit;
 import com.infamous.infamous_legends.models.PiglinRuntModel;
+import com.infamous.infamous_legends.models.ThrownBlazeRodModel;
 import com.infamous.infamous_legends.renderers.PiglinRuntRenderer;
+import com.infamous.infamous_legends.renderers.ThrownBlazeRodRenderer;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -18,10 +20,12 @@ public class ClientEventBusSubscriber {
 	@SubscribeEvent
     public static void onRegisterLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event){
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_RUNT, PiglinRuntModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.THROWN_BLAZE_ROD, ThrownBlazeRodModel::createBodyLayer);
     }
 	
 	@SubscribeEvent
 	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_RUNT.get(), PiglinRuntRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.THROWN_BLAZE_ROD.get(), ThrownBlazeRodRenderer::new);
 	}
 }
