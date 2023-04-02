@@ -6,6 +6,7 @@ import com.infamous.infamous_legends.itemgroups.InfamousLegendsMobsItemGroup;
 import com.infamous.infamous_legends.items.PiglinMaceItem;
 
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
@@ -31,6 +32,10 @@ public class ItemInit {
 	
 	public static final RegistryObject<Item> PIGLIN_MACE = ITEMS.register("piglin_mace",
 			() -> new PiglinMaceItem(7, -3.15F, Tiers.NETHERITE,
+					new Item.Properties().tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
+	
+	public static final RegistryObject<Item> PIGLIN_SAW = ITEMS.register("piglin_saw",
+			() -> new SwordItem(Tiers.NETHERITE, 10, -3.4F,
 					new Item.Properties().tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
 
 }

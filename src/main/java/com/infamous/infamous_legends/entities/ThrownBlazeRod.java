@@ -64,7 +64,7 @@ public class ThrownBlazeRod extends AbstractArrow {
 
    protected void onHitEntity(EntityHitResult p_37573_) {
       Entity entity = p_37573_.getEntity();
-      float f = 7.5F;
+      float f = 5F;
       Entity entity1 = this.getOwner();
       DamageSource damagesource = DamageSource.trident(this, (Entity)(entity1 == null ? this : entity1));
       this.dealtDamage = true;

@@ -1,0 +1,21 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "infamous_legends:item/piglin_saw_handheld"
+  },
+  "textures": {
+  	"particle": "infamous_legends:items/piglin_saw_flat"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "infamous_legends:item/piglin_saw_gui"
+    },
+    "fixed": {
+      "parent": "infamous_legends:item/piglin_saw_gui"
+    }, 
+    "ground": {
+      "parent": "infamous_legends:item/piglin_saw_gui"
+    }
+  }
+}

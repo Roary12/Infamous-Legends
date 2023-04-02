@@ -55,7 +55,7 @@ public class PiglinGrunterThrowAttack extends Behavior<PiglinGrunter> {
 		      double d1 = livingentity.getY(0.3333333333333333D) - thrownBlazeRod.getY();
 		      double d2 = livingentity.getZ() - p_22552_.getZ();
 		      double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-		      thrownBlazeRod.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.4F, 5);
+		      thrownBlazeRod.shoot(d0, d1 + d3 * (double)0.2F, d2, 1.4F, 10);
 		      p_22552_.playSound(SoundEvents.TRIDENT_THROW);
 		      p_22551_.addFreshEntity(thrownBlazeRod);
 		}

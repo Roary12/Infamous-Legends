@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMap;
+import com.infamous.infamous_legends.utils.PositionUtils;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -135,6 +136,6 @@ public class StopAtSpecifiedDistanceMoveToTargetSink extends Behavior<Mob> {
    }
 
    private boolean reachedTarget(Mob p_23590_, WalkTarget p_23591_) {
-      return p_23591_.getTarget().currentBlockPosition().distManhattan(p_23590_.blockPosition()) <= this.stopDistance;
+      return p_23591_.getTarget().currentBlockPosition().distManhattan(p_23590_.blockPosition()) <= this.stopDistance && PositionUtils.hasLineOfSight(p_23590_, p_23591_.getTarget().currentPosition());
    }
 }
