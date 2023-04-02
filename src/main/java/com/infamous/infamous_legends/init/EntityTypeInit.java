@@ -1,6 +1,7 @@
 package com.infamous.infamous_legends.init;
 
 import com.infamous.infamous_legends.InfamousLegends;
+import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinGrunter;
 import com.infamous.infamous_legends.entities.PiglinRunt;
 import com.infamous.infamous_legends.entities.ThrownBlazeRod;
@@ -26,6 +27,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PiglinGrunter>> PIGLIN_GRUNTER = ENTITY_TYPES.register("piglin_grunter",
 			() -> EntityType.Builder.<PiglinGrunter>of(PiglinGrunter::new, MobCategory.MONSTER).sized(0.6F, 1.6F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "piglin_grunter").toString()));
+	
+	public static final RegistryObject<EntityType<PiglinBruiser>> PIGLIN_BRUISER = ENTITY_TYPES.register("piglin_bruiser",
+			() -> EntityType.Builder.<PiglinBruiser>of(PiglinBruiser::new, MobCategory.MONSTER).sized(0.7F, 2.1F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "piglin_bruiser").toString()));
 	
 	// PROJECTILES
 

@@ -57,7 +57,7 @@ public class PiglinGrunter extends AbstractPiglin {
 	   
 	public PiglinGrunter(EntityType<? extends PiglinGrunter> type, Level level) {
 		super(type, level);		
-		this.xpReward = 15;
+		this.xpReward = 5;
 	}
 	
 	@Override
@@ -81,6 +81,7 @@ public class PiglinGrunter extends AbstractPiglin {
 	@Override
 	protected void populateDefaultEquipmentSlots(RandomSource p_219209_, DifficultyInstance p_219210_) {
 		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BLAZE_ROD));
+		this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
 	}
 	
 	@Override

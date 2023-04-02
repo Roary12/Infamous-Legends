@@ -1,10 +1,12 @@
 {
 	"entity.infamous_legends.piglin_runt" : "Piglin Runt",
 	"entity.infamous_legends.piglin_grunter" : "Piglin Grunter",
+	"entity.infamous_legends.piglin_bruiser" : "Piglin Bruiser",
 	"entity.infamous_legends.thrown_blaze_rod" : "Thrown Blaze Rod",
 	
 	"item.infamous_legends.piglin_runt_spawn_egg" : "Piglin Runt Spawn Egg",
 	"item.infamous_legends.piglin_grunter_spawn_egg" : "Piglin Grunter Spawn Egg",
+	"item.infamous_legends.piglin_bruiser_spawn_egg" : "Piglin Bruiser Spawn Egg",
 	
 	"item.infamous_legends.piglin_mace" : "Piglin Mace",
 	"item.infamous_legends.piglin_saw" : "Piglin Saw",
