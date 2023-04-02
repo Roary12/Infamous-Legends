@@ -7,7 +7,7 @@ import com.infamous.infamous_legends.utils.MiscUtils;
 
 public class PiglinRuntSineWaveAnimations {
 
-	private static float floatMax = 360;
+	private static float floatMax = Float.MAX_VALUE;
 	
 	public static void piglinRuntIdleAnimation(PiglinRuntModel model, float tick, float speedMultiplier, boolean shouldPlay) {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, 1, 150, tick, -floatMax, floatMax, 0, speedMultiplier, SineWaveMotionTypes.ROTATION_X, shouldPlay);

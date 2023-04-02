@@ -13,6 +13,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.ItemStack;
@@ -45,6 +46,12 @@ public class ThrownBlazeRod extends AbstractArrow {
 
       super.tick();
    }
+   
+   @Override
+	protected boolean canHitEntity(Entity p_36743_) {
+		boolean piglinThatCantBeHurt = this.getOwner() != null && this.getOwner() instanceof AbstractPiglin && p_36743_.getTeam() == null && this.getOwner().getTeam() == null && p_36743_ instanceof AbstractPiglin;
+		return !piglinThatCantBeHurt && super.canHitEntity(p_36743_);
+	}
 
    protected ItemStack getPickupItem() {
       return null;
@@ -59,7 +66,7 @@ public class ThrownBlazeRod extends AbstractArrow {
       Entity entity = p_37573_.getEntity();
       float f = 7.5F;
       Entity entity1 = this.getOwner();
-      DamageSource damagesource = DamageSource.arrow(this, (Entity)(entity1 == null ? this : entity1));
+      DamageSource damagesource = DamageSource.trident(this, (Entity)(entity1 == null ? this : entity1));
       this.dealtDamage = true;
       SoundEvent soundevent = SoundEvents.TRIDENT_HIT;
       if (entity.hurt(damagesource, f)) {

@@ -23,7 +23,13 @@ public class SineWaveAnimationUtils {
 	
 	public static void adjustPositionOfModelPart(ModelPart modelPart, float amount, SineWaveMotionTypes motionType, boolean shouldPlay) {
 		float newAmount = shouldPlay ? amount : 0;
-		affectModelPartBasedOnMotionType(modelPart, MiscUtils.degToRad(newAmount), newAmount, motionType);
+		float newPositionAmount = shouldPlay ? amount : 0;
+		
+		if (motionType == SineWaveMotionTypes.POSITION_Y) {
+			newPositionAmount = -newPositionAmount;
+		}
+		
+		affectModelPartBasedOnMotionType(modelPart, MiscUtils.degToRad(newAmount), newPositionAmount, motionType);
 	}
 	
 	public static void affectModelPartBasedOnMotionType(ModelPart modelPart, float rotationMotion, float motion, SineWaveMotionTypes motionType) {

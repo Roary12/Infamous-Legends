@@ -1,5 +1,6 @@
 package com.infamous.infamous_legends;
 
+import com.infamous.infamous_legends.entities.PiglinGrunter;
 import com.infamous.infamous_legends.entities.PiglinRunt;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ItemInit;
@@ -37,6 +38,7 @@ public class InfamousLegends {
 
 	private void addAttributes(final EntityAttributeCreationEvent event) {
 	        event.put(EntityTypeInit.PIGLIN_RUNT.get(), PiglinRunt.createAttributes().build());
+	        event.put(EntityTypeInit.PIGLIN_GRUNTER.get(), PiglinGrunter.createAttributes().build());
 	}
 	
     public void commonSetup(final FMLCommonSetupEvent event) {    

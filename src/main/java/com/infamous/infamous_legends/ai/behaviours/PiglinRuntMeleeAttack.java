@@ -2,14 +2,18 @@ package com.infamous.infamous_legends.ai.behaviours;
 
 import com.google.common.collect.ImmutableMap;
 import com.infamous.infamous_legends.entities.PiglinRunt;
+import com.infamous.infamous_legends.utils.MiscUtils;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ProjectileWeaponItem;
 
@@ -55,12 +59,17 @@ public class PiglinRuntMeleeAttack extends Behavior<PiglinRunt> {
 		p_22552_.getNavigation().stop();
 		
 		if (p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint) {
-			p_22552_.playSound(SoundEvents.ANVIL_LAND);
+			p_22552_.playSound(SoundEvents.ANVIL_LAND, 1, MiscUtils.randomSoundPitch() * 0.75F);
 		}
 		
 		if (livingentity != null && p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint && p_22552_.distanceTo(livingentity) <= 3 && p_22552_.hasLineOfSight(livingentity)) {
-			p_22552_.playSound(SoundEvents.ANVIL_LAND);
 			p_22552_.doHurtTarget(livingentity);
+			for (LivingEntity entity : p_22551_.getNearbyEntities(LivingEntity.class, TargetingConditions.forCombat(), p_22552_, livingentity.getBoundingBox().inflate(1, 0, 1))) {
+				boolean piglinThatCantBeHurt = entity.getTeam() == null && p_22552_.getTeam() == null && entity instanceof AbstractPiglin;
+				if (!piglinThatCantBeHurt && entity != livingentity) {
+					p_22552_.doHurtTarget(entity);
+				}
+			}
 		}
 	}
    
