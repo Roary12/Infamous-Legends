@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:item/handheld_rod",
+  "textures": {
+    "layer0": "minecraft:item/blaze_rod"
+  },
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 0, 90, 55 ],
+            "translation": [ 0, 0.0, 2.5 ],
+            "scale": [ 0.85, 0.85, 0.85 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, -90, -55 ],
+            "translation": [ 0, 0.0, 2.5 ],
+            "scale": [ 0.85, 0.85, 0.85 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ -25, 90, 50 ],
+            "translation": [ 2.5, -2.6, -2.0 ],
+            "scale": [ 0.68, 0.68, 0.68 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 0, -90, -25 ],
+            "translation": [ 0, 1.6, 0.8 ],
+            "scale": [ 0.68, 0.68, 0.68 ]
+        }
+    }
+}

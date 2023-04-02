@@ -4,7 +4,6 @@ import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.itemgroups.InfamousLegendsItemsItemGroup;
 import com.infamous.infamous_legends.itemgroups.InfamousLegendsMobsItemGroup;
 import com.infamous.infamous_legends.items.PiglinMaceItem;
-import com.infamous.infamous_legends.items.ThrowableBlazeRodItem;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Tiers;
@@ -29,9 +28,5 @@ public class ItemInit {
 	public static final RegistryObject<Item> PIGLIN_MACE = ITEMS.register("piglin_mace",
 			() -> new PiglinMaceItem(7, -3.15F, Tiers.NETHERITE,
 					new Item.Properties().tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
-	
-	public static final RegistryObject<Item> THROWABLE_BLAZE_ROD = ITEMS.register("throwable_blaze_rod",
-			() -> new ThrowableBlazeRodItem(
-					new Item.Properties().stacksTo(16).tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
 
 }

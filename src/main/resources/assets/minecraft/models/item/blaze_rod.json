@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "minecraft:item/blaze_rod"
+  },
+	    "overrides": [
+        {
+            "predicate": {
+                "throwing": 1
+            },
+            "model": "item/blaze_rod_throwing"
+        }
+    ]
+}

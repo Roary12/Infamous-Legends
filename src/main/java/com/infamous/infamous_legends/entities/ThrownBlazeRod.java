@@ -38,7 +38,7 @@ public class ThrownBlazeRod extends AbstractArrow {
       if (this.inGroundTime > 4) {
          this.dealtDamage = true;
       } else {
-    	  if (this.level.isClientSide && this.random.nextBoolean()) {
+    	  if (this.level.isClientSide && this.random.nextBoolean() && !this.isInWaterRainOrBubble()) {
     		  this.level.addParticle(ParticleTypes.FLAME, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
     	  }
       }
