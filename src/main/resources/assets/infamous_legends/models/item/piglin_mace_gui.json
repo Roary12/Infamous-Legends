@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "infamous_legends:items/piglin_mace_flat",
+    "particle": "infamous_legends:items/piglin_mace_flat"
+  }
+}
