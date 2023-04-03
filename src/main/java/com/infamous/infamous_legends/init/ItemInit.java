@@ -39,7 +39,7 @@ public class ItemInit {
 					new Item.Properties().tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
 	
 	public static final RegistryObject<Item> PIGLIN_SAW = ITEMS.register("piglin_saw",
-			() -> new SwordItem(Tiers.NETHERITE, 10, -3.4F,
+			() -> new SwordItem(Tiers.NETHERITE, 9, -3.4F,
 					new Item.Properties().tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
 
 }

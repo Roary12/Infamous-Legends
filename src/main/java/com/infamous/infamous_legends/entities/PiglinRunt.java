@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.infamous.infamous_legends.ai.PiglinRuntAi;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.utils.MiscUtils;
 import com.mojang.serialization.Dynamic;
 
 import net.minecraft.core.BlockPos;
@@ -16,6 +17,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -66,7 +68,7 @@ public class PiglinRunt extends AbstractPiglin {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 17.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.4F).add(Attributes.ATTACK_DAMAGE, 1.0D);
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.35F).add(Attributes.ATTACK_DAMAGE, 1.0D);
 	}
 	
 	@Nullable
@@ -116,6 +118,15 @@ public class PiglinRunt extends AbstractPiglin {
 
 	public Brain<PiglinRunt> getBrain() {
 		return (Brain<PiglinRunt>) super.getBrain();
+	}
+	
+	@Override
+	public boolean doHurtTarget(Entity p_21372_) {
+		boolean flag = super.doHurtTarget(p_21372_);
+		if (flag && p_21372_ instanceof LivingEntity) {
+			MiscUtils.disableShield(((LivingEntity)p_21372_), 60);
+		}
+		return flag;
 	}
 		   
 	@Override
