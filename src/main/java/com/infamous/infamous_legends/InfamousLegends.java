@@ -4,6 +4,7 @@ import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.entities.PiglinGrunter;
 import com.infamous.infamous_legends.entities.PiglinRunt;
+import com.infamous.infamous_legends.entities.WarpedBomber;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.network.Messages;
@@ -43,6 +44,7 @@ public class InfamousLegends {
 	        event.put(EntityTypeInit.PIGLIN_GRUNTER.get(), PiglinGrunter.createAttributes().build());
 	        event.put(EntityTypeInit.PIGLIN_BRUISER.get(), PiglinBruiser.createAttributes().build());
 	        event.put(EntityTypeInit.PIGLIN_ENGINEER.get(), PiglinEngineer.createAttributes().build());
+	        event.put(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomber.createAttributes().build());
 	}
 	
     public void commonSetup(final FMLCommonSetupEvent event) {    

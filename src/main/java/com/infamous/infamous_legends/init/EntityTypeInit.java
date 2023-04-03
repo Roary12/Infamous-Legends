@@ -7,6 +7,7 @@ import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.entities.PiglinGrunter;
 import com.infamous.infamous_legends.entities.PiglinRunt;
 import com.infamous.infamous_legends.entities.ThrownBlazeRod;
+import com.infamous.infamous_legends.entities.WarpedBomber;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -37,6 +38,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PiglinEngineer>> PIGLIN_ENGINEER = ENTITY_TYPES.register("piglin_engineer",
 			() -> EntityType.Builder.<PiglinEngineer>of(PiglinEngineer::new, MobCategory.MONSTER).sized(0.6F, 1.3F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "piglin_engineer").toString()));
+	
+	public static final RegistryObject<EntityType<WarpedBomber>> WARPED_BOMBER = ENTITY_TYPES.register("warped_bomber",
+			() -> EntityType.Builder.<WarpedBomber>of(WarpedBomber::new, MobCategory.MONSTER).sized(0.7F, 2.3F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "warped_bomber").toString()));
 	
 	// PROJECTILES
 

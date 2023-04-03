@@ -9,12 +9,14 @@ import com.infamous.infamous_legends.models.PiglinEngineerModel;
 import com.infamous.infamous_legends.models.PiglinGrunterModel;
 import com.infamous.infamous_legends.models.PiglinRuntModel;
 import com.infamous.infamous_legends.models.ThrownBlazeRodModel;
+import com.infamous.infamous_legends.models.WarpedBomberModel;
 import com.infamous.infamous_legends.renderers.PiglinBombRenderer;
 import com.infamous.infamous_legends.renderers.PiglinBruiserRenderer;
 import com.infamous.infamous_legends.renderers.PiglinEngineerRenderer;
 import com.infamous.infamous_legends.renderers.PiglinGrunterRenderer;
 import com.infamous.infamous_legends.renderers.PiglinRuntRenderer;
 import com.infamous.infamous_legends.renderers.ThrownBlazeRodRenderer;
+import com.infamous.infamous_legends.renderers.WarpedBomberRenderer;
 
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -35,6 +37,7 @@ public class ClientEventBusSubscriber {
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_GRUNTER, PiglinGrunterModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BRUISER, PiglinBruiserModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_ENGINEER, PiglinEngineerModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.WARPED_BOMBER, WarpedBomberModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.THROWN_BLAZE_ROD, ThrownBlazeRodModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BOMB, PiglinBombModel::createBodyLayer);
     }
@@ -45,6 +48,7 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_GRUNTER.get(), PiglinGrunterRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_BRUISER.get(), PiglinBruiserRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_ENGINEER.get(), PiglinEngineerRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomberRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.THROWN_BLAZE_ROD.get(), ThrownBlazeRodRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_BOMB.get(), PiglinBombRenderer::new);
 	}

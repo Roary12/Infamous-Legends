@@ -37,6 +37,10 @@ public class ItemInit {
 			() -> new ForgeSpawnEggItem(EntityTypeInit.PIGLIN_ENGINEER, 0x4d494d, 0xffd83d,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
+	public static final RegistryObject<Item> WARPED_BOMBER_SPAWN_EGG = ITEMS.register("warped_bomber_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.WARPED_BOMBER, 0x986c7c, 0x119b85,
+					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
+	
 	// WEAPONS
 	
 	public static final RegistryObject<Item> PIGLIN_MACE = ITEMS.register("piglin_mace",

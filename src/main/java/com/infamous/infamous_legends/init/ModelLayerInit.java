@@ -14,6 +14,7 @@ public class ModelLayerInit {
     public static final ModelLayerLocation PIGLIN_GRUNTER = register("piglin_grunter");
     public static final ModelLayerLocation PIGLIN_BRUISER = register("piglin_bruiser");
     public static final ModelLayerLocation PIGLIN_ENGINEER = register("piglin_engineer");
+    public static final ModelLayerLocation WARPED_BOMBER = register("warped_bomber");
     public static final ModelLayerLocation THROWN_BLAZE_ROD = register("thrown_blaze_rod");
     public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
 
