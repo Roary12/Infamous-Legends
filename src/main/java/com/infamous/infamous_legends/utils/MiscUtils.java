@@ -4,8 +4,14 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
+import com.infamous.infamous_legends.explosions.CustomExplosion;
+
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -15,6 +21,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Explosion;
+import net.minecraft.world.level.Explosion.BlockInteraction;
+import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 
@@ -83,5 +92,19 @@ public class MiscUtils {
 		   
 	public static float randomSoundPitch() {
 		return (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F;
+	}
+	
+	public static Explosion customExplosion(Level level, Entity explodingEntity, DamageSource damageSource,
+			ExplosionDamageCalculator damageCalculator, double x, double y, double z, float explosionSize,
+			boolean createsFire, BlockInteraction blockInteraction, SoundEvent explosionSound,
+			SoundSource explosionSoundSource, ParticleOptions explosionParticle,
+			ParticleOptions secondaryExplosionParticle, float entityDamage,
+			boolean friendlyFire) {
+		CustomExplosion explosion = new CustomExplosion(level, explodingEntity, damageSource, damageCalculator, x, y, z,
+				explosionSize, createsFire, blockInteraction, explosionSound, explosionSoundSource, explosionParticle,
+				secondaryExplosionParticle, entityDamage, friendlyFire);
+		explosion.explode();
+		explosion.finalizeExplosion(true);
+		return explosion;
 	}
 }

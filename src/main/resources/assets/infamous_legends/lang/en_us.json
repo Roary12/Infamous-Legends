@@ -3,6 +3,7 @@
 	"entity.infamous_legends.piglin_grunter" : "Piglin Grunter",
 	"entity.infamous_legends.piglin_bruiser" : "Piglin Bruiser",
 	"entity.infamous_legends.thrown_blaze_rod" : "Thrown Blaze Rod",
+	"entity.infamous_legends.piglin_bomb" : "Piglin Bomb",
 	
 	"item.infamous_legends.piglin_runt_spawn_egg" : "Piglin Runt Spawn Egg",
 	"item.infamous_legends.piglin_grunter_spawn_egg" : "Piglin Grunter Spawn Egg",
@@ -10,6 +11,7 @@
 	
 	"item.infamous_legends.piglin_mace" : "Piglin Mace",
 	"item.infamous_legends.piglin_saw" : "Piglin Saw",
+	"item.infamous_legends.piglin_bomb" : "Piglin Bomb",
 	
 	"itemGroup.infamous_legends_mobs": "Infamous Legends: Mobs",
 	"itemGroup.infamous_legends_items": "Infamous Legends: Items",

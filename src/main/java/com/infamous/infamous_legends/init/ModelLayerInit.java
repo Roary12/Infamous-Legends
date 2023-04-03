@@ -14,6 +14,7 @@ public class ModelLayerInit {
     public static final ModelLayerLocation PIGLIN_GRUNTER = register("piglin_grunter");
     public static final ModelLayerLocation PIGLIN_BRUISER = register("piglin_bruiser");
     public static final ModelLayerLocation THROWN_BLAZE_ROD = register("thrown_blaze_rod");
+    public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
 
     private static ModelLayerLocation register(String path) {
         return register("main", new ResourceLocation(InfamousLegends.MOD_ID, path));
