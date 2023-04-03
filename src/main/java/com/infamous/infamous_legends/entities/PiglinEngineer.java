@@ -3,21 +3,23 @@ package com.infamous.infamous_legends.entities;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
-import com.infamous.infamous_legends.ai.PiglinGrunterAi;
+import com.infamous.infamous_legends.ai.PiglinEngineerAi;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.interfaces.IHasCustomExplosion;
+import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.SpawnGroupData;
@@ -31,19 +33,21 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.monster.piglin.PiglinArmPose;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
-public class PiglinGrunter extends AbstractPiglin {
+public class PiglinEngineer extends AbstractPiglin implements IHasCustomExplosion {
 
 	public AnimationState throwAnimationState = new AnimationState();
 	public int throwAnimationTick;
-	public final int throwAnimationLength = 35;
-	public final int throwAnimationActionPoint = 22;
+	public final int throwAnimationLength = 110;
+	public final int throwAnimationActionPoint = 18;
 	
-	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinGrunter>>> SENSOR_TYPES = ImmutableList
+	public int textureChange;
+	
+	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinEngineer>>> SENSOR_TYPES = ImmutableList
 			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
@@ -55,33 +59,39 @@ public class PiglinGrunter extends AbstractPiglin {
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
 			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME);
 	   
-	public PiglinGrunter(EntityType<? extends PiglinGrunter> type, Level level) {
+	public PiglinEngineer(EntityType<? extends PiglinEngineer> type, Level level) {
 		super(type, level);		
-		this.xpReward = 5;
+		this.xpReward = 10;
+	}
+	
+	   @Override
+	public void tick() {
+		super.tick();	
+		if (this.tickCount % 3 == 0) {
+			this.textureChange ++;
+		}
+		
+		if (this.level.isClientSide && this.random.nextBoolean() && !this.isInWaterRainOrBubble()) {
+			Vec3 particlePos = PositionUtils.getOffsetPos(this, -14 / 16.0F, 33 / 16.0F, -12 / 16.0F, this.yBodyRot);
+			this.level.addParticle(ParticleTypes.LARGE_SMOKE, particlePos.x, particlePos.y, particlePos.z, 0, 0.05, 0.025);
+		}
 	}
 	
 	@Override
 	public float getVoicePitch() {
-		return super.getVoicePitch() * 1.3F;
+		return super.getVoicePitch() * 1.4F;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 14.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.275F);
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ARMOR, 10.0D)
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.2F);
 	}
 	
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_35058_, DifficultyInstance p_35059_,
 			MobSpawnType p_35060_, @Nullable SpawnGroupData p_35061_, @Nullable CompoundTag p_35062_) {
-		PiglinGrunterAi.initMemories(this);
-		this.populateDefaultEquipmentSlots(p_35058_.getRandom(), p_35059_);
+		PiglinEngineerAi.initMemories(this);
 		return super.finalizeSpawn(p_35058_, p_35059_, p_35060_, p_35061_, p_35062_);
-	}
-	
-	@Override
-	protected void populateDefaultEquipmentSlots(RandomSource p_219209_, DifficultyInstance p_219210_) {
-		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(Items.BLAZE_ROD));
-		this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
 	}
 	
 	@Override
@@ -107,16 +117,16 @@ public class PiglinGrunter extends AbstractPiglin {
 
 	}
 
-	protected Brain.Provider<PiglinGrunter> brainProvider() {
+	protected Brain.Provider<PiglinEngineer> brainProvider() {
 		return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
 	}
 
 	protected Brain<?> makeBrain(Dynamic<?> p_35064_) {
-		return PiglinGrunterAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
+		return PiglinEngineerAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
 	}
 
-	public Brain<PiglinGrunter> getBrain() {
-		return (Brain<PiglinGrunter>) super.getBrain();
+	public Brain<PiglinEngineer> getBrain() {
+		return (Brain<PiglinEngineer>) super.getBrain();
 	}
 		   
 	@Override
@@ -129,11 +139,11 @@ public class PiglinGrunter extends AbstractPiglin {
 	}
 
 	protected void customServerAiStep() {
-		this.level.getProfiler().push("piglinGrunterBrain");
+		this.level.getProfiler().push("piglinEngineerBrain");
 		this.getBrain().tick((ServerLevel) this.level, this);
 		this.level.getProfiler().pop();
-		PiglinGrunterAi.updateActivity(this);
-		PiglinGrunterAi.maybePlayActivitySound(this);
+		PiglinEngineerAi.updateActivity(this);
+		PiglinEngineerAi.maybePlayActivitySound(this);
 		super.customServerAiStep();
 	}
 	
@@ -154,7 +164,7 @@ public class PiglinGrunter extends AbstractPiglin {
 			return false;
 		} else {
 			if (flag && p_35055_.getEntity() instanceof LivingEntity) {
-				PiglinGrunterAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
+				PiglinEngineerAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
 			}
 
 			return flag;
@@ -171,7 +181,7 @@ public class PiglinGrunter extends AbstractPiglin {
 	}
 
 	protected SoundEvent getHurtSound(DamageSource p_35072_) {
-		return SoundEvents.PIGLIN_BRUTE_HURT;
+		return SoundEvents.BLAZE_HURT;
 	}
 
 	protected SoundEvent getDeathSound() {
@@ -179,7 +189,7 @@ public class PiglinGrunter extends AbstractPiglin {
 	}
 
 	protected void playStepSound(BlockPos p_35066_, BlockState p_35067_) {
-		this.playSound(SoundEvents.PIGLIN_BRUTE_STEP, 0.15F, 1.0F);
+		this.playSound(SoundEvents.RAVAGER_STEP, 0.15F, 1.0F);
 	}
 
 	public void playAngrySound() {
@@ -188,6 +198,11 @@ public class PiglinGrunter extends AbstractPiglin {
 
 	protected void playConvertedSound() {
 		this.playSound(SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED, 1.0F, this.getVoicePitch());
+	}
+
+	@Override
+	public boolean canHarmWithExplosion(Entity target) {
+		return (target.getTeam() == null && this.getTeam() == null && target instanceof AbstractPiglin) ? false : true;
 	}
 	   
 }

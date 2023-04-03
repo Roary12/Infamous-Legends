@@ -6,8 +6,11 @@ import com.infamous.infamous_legends.utils.MiscUtils;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrowableProjectile;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
@@ -38,10 +41,16 @@ public class PiglinBomb extends ThrowableProjectile {
 				this.textureChange ++;
 			}
 			
-			if (this.level.isClientSide && this.random.nextBoolean() && !this.isInWaterRainOrBubble()) {
+			if (this.level.isClientSide && !this.isInWaterRainOrBubble()) {
 				this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0, 0, 0);
 			}
 		}
+		   
+		   @Override
+			protected boolean canHitEntity(Entity p_36743_) {
+				boolean piglinThatCantBeHurt = this.getOwner() != null && this.getOwner() instanceof AbstractPiglin && p_36743_.getTeam() == null && this.getOwner().getTeam() == null && p_36743_ instanceof AbstractPiglin;
+				return !piglinThatCantBeHurt && super.canHitEntity(p_36743_);
+			}
 
 		@Override
 		protected void defineSynchedData() {
@@ -52,8 +61,8 @@ public class PiglinBomb extends ThrowableProjectile {
 		protected void onHit(HitResult p_37260_) {
 			super.onHit(p_37260_);
 			if (!this.level.isClientSide) {
-				MiscUtils.customExplosion(this.level, this, DamageSource.explosion(this.getOwner() != null && this.getOwner() instanceof LivingEntity ? ((LivingEntity)this.getOwner()) : null).setProjectile(), null, this.getX(), this.getY(),
-						this.getZ(), 4.0F, false, this.blockInteraction, SoundEvents.GENERIC_EXPLODE,
+				MiscUtils.customExplosion(this.level, this.getOwner() != null ? this.getOwner() instanceof Player ? this : this.getOwner() : this, DamageSource.explosion(this.getOwner() != null && this.getOwner() instanceof LivingEntity ? ((LivingEntity)this.getOwner()) : null).setProjectile(), null, this.getX(), this.getY(),
+						this.getZ(), 3.0F, false, this.blockInteraction, SoundEvents.GENERIC_EXPLODE,
 						this.getSoundSource(), ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER, 15.0F, false);
 				this.discard();
 			}

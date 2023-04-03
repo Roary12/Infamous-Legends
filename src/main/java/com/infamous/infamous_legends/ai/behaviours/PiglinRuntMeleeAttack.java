@@ -21,7 +21,7 @@ public class PiglinRuntMeleeAttack extends Behavior<PiglinRunt> {
    private final int cooldownBetweenAttacks;
 
    public PiglinRuntMeleeAttack(int p_23512_) {
-      super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryStatus.VALUE_ABSENT));
+      super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryStatus.VALUE_ABSENT), 600, 600);
       this.cooldownBetweenAttacks = p_23512_;
    }
 

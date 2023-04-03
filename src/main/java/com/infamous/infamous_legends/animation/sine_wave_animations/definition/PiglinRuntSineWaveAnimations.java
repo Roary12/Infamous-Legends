@@ -60,7 +60,7 @@ public class PiglinRuntSineWaveAnimations {
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightEar, 5.0F, 500, tick, -floatMax, floatMax, -225, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
 		
-		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightEar, -5.0F, 500, tick, -floatMax, floatMax, -225, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftEar, -5.0F, 500, tick, -floatMax, floatMax, -225, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftArm, -2.5F, 500, tick, -floatMax, floatMax, -175, speedMultiplier, SineWaveMotionTypes.ROTATION_X, shouldPlay);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.leftArm, -35.8085F, SineWaveMotionTypes.ROTATION_X, shouldPlay);

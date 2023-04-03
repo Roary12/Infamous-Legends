@@ -54,7 +54,7 @@ public class PiglinGrunterSineWaveAnimations {
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightEar, 5F, 500, tick, -floatMax, floatMax, -300, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
 		
-		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightEar, -5F, 500, tick, -floatMax, floatMax, -300, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftEar, -5F, 500, tick, -floatMax, floatMax, -300, speedMultiplier, SineWaveMotionTypes.ROTATION_Z, shouldPlay);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightArm, -40F, 250, tick, -floatMax, floatMax, -25, speedMultiplier, SineWaveMotionTypes.ROTATION_X, shouldPlay);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightArm, -7.5F, SineWaveMotionTypes.ROTATION_X, shouldPlay);

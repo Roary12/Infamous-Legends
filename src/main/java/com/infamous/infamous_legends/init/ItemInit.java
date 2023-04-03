@@ -33,6 +33,10 @@ public class ItemInit {
 			() -> new ForgeSpawnEggItem(EntityTypeInit.PIGLIN_BRUISER, 0x995f40, 0x3f303b,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
+	public static final RegistryObject<Item> PIGLIN_ENGINEER_SPAWN_EGG = ITEMS.register("piglin_engineer_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.PIGLIN_ENGINEER, 0x4d494d, 0xffd83d,
+					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
+	
 	// WEAPONS
 	
 	public static final RegistryObject<Item> PIGLIN_MACE = ITEMS.register("piglin_mace",
