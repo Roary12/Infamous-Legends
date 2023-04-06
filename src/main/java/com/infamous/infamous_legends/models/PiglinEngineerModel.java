@@ -1,10 +1,16 @@
 package com.infamous.infamous_legends.models;
 
-import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.keyframe_animations.definition.PiglinEngineerKeyframeAnimations;
+import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.PiglinEngineerSineWaveAnimations;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
+import com.infamous.infamous_legends.interfaces.ArmourWearingModel;
+import com.infamous.infamous_legends.interfaces.CustomHeadedModel;
+import com.infamous.infamous_legends.renderers.layers.CustomArmourLayer.ArmourModelPart;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Vector3f;
 
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -14,6 +20,7 @@ import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.phys.Vec3;
 
 // Made with Blockbench 4.6.5
@@ -21,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 // Paste this class into your mod and generate all required imports
 
 
-public class PiglinEngineerModel<T extends PiglinEngineer> extends HierarchicalModel<T> {
+public class PiglinEngineerModel<T extends PiglinEngineer> extends HierarchicalModel<T> implements ArmedModel, CustomHeadedModel, ArmourWearingModel {
 	private final ModelPart root;
 	public final ModelPart everything;
 	public final ModelPart body;
@@ -151,8 +158,8 @@ public class PiglinEngineerModel<T extends PiglinEngineer> extends HierarchicalM
 		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && entity.throwAnimationTick <= 0;	
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		PiglinEngineerSineWaveAnimations.piglinEngineerWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation);
-		PiglinEngineerSineWaveAnimations.piglinEngineerIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation);
+		PiglinEngineerSineWaveAnimations.piglinEngineerWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
+		PiglinEngineerSineWaveAnimations.piglinEngineerIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation ? 1 : 0);
 		this.animate(entity.throwAnimationState, PiglinEngineerKeyframeAnimations.ENGINEER_THROW, ageInTicks);
 	}
 	
@@ -164,5 +171,88 @@ public class PiglinEngineerModel<T extends PiglinEngineer> extends HierarchicalM
 	@Override
 	public ModelPart root() {
 		return this.root;
+	}
+	
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftArm : this.rightArm;
+	}
+   
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack stack) {
+		if (arm == HumanoidArm.RIGHT) {
+			this.root().translateAndRotate(stack);
+			this.everything.translateAndRotate(stack);
+			this.body.translateAndRotate(stack);
+			this.getArm(arm).translateAndRotate(stack);
+	        stack.translate(-3 / 16.0F, 2.25 / 16.0F, 2.5 / 16.0F);
+	        stack.mulPose(Vector3f.YP.rotationDegrees(180));
+		} else {
+			this.root().translateAndRotate(stack);
+			this.everything.translateAndRotate(stack);
+			this.body.translateAndRotate(stack);
+			this.getArm(arm).translateAndRotate(stack);
+	        stack.translate(1 / 16.0F, -3.25 / 16.0F, -0.5 / 16.0F);
+		}
+	}
+
+	@Override
+	public void translateToHead(PoseStack stack) {
+		this.root().translateAndRotate(stack);
+		this.everything.translateAndRotate(stack);
+		this.body.translateAndRotate(stack);
+		this.head.translateAndRotate(stack);
+	}
+	
+	@Override
+	public void translateArmour(ArmourModelPart modelPart, PoseStack stack, boolean innerModel) {
+		switch (modelPart) {
+			case HEAD:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.head.translateAndRotate(stack);
+				stack.scale(1.15F, 1.15F, 1.15F);
+				break;
+			case BODY:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				stack.translate(0, -10.5 / 16.0F, 0);
+				break;
+			case RIGHT_ARM:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.rightArm.translateAndRotate(stack);
+				stack.translate(4 / 16.0F, -2 / 16.0F, 0);
+				break;
+			case LEFT_ARM:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.leftArm.translateAndRotate(stack);
+				stack.translate(-4 / 16.0F, -2 / 16.0F, 0);
+				break;
+			case RIGHT_LEG:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.rightLeg.translateAndRotate(stack);
+				stack.translate(2 / 16.0F, -16 / 16.0F, 0);
+				if (innerModel) {
+					stack.scale(1, 0.58F, 1);
+					stack.translate(0, 15 / 16.0F, 0);
+				}
+				break;
+			case LEFT_LEG:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.leftLeg.translateAndRotate(stack);
+				stack.translate(-2 / 16.0F, -16 / 16.0F, 0);
+				if (innerModel) {
+					stack.scale(1, 0.58F, 1);
+					stack.translate(0, 15 / 16.0F, 0);
+				}
+				break;
+		}
 	}
 }

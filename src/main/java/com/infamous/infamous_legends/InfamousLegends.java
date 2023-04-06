@@ -7,6 +7,8 @@ import com.infamous.infamous_legends.entities.PiglinRunt;
 import com.infamous.infamous_legends.entities.WarpedBomber;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.init.ParticleTypeInit;
+import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.infamous.infamous_legends.network.Messages;
 
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,6 +34,8 @@ public class InfamousLegends {
 		
 			EntityTypeInit.ENTITY_TYPES.register(bus);
 			ItemInit.ITEMS.register(bus);
+			ParticleTypeInit.PARTICLE_TYPES.register(bus);
+			SensorTypeInit.SENSOR_TYPES.register(bus);
 			
 			bus.addListener(this::commonSetup);
 			

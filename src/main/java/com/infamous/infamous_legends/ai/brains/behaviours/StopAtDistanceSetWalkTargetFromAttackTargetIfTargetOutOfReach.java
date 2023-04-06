@@ -1,4 +1,4 @@
-package com.infamous.infamous_legends.ai.behaviours;
+package com.infamous.infamous_legends.ai.brains.behaviours;
 
 import java.util.function.Function;
 
@@ -16,7 +16,6 @@ import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.memory.WalkTarget;
 
 public class StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach extends Behavior<Mob> {
-   private static final int PROJECTILE_ATTACK_RANGE_BUFFER = 1;
    private final Function<LivingEntity, Float> speedModifier;
    private double stopDistance;
 
@@ -31,10 +30,16 @@ public class StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach exten
       super(ImmutableMap.of(MemoryModuleType.WALK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryStatus.REGISTERED));
       this.speedModifier = p_147905_;
    }
+   
+   @Override
+	protected boolean checkExtraStartConditions(ServerLevel p_22538_, Mob p_22539_) {
+	    LivingEntity livingentity = p_22539_.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).get();
+		return p_22539_.distanceTo(livingentity) > this.stopDistance && super.checkExtraStartConditions(p_22538_, p_22539_);
+	}
 
    protected void start(ServerLevel p_24032_, Mob p_24033_, long p_24034_) {
       LivingEntity livingentity = p_24033_.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).get();
-      if (BehaviorUtils.canSee(p_24033_, livingentity) && p_24033_.distanceTo(livingentity) <= this.stopDistance) {
+      if (p_24033_.hasLineOfSight(livingentity) && p_24033_.distanceTo(livingentity) <= this.stopDistance) {
          this.clearWalkTarget(p_24033_);
       } else {
          this.setWalkAndLookTarget(p_24033_, livingentity);

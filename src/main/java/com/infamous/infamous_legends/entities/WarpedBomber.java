@@ -3,10 +3,13 @@ package com.infamous.infamous_legends.entities;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
-import com.infamous.infamous_legends.ai.WarpedBomberAi;
+import com.infamous.infamous_legends.ai.brains.WarpedBomberAi;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.init.ParticleTypeInit;
+import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.infamous.infamous_legends.interfaces.IHasCustomExplosion;
 import com.infamous.infamous_legends.utils.MiscUtils;
+import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
 
 import net.minecraft.core.BlockPos;
@@ -14,6 +17,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
@@ -37,6 +41,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 
 public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion {
 
@@ -46,7 +51,7 @@ public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion 
 	public final int attackAnimationActionPoint = 1;
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super WarpedBomber>>> SENSOR_TYPES = ImmutableList
-			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS,
+			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
@@ -69,7 +74,7 @@ public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion 
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 25.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.4F).add(Attributes.ATTACK_DAMAGE, 1.0D);
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.4F).add(Attributes.ATTACK_DAMAGE, 1.0D).add(Attributes.FOLLOW_RANGE, 20.0D);
 	}
 	
 	@Nullable
@@ -82,6 +87,18 @@ public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion 
 	@Override
 	public void baseTick() {
 		super.baseTick();
+		
+		if (this.level.isClientSide) {
+			Vec3 velocity = this.getDeltaMovement();
+			float speed = Mth.sqrt((float) ((velocity.x * velocity.x) + (velocity.z * velocity.z)));				
+			
+			boolean shouldPlayRunAnimation = speed > 0.15 && this.attackAnimationTick <= 0;
+			
+			if (shouldPlayRunAnimation && this.random.nextInt(5) == 0) {
+				Vec3 particlePos = PositionUtils.getOffsetPos(this, 0, this.getEyeHeight() + 1.25, -5 / 16.0F, this.yBodyRot);
+				this.level.addParticle(ParticleTypeInit.SPARK.get(), particlePos.x, particlePos.y, particlePos.z, 0, 0.1, 0);
+			}
+		}
 		
 		if (this.attackAnimationTick > 0) {
 			this.attackAnimationTick--;

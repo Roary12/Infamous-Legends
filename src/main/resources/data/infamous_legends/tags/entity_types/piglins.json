@@ -1,0 +1,13 @@
+
+{
+	"replace": false,
+	"values": [
+		"minecraft:piglin",
+		"minecraft:piglin_brute",
+		"infamous_legends:piglin_runt",
+		"infamous_legends:piglin_grunter",
+		"infamous_legends:piglin_bruiser",
+		"infamous_legends:piglin_engineer",
+		"infamous_legends:warped_bomber"
+	]
+}

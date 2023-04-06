@@ -3,8 +3,9 @@ package com.infamous.infamous_legends.entities;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
-import com.infamous.infamous_legends.ai.PiglinGrunterAi;
+import com.infamous.infamous_legends.ai.brains.PiglinGrunterAi;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.mojang.serialization.Dynamic;
 
 import net.minecraft.core.BlockPos;
@@ -44,7 +45,7 @@ public class PiglinGrunter extends AbstractPiglin {
 	public final int throwAnimationActionPoint = 22;
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinGrunter>>> SENSOR_TYPES = ImmutableList
-			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorType.NEAREST_PLAYERS, SensorType.NEAREST_ITEMS,
+			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
@@ -67,7 +68,7 @@ public class PiglinGrunter extends AbstractPiglin {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 14.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.275F);
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.275F).add(Attributes.FOLLOW_RANGE, 25.0D);
 	}
 	
 	@Nullable

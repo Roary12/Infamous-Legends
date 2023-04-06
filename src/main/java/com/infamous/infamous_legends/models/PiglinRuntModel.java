@@ -3,11 +3,13 @@ package com.infamous.infamous_legends.models;
 // Exported for Minecraft version 1.17 or later with Mojang mappings
 // Paste this class into your mod and generate all required imports
 
-import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.keyframe_animations.definition.PiglinRuntKeyframeAnimations;
+import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.PiglinRuntSineWaveAnimations;
 import com.infamous.infamous_legends.entities.PiglinRunt;
-import com.infamous.infamous_legends.models.modelparts.CustomModelPart;
+import com.infamous.infamous_legends.interfaces.ArmourWearingModel;
+import com.infamous.infamous_legends.interfaces.CustomHeadedModel;
+import com.infamous.infamous_legends.renderers.layers.CustomArmourLayer.ArmourModelPart;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.model.ArmedModel;
@@ -24,7 +26,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.phys.Vec3;
 
-public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> implements ArmedModel {
+public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> implements ArmedModel, CustomHeadedModel, ArmourWearingModel {
 	private final ModelPart root;
 	public final ModelPart everything;
 	public final ModelPart body;
@@ -92,16 +94,10 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
 		Vec3 velocity = entity.getDeltaMovement();
 		float speed = Mth.sqrt((float) ((velocity.x * velocity.x) + (velocity.z * velocity.z)));				
 		
-		boolean shouldPlayRunAnimation = speed > 0.1 && entity.attackAnimationTick <= 0;
-		
-		boolean shouldPlayWalkAnimation = !shouldPlayRunAnimation && speed > 0 && entity.attackAnimationTick <= 0;
-		
-		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && !shouldPlayRunAnimation && entity.attackAnimationTick <= 0;	
-		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		PiglinRuntSineWaveAnimations.piglinRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 25, shouldPlayRunAnimation);
-		PiglinRuntSineWaveAnimations.piglinRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation);
-		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation);
+		PiglinRuntSineWaveAnimations.piglinRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 25, entity.runAnimationAmountMultiplier);
+		PiglinRuntSineWaveAnimations.piglinRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, entity.walkAnimationAmountMultiplier);
+		PiglinRuntSineWaveAnimations.piglinRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, entity.idleAnimationAmountMultiplier);
 		this.animate(entity.attackAnimationState, PiglinRuntKeyframeAnimations.RUNT_ATTACK, ageInTicks);
 	}
 	
@@ -121,12 +117,81 @@ public class PiglinRuntModel<T extends PiglinRunt> extends HierarchicalModel<T> 
    
 	@Override
 	public void translateToHand(HumanoidArm arm, PoseStack stack) {
-		//stack = this.getArm(arm).stack;
+		if (arm == HumanoidArm.RIGHT) {
+			this.root().translateAndRotate(stack);
+			this.everything.translateAndRotate(stack);
+			this.body.translateAndRotate(stack);
+			this.rightArm.translateAndRotate(stack);
+			this.getArm(arm).translateAndRotate(stack);
+	        stack.translate(1 / 16.0F, -8.25 / 16.0F, -1.5 / 16.0F);
+		} else {
+			this.root().translateAndRotate(stack);
+			this.everything.translateAndRotate(stack);
+			this.body.translateAndRotate(stack);
+			this.getArm(arm).translateAndRotate(stack);
+	        stack.translate(1 / 16.0F, -3.25 / 16.0F, -1.5 / 16.0F);
+		}
+	}
+
+	@Override
+	public void translateToHead(PoseStack stack) {
+		this.root().translateAndRotate(stack);
 		this.everything.translateAndRotate(stack);
 		this.body.translateAndRotate(stack);
-		this.rightArm.translateAndRotate(stack);
-		this.getArm(arm).translateAndRotate(stack);
-        stack.translate(-4 / 16.0F, 11.5 / 16.0F, -3.5 / 16.0F);
+		this.head.translateAndRotate(stack);
+	}
+
+	@Override
+	public void translateArmour(ArmourModelPart modelPart, PoseStack stack, boolean innerModel) {
+		switch (modelPart) {
+			case HEAD:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.head.translateAndRotate(stack);
+				stack.scale(1.05F, 1.05F, 1.05F);
+				break;
+			case BODY:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				stack.translate(0, -10.5 / 16.0F, 0);
+				break;
+			case RIGHT_ARM:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.rightArm.translateAndRotate(stack);
+				stack.translate(4 / 16.0F, -2 / 16.0F, 0);
+				break;
+			case LEFT_ARM:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.leftArm.translateAndRotate(stack);
+				stack.translate(-4 / 16.0F, -2 / 16.0F, 0);
+				break;
+			case RIGHT_LEG:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.rightLeg.translateAndRotate(stack);
+				stack.translate(2 / 16.0F, -16 / 16.0F, 0);
+				if (innerModel) {
+					stack.scale(1, 0.58F, 1);
+					stack.translate(0, 15 / 16.0F, 0);
+				}
+				break;
+			case LEFT_LEG:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.leftLeg.translateAndRotate(stack);
+				stack.translate(-2 / 16.0F, -16 / 16.0F, 0);
+				if (innerModel) {
+					stack.scale(1, 0.58F, 1);
+					stack.translate(0, 15 / 16.0F, 0);
+				}
+				break;
+		}
 	}
 
 }

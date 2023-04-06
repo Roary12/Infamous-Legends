@@ -1,10 +1,15 @@
 package com.infamous.infamous_legends.models;
 
-import com.infamous.infamous_legends.animation.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.keyframe_animations.definition.WarpedBomberKeyframeAnimations;
+import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.definition.WarpedBomberSineWaveAnimations;
 import com.infamous.infamous_legends.entities.WarpedBomber;
+import com.infamous.infamous_legends.interfaces.ArmourWearingModel;
+import com.infamous.infamous_legends.interfaces.CustomHeadedModel;
+import com.infamous.infamous_legends.renderers.layers.CustomArmourLayer.ArmourModelPart;
+import com.mojang.blaze3d.vertex.PoseStack;
 
+import net.minecraft.client.model.ArmedModel;
 import net.minecraft.client.model.HierarchicalModel;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -15,6 +20,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.phys.Vec3;
 
 // Made with Blockbench 4.6.5
@@ -22,7 +28,7 @@ import net.minecraft.world.phys.Vec3;
 // Paste this class into your mod and generate all required imports
 
 
-public class WarpedBomberModel<T extends WarpedBomber> extends HierarchicalModel<T> {
+public class WarpedBomberModel<T extends WarpedBomber> extends HierarchicalModel<T> implements ArmedModel, CustomHeadedModel, ArmourWearingModel {
 	private final ModelPart root;
 	public final ModelPart everything;
 	public final ModelPart body;
@@ -138,9 +144,9 @@ public class WarpedBomberModel<T extends WarpedBomber> extends HierarchicalModel
 		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && !shouldPlayRunAnimation && entity.attackAnimationTick <= 0;	
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		WarpedBomberSineWaveAnimations.warpedBomberRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 20, shouldPlayRunAnimation);
-		WarpedBomberSineWaveAnimations.warpedBomberWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 15, shouldPlayWalkAnimation);
-		WarpedBomberSineWaveAnimations.warpedBomberIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation);
+		WarpedBomberSineWaveAnimations.warpedBomberRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 20, shouldPlayRunAnimation ? 1 : 0);
+		WarpedBomberSineWaveAnimations.warpedBomberWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 15, shouldPlayWalkAnimation ? 1 : 0);
+		WarpedBomberSineWaveAnimations.warpedBomberIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation ? 1 : 0);
 		this.animate(entity.attackAnimationState, WarpedBomberKeyframeAnimations.WARPED_BOMBER_ATTACK, ageInTicks);
 	}
 	
@@ -152,5 +158,77 @@ public class WarpedBomberModel<T extends WarpedBomber> extends HierarchicalModel
 	@Override
 	public ModelPart root() {
 		return this.root;
+	}
+	
+	private ModelPart getArm(HumanoidArm arm) {
+		return arm == HumanoidArm.LEFT ? this.leftArm : this.rightArm;
+	}
+   
+	@Override
+	public void translateToHand(HumanoidArm arm, PoseStack stack) {
+		this.root().translateAndRotate(stack);
+		this.everything.translateAndRotate(stack);
+		this.body.translateAndRotate(stack);
+		this.getArm(arm).translateAndRotate(stack);
+		stack.translate(arm == HumanoidArm.LEFT ? 1.5 / 16.0F : -1.5 / 16.0F, 0.75 / 16.0F, 0.0 / 16.0F);
+	}
+
+	@Override
+	public void translateToHead(PoseStack stack) {
+		this.root().translateAndRotate(stack);
+		this.everything.translateAndRotate(stack);
+		this.body.translateAndRotate(stack);
+		this.head.translateAndRotate(stack);
+	}
+	
+	@Override
+	public void translateArmour(ArmourModelPart modelPart, PoseStack stack, boolean innerModel) {
+		switch (modelPart) {
+			case HEAD:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.head.translateAndRotate(stack);
+				stack.translate(0, -0.25 / 16.0F, 0);
+				stack.scale(1.25F, 1.25F, 1.25F);
+				break;
+			case BODY:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				stack.translate(0, -14.5 / 16.0F, 0);
+				stack.scale(1.2F, 1.2F, 1.375F);
+				break;
+			case RIGHT_ARM:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.rightArm.translateAndRotate(stack);
+				stack.translate(4 / 16.0F, -2 / 16.0F, 0);
+				stack.scale(1.1F, 1.1F, 1.1F);
+				break;
+			case LEFT_ARM:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.body.translateAndRotate(stack);
+				this.leftArm.translateAndRotate(stack);
+				stack.translate(-4 / 16.0F, -2 / 16.0F, 0);
+				stack.scale(1.1F, 1.1F, 1.1F);
+				break;
+			case RIGHT_LEG:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.rightLeg.translateAndRotate(stack);
+				stack.translate(2 / 16.0F, -12 / 16.0F, 0);
+				stack.scale(1.025F, 1.025F, 1.025F);
+				break;
+			case LEFT_LEG:
+				this.root().translateAndRotate(stack);
+				this.everything.translateAndRotate(stack);
+				this.leftLeg.translateAndRotate(stack);
+				stack.translate(-2 / 16.0F, -12 / 16.0F, 0);
+				stack.scale(1.025F, 1.025F, 1.025F);
+				break;
+		}
 	}
 }

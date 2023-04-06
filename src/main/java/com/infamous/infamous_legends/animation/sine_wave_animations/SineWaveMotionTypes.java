@@ -1,4 +1,4 @@
-package com.infamous.infamous_legends.animation;
+package com.infamous.infamous_legends.animation.sine_wave_animations;
 
 public enum SineWaveMotionTypes {
 	ROTATION_X,

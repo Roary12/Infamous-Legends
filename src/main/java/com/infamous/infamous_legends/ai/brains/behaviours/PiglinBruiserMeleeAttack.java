@@ -1,11 +1,13 @@
-package com.infamous.infamous_legends.ai.behaviours;
+package com.infamous.infamous_legends.ai.brains.behaviours;
 
 import com.google.common.collect.ImmutableMap;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.utils.MiscUtils;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -28,7 +30,7 @@ public class PiglinBruiserMeleeAttack extends Behavior<PiglinBruiser> {
 
    protected boolean checkExtraStartConditions(ServerLevel level, PiglinBruiser mob) {
       LivingEntity livingentity = this.getAttackTarget(mob);
-      return !this.isHoldingUsableProjectileWeapon(mob) && BehaviorUtils.canSee(mob, livingentity) && mob.distanceTo(livingentity) <= 3 && mob.hasLineOfSight(livingentity);
+      return !this.isHoldingUsableProjectileWeapon(mob) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 2.5 && mob.hasLineOfSight(livingentity);
    }
 
    private boolean isHoldingUsableProjectileWeapon(PiglinBruiser p_23528_) {
@@ -59,7 +61,7 @@ public class PiglinBruiserMeleeAttack extends Behavior<PiglinBruiser> {
 		
 		p_22552_.getNavigation().stop();
 		
-		if (livingentity != null && (p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint1 || p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint2) && p_22552_.distanceTo(livingentity) <= 4 && p_22552_.hasLineOfSight(livingentity)) {
+		if (livingentity != null && (p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint1 || p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint2) && p_22552_.distanceTo(livingentity) <= 3.5 && p_22552_.hasLineOfSight(livingentity)) {					
 			p_22552_.doHurtTarget(livingentity);
 			for (LivingEntity entity : p_22551_.getNearbyEntities(LivingEntity.class, TargetingConditions.forCombat(), p_22552_, livingentity.getBoundingBox().inflate(2, 0, 2))) {
 				boolean piglinThatCantBeHurt = entity.getTeam() == null && p_22552_.getTeam() == null && entity instanceof AbstractPiglin;

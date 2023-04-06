@@ -1,8 +1,9 @@
-package com.infamous.infamous_legends.ai.behaviours;
+package com.infamous.infamous_legends.ai.brains.behaviours;
 
 import com.google.common.collect.ImmutableMap;
 import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
+import com.infamous.infamous_legends.init.ItemInit;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -11,6 +12,7 @@ import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.item.Items;
 
 public class PiglinEngineerThrowAttack extends Behavior<PiglinEngineer> {
    private final int cooldownBetweenAttacks;
@@ -22,7 +24,7 @@ public class PiglinEngineerThrowAttack extends Behavior<PiglinEngineer> {
 
    protected boolean checkExtraStartConditions(ServerLevel level, PiglinEngineer mob) {
       LivingEntity livingentity = this.getAttackTarget(mob);
-      return BehaviorUtils.canSee(mob, livingentity) && mob.distanceTo(livingentity) <= 15 && mob.hasLineOfSight(livingentity);
+      return mob.isHolding(ItemInit.PIGLIN_BOMB.get()) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 15 && mob.hasLineOfSight(livingentity);
    }
 
    protected void start(ServerLevel p_23524_, PiglinEngineer p_23525_, long p_23526_) {

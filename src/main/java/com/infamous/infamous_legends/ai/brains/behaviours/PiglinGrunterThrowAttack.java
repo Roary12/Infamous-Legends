@@ -1,4 +1,4 @@
-package com.infamous.infamous_legends.ai.behaviours;
+package com.infamous.infamous_legends.ai.brains.behaviours;
 
 import com.google.common.collect.ImmutableMap;
 import com.infamous.infamous_legends.entities.PiglinGrunter;
@@ -25,7 +25,7 @@ public class PiglinGrunterThrowAttack extends Behavior<PiglinGrunter> {
 
    protected boolean checkExtraStartConditions(ServerLevel level, PiglinGrunter mob) {
       LivingEntity livingentity = this.getAttackTarget(mob);
-      return mob.isHolding(Items.BLAZE_ROD) && BehaviorUtils.canSee(mob, livingentity) && mob.distanceTo(livingentity) <= 20 && mob.hasLineOfSight(livingentity);
+      return mob.isHolding(Items.BLAZE_ROD) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 20 && mob.hasLineOfSight(livingentity);
    }
 
    protected void start(ServerLevel p_23524_, PiglinGrunter p_23525_, long p_23526_) {
@@ -42,7 +42,6 @@ public class PiglinGrunterThrowAttack extends Behavior<PiglinGrunter> {
 		super.tick(p_22551_, p_22552_, p_22553_);
 		
 		LivingEntity livingentity = this.getAttackTarget(p_22552_);
-		
 		if (livingentity != null) {
 			BehaviorUtils.lookAtEntity(p_22552_, livingentity);
 		}
