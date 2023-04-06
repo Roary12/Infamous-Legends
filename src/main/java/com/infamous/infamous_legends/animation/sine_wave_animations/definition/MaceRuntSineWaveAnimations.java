@@ -2,14 +2,14 @@ package com.infamous.infamous_legends.animation.sine_wave_animations.definition;
 
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveMotionTypes;
-import com.infamous.infamous_legends.models.PiglinRuntModel;
+import com.infamous.infamous_legends.models.MaceRuntModel;
 import com.infamous.infamous_legends.utils.MiscUtils;
 
-public class PiglinRuntSineWaveAnimations {
+public class MaceRuntSineWaveAnimations {
 
 	private static float floatMax = Float.MAX_VALUE;
 	
-	public static void piglinRuntIdleAnimation(PiglinRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
+	public static void maceRuntIdleAnimation(MaceRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, 1, 150, tick, -floatMax, floatMax, 0, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.body, 25.6187F, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.body, -14.2008F, amountMultiplier, SineWaveMotionTypes.ROTATION_Y);
@@ -45,7 +45,7 @@ public class PiglinRuntSineWaveAnimations {
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightHand, -2.3738F, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);
 	}
 	
-	public static void piglinRuntWalkAnimation(PiglinRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
+	public static void maceRuntWalkAnimation(MaceRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, -1.5F, 500, tick, -floatMax, floatMax, -75, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.body, 23.7877F, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.body, -18.4203F, amountMultiplier, SineWaveMotionTypes.ROTATION_Y);
@@ -95,7 +95,7 @@ public class PiglinRuntSineWaveAnimations {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, -0.75F, 250, tick, 0, floatMax, -50, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Z);
 	}
 	
-	public static void piglinRuntRunAnimation(PiglinRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
+	public static void maceRuntRunAnimation(MaceRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, 0.5F, 500, tick, -floatMax, floatMax, -75, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, 7.5F, 50, tick, -floatMax, floatMax, -75, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, -15F, 12.5F, tick, -floatMax, floatMax, -75, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);

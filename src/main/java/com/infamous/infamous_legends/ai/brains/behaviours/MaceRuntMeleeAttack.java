@@ -1,7 +1,7 @@
 package com.infamous.infamous_legends.ai.brains.behaviours;
 
 import com.google.common.collect.ImmutableMap;
-import com.infamous.infamous_legends.entities.PiglinRunt;
+import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
@@ -19,27 +19,27 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.phys.Vec3;
 
-public class PiglinRuntMeleeAttack extends Behavior<PiglinRunt> {
+public class MaceRuntMeleeAttack extends Behavior<MaceRunt> {
    private final int cooldownBetweenAttacks;
 
-   public PiglinRuntMeleeAttack(int p_23512_) {
+   public MaceRuntMeleeAttack(int p_23512_) {
       super(ImmutableMap.of(MemoryModuleType.LOOK_TARGET, MemoryStatus.REGISTERED, MemoryModuleType.ATTACK_TARGET, MemoryStatus.VALUE_PRESENT, MemoryModuleType.ATTACK_COOLING_DOWN, MemoryStatus.VALUE_ABSENT), 600, 600);
       this.cooldownBetweenAttacks = p_23512_;
    }
 
-   protected boolean checkExtraStartConditions(ServerLevel level, PiglinRunt mob) {
+   protected boolean checkExtraStartConditions(ServerLevel level, MaceRunt mob) {
       LivingEntity livingentity = this.getAttackTarget(mob);
       return !this.isHoldingUsableProjectileWeapon(mob) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 2 && mob.hasLineOfSight(livingentity);
    }
 
-   private boolean isHoldingUsableProjectileWeapon(PiglinRunt p_23528_) {
+   private boolean isHoldingUsableProjectileWeapon(MaceRunt p_23528_) {
       return p_23528_.isHolding((p_147697_) -> {
          Item item = p_147697_.getItem();
          return item instanceof ProjectileWeaponItem && p_23528_.canFireProjectileWeapon((ProjectileWeaponItem)item);
       });
    }
 
-   protected void start(ServerLevel p_23524_, PiglinRunt p_23525_, long p_23526_) {
+   protected void start(ServerLevel p_23524_, MaceRunt p_23525_, long p_23526_) {
       LivingEntity livingentity = this.getAttackTarget(p_23525_);
       BehaviorUtils.lookAtEntity(p_23525_, livingentity);
       p_23525_.getNavigation().stop();
@@ -49,7 +49,7 @@ public class PiglinRuntMeleeAttack extends Behavior<PiglinRunt> {
    }
    
    @Override
-	protected void tick(ServerLevel p_22551_, PiglinRunt p_22552_, long p_22553_) {
+	protected void tick(ServerLevel p_22551_, MaceRunt p_22552_, long p_22553_) {
 		super.tick(p_22551_, p_22552_, p_22553_);
 		
 		LivingEntity livingentity = this.getAttackTarget(p_22552_);
@@ -78,17 +78,17 @@ public class PiglinRuntMeleeAttack extends Behavior<PiglinRunt> {
 	}
    
    @Override
-	protected boolean canStillUse(ServerLevel p_22545_, PiglinRunt p_22546_, long p_22547_) {
+	protected boolean canStillUse(ServerLevel p_22545_, MaceRunt p_22546_, long p_22547_) {
 		return p_22546_.attackAnimationTick > 0;
 	}
    
    @Override
-	protected void stop(ServerLevel p_22548_, PiglinRunt p_22549_, long p_22550_) {
+	protected void stop(ServerLevel p_22548_, MaceRunt p_22549_, long p_22550_) {
 		super.stop(p_22548_, p_22549_, p_22550_);
 		p_22549_.getBrain().setMemoryWithExpiry(MemoryModuleType.ATTACK_COOLING_DOWN, true, (long)this.cooldownBetweenAttacks);
 	}
 
-   private LivingEntity getAttackTarget(PiglinRunt p_23533_) {
+   private LivingEntity getAttackTarget(MaceRunt p_23533_) {
       return p_23533_.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).isPresent() ? p_23533_.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).get() : null;
    }
 }

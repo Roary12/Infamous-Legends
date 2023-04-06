@@ -3,7 +3,7 @@ package com.infamous.infamous_legends.entities;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
-import com.infamous.infamous_legends.ai.brains.PiglinGrunterAi;
+import com.infamous.infamous_legends.ai.brains.BlazeRuntAi;
 import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.mojang.serialization.Dynamic;
@@ -37,14 +37,14 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class PiglinGrunter extends AbstractPiglin {
+public class BlazeRunt extends AbstractPiglin {
 
 	public AnimationState throwAnimationState = new AnimationState();
 	public int throwAnimationTick;
 	public final int throwAnimationLength = 35;
 	public final int throwAnimationActionPoint = 22;
 	
-	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinGrunter>>> SENSOR_TYPES = ImmutableList
+	protected static final ImmutableList<SensorType<? extends Sensor<? super BlazeRunt>>> SENSOR_TYPES = ImmutableList
 			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
@@ -56,7 +56,7 @@ public class PiglinGrunter extends AbstractPiglin {
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
 			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME);
 	   
-	public PiglinGrunter(EntityType<? extends PiglinGrunter> type, Level level) {
+	public BlazeRunt(EntityType<? extends BlazeRunt> type, Level level) {
 		super(type, level);		
 		this.xpReward = 5;
 	}
@@ -74,7 +74,7 @@ public class PiglinGrunter extends AbstractPiglin {
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_35058_, DifficultyInstance p_35059_,
 			MobSpawnType p_35060_, @Nullable SpawnGroupData p_35061_, @Nullable CompoundTag p_35062_) {
-		PiglinGrunterAi.initMemories(this);
+		BlazeRuntAi.initMemories(this);
 		this.populateDefaultEquipmentSlots(p_35058_.getRandom(), p_35059_);
 		return super.finalizeSpawn(p_35058_, p_35059_, p_35060_, p_35061_, p_35062_);
 	}
@@ -108,16 +108,16 @@ public class PiglinGrunter extends AbstractPiglin {
 
 	}
 
-	protected Brain.Provider<PiglinGrunter> brainProvider() {
+	protected Brain.Provider<BlazeRunt> brainProvider() {
 		return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
 	}
 
 	protected Brain<?> makeBrain(Dynamic<?> p_35064_) {
-		return PiglinGrunterAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
+		return BlazeRuntAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
 	}
 
-	public Brain<PiglinGrunter> getBrain() {
-		return (Brain<PiglinGrunter>) super.getBrain();
+	public Brain<BlazeRunt> getBrain() {
+		return (Brain<BlazeRunt>) super.getBrain();
 	}
 		   
 	@Override
@@ -130,11 +130,11 @@ public class PiglinGrunter extends AbstractPiglin {
 	}
 
 	protected void customServerAiStep() {
-		this.level.getProfiler().push("piglinGrunterBrain");
+		this.level.getProfiler().push("blazeRuntBrain");
 		this.getBrain().tick((ServerLevel) this.level, this);
 		this.level.getProfiler().pop();
-		PiglinGrunterAi.updateActivity(this);
-		PiglinGrunterAi.maybePlayActivitySound(this);
+		BlazeRuntAi.updateActivity(this);
+		BlazeRuntAi.maybePlayActivitySound(this);
 		super.customServerAiStep();
 	}
 	
@@ -155,7 +155,7 @@ public class PiglinGrunter extends AbstractPiglin {
 			return false;
 		} else {
 			if (flag && p_35055_.getEntity() instanceof LivingEntity) {
-				PiglinGrunterAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
+				BlazeRuntAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
 			}
 
 			return flag;

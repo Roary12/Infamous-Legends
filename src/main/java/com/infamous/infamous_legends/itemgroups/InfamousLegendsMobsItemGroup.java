@@ -16,7 +16,7 @@ public class InfamousLegendsMobsItemGroup extends CreativeModeTab {
 
 	@Override
 	public ItemStack makeIcon() {
-		return new ItemStack(ItemInit.PIGLIN_RUNT_SPAWN_EGG.get());
+		return new ItemStack(ItemInit.MACE_RUNT_SPAWN_EGG.get());
 	}
 
 }

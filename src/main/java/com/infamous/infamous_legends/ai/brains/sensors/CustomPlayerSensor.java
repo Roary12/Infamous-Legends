@@ -18,7 +18,7 @@ import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.player.Player;
 
-public class CustomPlayerSensor extends Sensor<LivingEntity> {
+public class CustomPlayerSensor extends CustomSensor<LivingEntity> {
 
    public Set<MemoryModuleType<?>> requires() {
       return ImmutableSet.of(MemoryModuleType.NEAREST_PLAYERS, MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER);

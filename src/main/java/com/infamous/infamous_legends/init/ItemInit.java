@@ -22,12 +22,12 @@ public class ItemInit {
 	
 	// SPAWN EGGS
 	
-	public static final RegistryObject<Item> PIGLIN_RUNT_SPAWN_EGG = ITEMS.register("piglin_runt_spawn_egg",
-			() -> new ForgeSpawnEggItem(EntityTypeInit.PIGLIN_RUNT, 0x4b3f34, 0xf9f3a4,
+	public static final RegistryObject<Item> MACE_RUNT_SPAWN_EGG = ITEMS.register("mace_runt_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.MACE_RUNT, 0x4b3f34, 0xf9f3a4,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
-	public static final RegistryObject<Item> PIGLIN_GRUNTER_SPAWN_EGG = ITEMS.register("piglin_grunter_spawn_egg",
-			() -> new ForgeSpawnEggItem(EntityTypeInit.PIGLIN_GRUNTER, 0x995f40, 0xffd528,
+	public static final RegistryObject<Item> BLAZE_RUNT_SPAWN_EGG = ITEMS.register("blaze_runt_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.BLAZE_RUNT, 0x995f40, 0xffd528,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
 	public static final RegistryObject<Item> PIGLIN_BRUISER_SPAWN_EGG = ITEMS.register("piglin_bruiser_spawn_egg",
@@ -40,6 +40,10 @@ public class ItemInit {
 	
 	public static final RegistryObject<Item> WARPED_BOMBER_SPAWN_EGG = ITEMS.register("warped_bomber_spawn_egg",
 			() -> new ForgeSpawnEggItem(EntityTypeInit.WARPED_BOMBER, 0x986c7c, 0x119b85,
+					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
+	
+	public static final RegistryObject<Item> BIG_FUNGUS_THROWER_SPAWN_EGG = ITEMS.register("big_fungus_thrower_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.BIG_FUNGUS_THROWER, 0xe5d3c7, 0x119b85,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
 	// WEAPONS

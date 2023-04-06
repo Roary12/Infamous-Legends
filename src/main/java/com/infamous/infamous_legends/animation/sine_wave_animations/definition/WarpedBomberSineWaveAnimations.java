@@ -2,7 +2,7 @@ package com.infamous.infamous_legends.animation.sine_wave_animations.definition;
 
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveMotionTypes;
-import com.infamous.infamous_legends.models.PiglinGrunterModel;
+import com.infamous.infamous_legends.models.BlazeRuntModel;
 import com.infamous.infamous_legends.models.WarpedBomberModel;
 
 public class WarpedBomberSineWaveAnimations {

@@ -8,9 +8,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class PiglinGrunterKeyframeAnimations {
+public class BlazeRuntKeyframeAnimations {
 
-	public static final AnimationDefinition GRUNTER_THROW = AnimationDefinition.Builder
+	public static final AnimationDefinition BLAZE_RUNT_THROW = AnimationDefinition.Builder
 			.withLength(
 					1.75f)
 			.addAnimation("body",

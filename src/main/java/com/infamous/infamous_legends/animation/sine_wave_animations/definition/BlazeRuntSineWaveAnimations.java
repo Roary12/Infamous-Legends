@@ -2,13 +2,13 @@ package com.infamous.infamous_legends.animation.sine_wave_animations.definition;
 
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveMotionTypes;
-import com.infamous.infamous_legends.models.PiglinGrunterModel;
+import com.infamous.infamous_legends.models.BlazeRuntModel;
 
-public class PiglinGrunterSineWaveAnimations {
+public class BlazeRuntSineWaveAnimations {
 
 	private static float floatMax = Float.MAX_VALUE;
 	
-	public static void piglinGrunterIdleAnimation(PiglinGrunterModel model, float tick, float speedMultiplier, float amountMultiplier) {
+	public static void blazeRuntIdleAnimation(BlazeRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, 2.5F, 125, tick, -floatMax, floatMax, 0, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.body, 5, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		
@@ -39,7 +39,7 @@ public class PiglinGrunterSineWaveAnimations {
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.leftLeg, -2.4905F, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);
 	}
 	
-	public static void piglinGrunterWalkAnimation(PiglinGrunterModel model, float tick, float speedMultiplier, float amountMultiplier) {
+	public static void blazeRuntWalkAnimation(BlazeRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, -3.5F, 500, tick, -floatMax, floatMax, -150, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, -2.5F, 250, tick, -floatMax, floatMax, -150, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_Y);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.body, 2.5F, 250, tick, -floatMax, floatMax, -150, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);

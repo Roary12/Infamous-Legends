@@ -8,9 +8,9 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class PiglinRuntKeyframeAnimations {
+public class MaceRuntKeyframeAnimations {
 
-	public static final AnimationDefinition RUNT_ATTACK = AnimationDefinition.Builder.withLength(2.875f)
+	public static final AnimationDefinition MACE_RUNT_ATTACK = AnimationDefinition.Builder.withLength(2.875f)
 			.addAnimation("body", new AnimationChannel(AnimationChannel.Targets.POSITION,
 					new Keyframe(0f, KeyframeAnimations.posVec(0f, 0f, 0f), AnimationChannel.Interpolations.LINEAR),
 					new Keyframe(1.0416767f, KeyframeAnimations.posVec(0f, 1f, 0.5f),

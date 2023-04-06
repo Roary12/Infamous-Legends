@@ -3,17 +3,13 @@ package com.infamous.infamous_legends.entities;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
-import com.infamous.infamous_legends.ai.brains.PiglinRuntAi;
-import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
+import com.infamous.infamous_legends.ai.brains.BigFungusThrowerAi;
 import com.infamous.infamous_legends.init.ItemInit;
-import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
-import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +20,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -40,29 +35,24 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.monster.piglin.PiglinArmPose;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class PiglinRunt extends AbstractPiglin {
+public class BigFungusThrower extends AbstractPiglin {
 
-	public AnimationState attackAnimationState = new AnimationState();
-	public int attackAnimationTick;
-	public final int attackAnimationLength = 58;
-	public final int attackAnimationActionPoint = 27;
+	public AnimationState throwAnimationState = new AnimationState();
+	public int throwAnimationTick;
+	public final int throwAnimationLength = 80;
+	public final int throwAnimationActionPoint = 67;
 	
-	public boolean shouldPlayRunAnimation;
-	public boolean shouldPlayWalkAnimation;
-	public boolean shouldPlayIdleAnimation;
+	public AnimationState noveltyAnimationState = new AnimationState();
+	public int noveltyAnimationTick;
+	public final int noveltyAnimationLength = 27;
 	
-	public float runAnimationAmountMultiplier;
-	public float walkAnimationAmountMultiplier;
-	public float idleAnimationAmountMultiplier;
-	
-	public final float animationTransitionSpeed = 0.5F;
-	
-	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinRunt>>> SENSOR_TYPES = ImmutableList
+	protected static final ImmutableList<SensorType<? extends Sensor<? super BigFungusThrower>>> SENSOR_TYPES = ImmutableList
 			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
@@ -74,32 +64,32 @@ public class PiglinRunt extends AbstractPiglin {
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
 			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME);
 	   
-	public PiglinRunt(EntityType<? extends PiglinRunt> type, Level level) {
+	public BigFungusThrower(EntityType<? extends BigFungusThrower> type, Level level) {
 		super(type, level);		
-		this.xpReward = 5;
+		this.xpReward = 10;
 	}
 	
 	@Override
 	public float getVoicePitch() {
-		return super.getVoicePitch() * 1.5F;
+		return super.getVoicePitch() * 0.65F;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 17.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.35F).add(Attributes.ATTACK_DAMAGE, 1.0D).add(Attributes.FOLLOW_RANGE, 17.5D);
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 30.0D)
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.25F).add(Attributes.FOLLOW_RANGE, 30.0D);
 	}
 	
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_35058_, DifficultyInstance p_35059_,
 			MobSpawnType p_35060_, @Nullable SpawnGroupData p_35061_, @Nullable CompoundTag p_35062_) {
-		PiglinRuntAi.initMemories(this);
+		BigFungusThrowerAi.initMemories(this);
 		this.populateDefaultEquipmentSlots(p_35058_.getRandom(), p_35059_);
 		return super.finalizeSpawn(p_35058_, p_35059_, p_35060_, p_35061_, p_35062_);
 	}
 	
 	@Override
 	protected void populateDefaultEquipmentSlots(RandomSource p_219209_, DifficultyInstance p_219210_) {
-		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ItemInit.PIGLIN_MACE.get()));
+		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ItemInit.EXPLOSIVE_FUNGUS.get()));
 		this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
 	}
 	
@@ -107,94 +97,59 @@ public class PiglinRunt extends AbstractPiglin {
 	public void baseTick() {
 		super.baseTick();
 		
-		this.tickAnimations();
+		if (this.throwAnimationTick > 0) {
+			this.throwAnimationTick--;
+		}
 		
-		if (this.level.isClientSide) {			
-		      if (this.shouldPlayRunAnimation && this.random.nextBoolean()) {
-		          int i = Mth.floor(this.getX());
-		          int j = Mth.floor(this.getY() - (double)0.2F);
-		          int k = Mth.floor(this.getZ());
-		          BlockPos pos = new BlockPos(i, j, k);
-		          BlockState blockstate = this.level.getBlockState(pos);
-		          if (!blockstate.isAir()) {
-		             this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
-		          }
-		       }
-		      
-			if (this.shouldPlayWalkAnimation && this.random.nextInt(10) == 0) {
-				Vec3 particlePos = PositionUtils.getOffsetPos(this, -0.5, 0, -0.5, this.yBodyRot);
-				this.level.addParticle(ParticleTypeInit.DUST.get(), particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
-			}
-		}			
-	}
-	
-	public void tickAnimations() {		
+		if (this.level.isClientSide && this.throwAnimationTick <= 0) {
+			this.throwAnimationState.stop();
+		}
+		
 		Vec3 velocity = this.getDeltaMovement();
 		float speed = Mth.sqrt((float) ((velocity.x * velocity.x) + (velocity.z * velocity.z)));				
 		
-		this.shouldPlayRunAnimation = speed > 0.1 && this.attackAnimationTick <= 0;
+		boolean shouldPlayWalkAnimation = speed > 0 && this.throwAnimationTick <= 0;
 		
-		this.shouldPlayWalkAnimation = !shouldPlayRunAnimation && speed > 0 && this.attackAnimationTick <= 0;
-		
-		this.shouldPlayIdleAnimation = !shouldPlayWalkAnimation && !shouldPlayRunAnimation && this.attackAnimationTick <= 0;			
-
-		if (this.shouldPlayRunAnimation) {
-			this.runAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.runAnimationAmountMultiplier, 1);
-		} else {
-			this.runAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.runAnimationAmountMultiplier, 0);
+		if (this.noveltyAnimationTick > 0) {
+			this.noveltyAnimationTick--;
 		}
 		
-		if (this.shouldPlayWalkAnimation) {
-			this.walkAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.walkAnimationAmountMultiplier, 1);
-		} else {
-			this.walkAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.walkAnimationAmountMultiplier, 0);
+		if (this.level.isClientSide && this.random.nextInt(200) == 0 && !shouldPlayWalkAnimation && this.throwAnimationTick <= 0) {
+			this.noveltyAnimationTick = this.noveltyAnimationLength;
+			this.noveltyAnimationState.start(this.tickCount);
 		}
 		
-		if (this.shouldPlayIdleAnimation) {
-			this.idleAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.idleAnimationAmountMultiplier, 1);
-		} else {
-			this.idleAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.idleAnimationAmountMultiplier, 0);
+		if (this.level.isClientSide && (this.noveltyAnimationTick <= 0 || shouldPlayWalkAnimation || this.throwAnimationTick > 0)) {
+			this.noveltyAnimationTick = 0;
+			this.noveltyAnimationState.stop();
 		}
 		
-		if (this.attackAnimationTick > 0) {
-			this.attackAnimationTick--;
-		}
-		
-		if (this.attackAnimationTick <= 0 && this.attackAnimationState.isStarted()) {
-			this.attackAnimationState.stop();
-			this.idleAnimationAmountMultiplier = 1;
+		if (this.level.isClientSide && !this.isInWaterRainOrBubble()) {
+			Vec3 particlePos = PositionUtils.getOffsetPos(this, 0 + this.random.nextGaussian() * 0.5, (26 / 16.0F) + this.random.nextGaussian() * 0.5, -8 / 16.0F, this.yBodyRot);
+			this.level.addParticle(ParticleTypes.WARPED_SPORE, particlePos.x, particlePos.y, particlePos.z, 0, 0.05, 0.025);
 		}
 	}
 	
 	public void handleEntityEvent(byte p_219360_) {
 		if (p_219360_ == 4) {
-			this.attackAnimationTick = this.attackAnimationLength;
-			this.attackAnimationState.start(this.tickCount);
+			this.throwAnimationTick = this.throwAnimationLength;
+			this.throwAnimationState.start(this.tickCount);
 		} else {
 			super.handleEntityEvent(p_219360_);
 		}
 
 	}
 
-	protected Brain.Provider<PiglinRunt> brainProvider() {
+	protected Brain.Provider<BigFungusThrower> brainProvider() {
 		return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
 	}
 
 	protected Brain<?> makeBrain(Dynamic<?> p_35064_) {
-		return PiglinRuntAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
+		return BigFungusThrowerAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
 	}
 
-	public Brain<PiglinRunt> getBrain() {
-		return (Brain<PiglinRunt>) super.getBrain();
-	}
-	
-	@Override
-	public boolean doHurtTarget(Entity p_21372_) {
-		boolean flag = super.doHurtTarget(p_21372_);
-		if (flag && p_21372_ instanceof LivingEntity) {
-			MiscUtils.disableShield(((LivingEntity)p_21372_), 60);
-		}
-		return flag;
+	public Brain<BigFungusThrower> getBrain() {
+		return (Brain<BigFungusThrower>) super.getBrain();
 	}
 		   
 	@Override
@@ -207,11 +162,11 @@ public class PiglinRunt extends AbstractPiglin {
 	}
 
 	protected void customServerAiStep() {
-		this.level.getProfiler().push("piglinRuntBrain");
+		this.level.getProfiler().push("bigFungusThrowerBrain");
 		this.getBrain().tick((ServerLevel) this.level, this);
 		this.level.getProfiler().pop();
-		PiglinRuntAi.updateActivity(this);
-		PiglinRuntAi.maybePlayActivitySound(this);
+		BigFungusThrowerAi.updateActivity(this);
+		BigFungusThrowerAi.maybePlayActivitySound(this);
 		super.customServerAiStep();
 	}
 	
@@ -232,7 +187,7 @@ public class PiglinRunt extends AbstractPiglin {
 			return false;
 		} else {
 			if (flag && p_35055_.getEntity() instanceof LivingEntity) {
-				PiglinRuntAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
+				BigFungusThrowerAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
 			}
 
 			return flag;
