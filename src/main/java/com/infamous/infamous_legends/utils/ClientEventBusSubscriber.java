@@ -3,6 +3,7 @@ package com.infamous.infamous_legends.utils;
 import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ModelLayerInit;
+import com.infamous.infamous_legends.models.ExplosiveFungusModel;
 import com.infamous.infamous_legends.models.PiglinBombModel;
 import com.infamous.infamous_legends.models.PiglinBruiserModel;
 import com.infamous.infamous_legends.models.PiglinEngineerModel;
@@ -10,6 +11,7 @@ import com.infamous.infamous_legends.models.PiglinGrunterModel;
 import com.infamous.infamous_legends.models.PiglinRuntModel;
 import com.infamous.infamous_legends.models.ThrownBlazeRodModel;
 import com.infamous.infamous_legends.models.WarpedBomberModel;
+import com.infamous.infamous_legends.renderers.ExplosiveFungusRenderer;
 import com.infamous.infamous_legends.renderers.PiglinBombRenderer;
 import com.infamous.infamous_legends.renderers.PiglinBruiserRenderer;
 import com.infamous.infamous_legends.renderers.PiglinEngineerRenderer;
@@ -53,6 +55,7 @@ public class ClientEventBusSubscriber {
         event.registerLayerDefinition(ModelLayerInit.WARPED_BOMBER_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.THROWN_BLAZE_ROD, ThrownBlazeRodModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BOMB, PiglinBombModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.EXPLOSIVE_FUNGUS, ExplosiveFungusModel::createBodyLayer);
     }
 	
 	public static LayerDefinition createInnerArmourLayer() {
@@ -72,6 +75,7 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomberRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.THROWN_BLAZE_ROD.get(), ThrownBlazeRodRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_BOMB.get(), PiglinBombRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.EXPLOSIVE_FUNGUS.get(), ExplosiveFungusRenderer::new);
 	}
 	
 	@SubscribeEvent

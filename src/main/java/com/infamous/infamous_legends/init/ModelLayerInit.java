@@ -27,6 +27,7 @@ public class ModelLayerInit {
     public static final ModelLayerLocation WARPED_BOMBER_OUTER_ARMOUR = register("warped_bomber_outer_armour");
     public static final ModelLayerLocation THROWN_BLAZE_ROD = register("thrown_blaze_rod");
     public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
+    public static final ModelLayerLocation EXPLOSIVE_FUNGUS = register("explosive_fungus");
 
     private static ModelLayerLocation register(String path) {
         return register("main", new ResourceLocation(InfamousLegends.MOD_ID, path));

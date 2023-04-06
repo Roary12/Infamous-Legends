@@ -1,0 +1,311 @@
+{
+	"credit": "Made with Blockbench",
+	"gui_light":"front",
+	"texture_size": [
+		32,
+		32
+	],
+	"textures": {
+		"0": "infamous_legends:items/explosive_fungus",
+		"particle": "infamous_legends:items/explosive_fungus"
+	},
+	"elements": [
+		{
+			"from": [
+				8,
+				2.75,
+				6.75
+			],
+			"to": [
+				10,
+				4.75,
+				16.75
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "x",
+				"origin": [
+					11,
+					7,
+					2.75
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						5,
+						15,
+						6,
+						16
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						15,
+						5,
+						16
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						11,
+						15,
+						12,
+						16
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						6,
+						15,
+						11,
+						16
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						6,
+						15,
+						5,
+						10
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						7,
+						10,
+						6,
+						15
+					],
+					"texture": "#0"
+				}
+			}
+		},
+		{
+			"from": [
+				5,
+				-0.25,
+				-1.25
+			],
+			"to": [
+				13,
+				7.75,
+				6.75
+			],
+			"rotation": {
+				"angle": 0,
+				"axis": "x",
+				"origin": [
+					11,
+					7,
+					2.75
+				]
+			},
+			"faces": {
+				"north": {
+					"uv": [
+						4,
+						6,
+						8,
+						10
+					],
+					"texture": "#0"
+				},
+				"east": {
+					"uv": [
+						0,
+						6,
+						4,
+						10
+					],
+					"texture": "#0"
+				},
+				"south": {
+					"uv": [
+						12,
+						6,
+						16,
+						10
+					],
+					"texture": "#0"
+				},
+				"west": {
+					"uv": [
+						8,
+						6,
+						12,
+						10
+					],
+					"texture": "#0"
+				},
+				"up": {
+					"uv": [
+						8,
+						6,
+						4,
+						2
+					],
+					"texture": "#0"
+				},
+				"down": {
+					"uv": [
+						12,
+						2,
+						8,
+						6
+					],
+					"texture": "#0"
+				}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [
+				90,
+				0,
+				0
+			],
+			"translation": [
+				-0.75,
+				1.5,
+				4.5
+			],
+			"scale": [
+				0.75,
+				0.75,
+				0.75
+			]
+		},
+		"thirdperson_lefthand": {
+			"rotation": [
+				90,
+				0,
+				0
+			],
+			"translation": [
+				0.75,
+				1.5,
+				4.5
+			],
+			"scale": [
+				0.75,
+				0.75,
+				0.75
+			]
+		},
+		"firstperson_righthand": {
+			"rotation": [
+				59,
+				-24,
+				10
+			],
+			"translation": [
+				4.75,
+				1.5,
+				0
+			]
+		},
+		"firstperson_lefthand": {
+			"rotation": [
+				59,
+				-24,
+				10
+			],
+			"translation": [
+				4.75,
+				1.5,
+				0
+			]
+		},
+		"ground": {
+			"rotation": [
+				53,
+				36,
+				-24
+			],
+			"translation": [
+				0.75,
+				1.75,
+				1.75
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			]
+		},
+		"gui": {
+			"rotation": [
+				106,
+				-41,
+				49
+			],
+			"translation": [
+				-2.75,
+				0.5,
+				0
+			],
+			"scale": [
+				0.75,
+				0.75,
+				0.75
+			]
+		},
+		"head": {
+			"rotation": [
+				69,
+				-11,
+				25
+			],
+			"translation": [
+				5.25,
+				9.25,
+				-5.5
+			],
+			"scale": [
+				0.5,
+				0.5,
+				0.5
+			]
+		},
+		"fixed": {
+			"rotation": [
+				90,
+				45,
+				0
+			],
+			"translation": [
+				0.5,
+				-2,
+				4.75
+			]
+		}
+	},
+	"groups": [
+		{
+			"name": "fungus",
+			"origin": [
+				14,
+				13,
+				-5.5
+			],
+			"rotation": [
+				-90,
+				0,
+				0
+			],
+			"color": 0,
+			"children": [
+				0,
+				1
+			]
+		}
+	]
+}

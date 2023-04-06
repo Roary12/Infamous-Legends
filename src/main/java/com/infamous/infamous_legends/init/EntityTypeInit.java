@@ -1,6 +1,7 @@
 package com.infamous.infamous_legends.init;
 
 import com.infamous.infamous_legends.InfamousLegends;
+import com.infamous.infamous_legends.entities.ExplosiveFungus;
 import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
@@ -52,4 +53,8 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PiglinBomb>> PIGLIN_BOMB = ENTITY_TYPES.register("piglin_bomb",
 			() -> EntityType.Builder.<PiglinBomb>of(PiglinBomb::new, MobCategory.MISC).sized(0.5F, 0.5F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "piglin_bomb").toString()));
+	
+	public static final RegistryObject<EntityType<ExplosiveFungus>> EXPLOSIVE_FUNGUS = ENTITY_TYPES.register("explosive_fungus",
+			() -> EntityType.Builder.<ExplosiveFungus>of(ExplosiveFungus::new, MobCategory.MISC).sized(0.5F, 0.5F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "explosive_fungus").toString()));
 }

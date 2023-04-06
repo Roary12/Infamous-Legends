@@ -3,6 +3,7 @@ package com.infamous.infamous_legends.init;
 import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.itemgroups.InfamousLegendsItemsItemGroup;
 import com.infamous.infamous_legends.itemgroups.InfamousLegendsMobsItemGroup;
+import com.infamous.infamous_legends.items.ExplosiveFungusItem;
 import com.infamous.infamous_legends.items.PiglinBombItem;
 import com.infamous.infamous_legends.items.PiglinMaceItem;
 
@@ -53,5 +54,8 @@ public class ItemInit {
 	
 	public static final RegistryObject<Item> PIGLIN_BOMB = ITEMS.register("piglin_bomb",
 			() -> new PiglinBombItem(new Item.Properties().stacksTo(16).tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
+	
+	public static final RegistryObject<Item> EXPLOSIVE_FUNGUS = ITEMS.register("explosive_fungus",
+			() -> new ExplosiveFungusItem(new Item.Properties().stacksTo(16).tab(InfamousLegendsItemsItemGroup.INFAMOUS_LEGENDS_ITEMS)));
 
 }

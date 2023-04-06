@@ -13,6 +13,7 @@ import net.minecraft.world.entity.ai.behavior.BehaviorUtils;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Explosion;
 
 public class PiglinEngineerThrowAttack extends Behavior<PiglinEngineer> {
    private final int cooldownBetweenAttacks;
@@ -60,6 +61,7 @@ public class PiglinEngineerThrowAttack extends Behavior<PiglinEngineer> {
 		      double d3 = livingentity.getZ() - p_22552_.getZ();
 		      double d4 = Math.sqrt(d1 * d1 + d3 * d3) * (double)0.2F;
 		      bomb.shoot(d1 + (p_22552_.getRandom().nextGaussian() * 2.5), d2 + d4, d3 + (p_22552_.getRandom().nextGaussian() * 2.5), 1.0F, 3.0F);
+		      bomb.blockInteraction = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(p_22551_, p_22552_) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
 		      p_22552_.playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.4F / (p_22552_.getRandom().nextFloat() * 0.4F + 0.8F));
 		      p_22551_.addFreshEntity(bomb);
 		}
