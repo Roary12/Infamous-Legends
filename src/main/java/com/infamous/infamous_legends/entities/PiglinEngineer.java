@@ -7,6 +7,7 @@ import com.infamous.infamous_legends.ai.brains.PiglinEngineerAi;
 import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.infamous.infamous_legends.interfaces.IHasCustomExplosion;
+import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
 
@@ -52,7 +53,7 @@ public class PiglinEngineer extends AbstractPiglin implements IHasCustomExplosio
 	public int textureChange;
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinEngineer>>> SENSOR_TYPES = ImmutableList
-			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
+			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
@@ -77,7 +78,7 @@ public class PiglinEngineer extends AbstractPiglin implements IHasCustomExplosio
 		
 		if (this.level.isClientSide && this.random.nextBoolean() && !this.isInWaterRainOrBubble()) {
 			Vec3 particlePos = PositionUtils.getOffsetPos(this, -14 / 16.0F, 33 / 16.0F, -12 / 16.0F, this.yBodyRot);
-			this.level.addParticle(ParticleTypes.LARGE_SMOKE, particlePos.x, particlePos.y, particlePos.z, 0, 0.05, 0.025);
+			this.level.addParticle(ParticleTypes.LARGE_SMOKE, particlePos.x, particlePos.y, particlePos.z, 0, 0.05, 0.0);
 		}
 	}
 	
@@ -146,7 +147,7 @@ public class PiglinEngineer extends AbstractPiglin implements IHasCustomExplosio
 	}
 
 	public boolean wantsToPickUp(ItemStack p_35078_) {
-		return p_35078_.is(ItemInit.PIGLIN_MACE.get()) ? super.wantsToPickUp(p_35078_) : false;
+		return p_35078_.is(ItemInit.PIGLIN_BOMB.get()) ? super.wantsToPickUp(p_35078_) : false;
 	}
 
 	protected void customServerAiStep() {
@@ -213,7 +214,7 @@ public class PiglinEngineer extends AbstractPiglin implements IHasCustomExplosio
 
 	@Override
 	public boolean canHarmWithExplosion(Entity target) {
-		return (target.getTeam() == null && this.getTeam() == null && target instanceof AbstractPiglin) ? false : true;
+		return MiscUtils.piglinAllies(this, target) ? false : true;
 	}
 	   
 }

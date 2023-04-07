@@ -11,6 +11,7 @@ import com.infamous.infamous_legends.ai.brains.behaviours.StopAtDistanceSetWalkT
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
 import com.infamous.infamous_legends.entities.BigFungusThrower;
 import com.infamous.infamous_legends.init.TagInit;
+import com.infamous.infamous_legends.utils.MiscUtils;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.core.GlobalPos;
@@ -65,15 +66,15 @@ public class BigFungusThrowerAi {
 	   private static void initFightActivity(BigFungusThrower p_35125_, Brain<BigFungusThrower> p_35126_) {
 	      p_35126_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(new StopAttackingIfTargetInvalid<>((p_35118_) -> {
 	         return !isNearestValidAttackTarget(p_35125_, p_35118_);
-	      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 25.0D), new BigFungusThrowerThrowAttack(40), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
+	      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 22.5D), new BigFungusThrowerThrowAttack(40), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
 	   }
 
 	   private static RunOne<BigFungusThrower> createIdleLookBehaviors() {
-	      return new RunOne<>(ImmutableList.of(Pair.of(new SetEntityLookTarget(EntityType.PLAYER, 8.0F), 1), Pair.of(new SetEntityLookTarget(TagInit.EntityTypes.PIGLINS, 8.0F), 1), Pair.of(new SetEntityLookTarget(8.0F), 1), Pair.of(new DoNothing(30, 60), 1)));
+	      return new RunOne<>(ImmutableList.of(Pair.of(new SetEntityLookTarget(EntityType.PLAYER, 8.0F), 1), Pair.of(new SetEntityLookTarget(TagInit.EntityTypes.PIGLIN_ALLIES, 8.0F), 1), Pair.of(new SetEntityLookTarget(8.0F), 1), Pair.of(new DoNothing(30, 60), 1)));
 	   }
 
 	   private static RunOne<BigFungusThrower> createIdleMovementBehaviors() {
-	      return new RunOne<>(ImmutableList.of(Pair.of(new RandomStroll(0.6F), 2), Pair.of(InteractWithTag.of(TagInit.EntityTypes.PIGLINS, 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(new StrollToPoi(MemoryModuleType.HOME, 0.6F, 2, 100), 2), Pair.of(new StrollAroundPoi(MemoryModuleType.HOME, 0.6F, 5), 2), Pair.of(new DoNothing(30, 60), 1)));
+	      return new RunOne<>(ImmutableList.of(Pair.of(new RandomStroll(0.6F), 2), Pair.of(InteractWithTag.of(TagInit.EntityTypes.PIGLIN_ALLIES, 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(new StrollToPoi(MemoryModuleType.HOME, 0.6F, 2, 100), 2), Pair.of(new StrollAroundPoi(MemoryModuleType.HOME, 0.6F, 5), 2), Pair.of(new DoNothing(30, 60), 1)));
 	   }
 
 	   public static void updateActivity(BigFungusThrower p_35110_) {
@@ -111,7 +112,7 @@ public class BigFungusThrowerAi {
 	   }
 
 	   public static void wasHurtBy(BigFungusThrower p_35097_, LivingEntity p_35098_) {
-	      if (!(p_35098_ instanceof AbstractPiglin)) {
+	      if (!MiscUtils.piglinAllies(p_35097_, p_35098_)) {
 	         PiglinAi.maybeRetaliate(p_35097_, p_35098_);
 	      }
 	   }

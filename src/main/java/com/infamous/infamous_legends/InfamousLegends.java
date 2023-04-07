@@ -1,13 +1,16 @@
 package com.infamous.infamous_legends;
 
 import com.infamous.infamous_legends.entities.BigFungusThrower;
-import com.infamous.infamous_legends.entities.PiglinBruiser;
-import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.entities.BlazeRunt;
 import com.infamous.infamous_legends.entities.MaceRunt;
+import com.infamous.infamous_legends.entities.PiglinBruiser;
+import com.infamous.infamous_legends.entities.PiglinEngineer;
+import com.infamous.infamous_legends.entities.SporeMedic;
 import com.infamous.infamous_legends.entities.WarpedBomber;
+import com.infamous.infamous_legends.init.ActivityInit;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.infamous.infamous_legends.network.Messages;
@@ -33,9 +36,11 @@ public class InfamousLegends {
 			
 			bus.addListener(this::addAttributes);
 		
+			ActivityInit.ACTIVITIES.register(bus);
 			EntityTypeInit.ENTITY_TYPES.register(bus);
 			ItemInit.ITEMS.register(bus);
 			ParticleTypeInit.PARTICLE_TYPES.register(bus);
+			MemoryModuleTypeInit.MEMORY_MODULE_TYPES.register(bus);
 			SensorTypeInit.SENSOR_TYPES.register(bus);
 			
 			bus.addListener(this::commonSetup);
@@ -47,6 +52,7 @@ public class InfamousLegends {
 	private void addAttributes(final EntityAttributeCreationEvent event) {
 	        event.put(EntityTypeInit.MACE_RUNT.get(), MaceRunt.createAttributes().build());
 	        event.put(EntityTypeInit.BLAZE_RUNT.get(), BlazeRunt.createAttributes().build());
+	        event.put(EntityTypeInit.SPORE_MEDIC.get(), SporeMedic.createAttributes().build());
 	        event.put(EntityTypeInit.PIGLIN_BRUISER.get(), PiglinBruiser.createAttributes().build());
 	        event.put(EntityTypeInit.PIGLIN_ENGINEER.get(), PiglinEngineer.createAttributes().build());
 	        event.put(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomber.createAttributes().build());

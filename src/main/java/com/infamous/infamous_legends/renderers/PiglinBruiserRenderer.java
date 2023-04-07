@@ -18,7 +18,7 @@ public class PiglinBruiserRenderer extends MobRenderer<PiglinBruiser, PiglinBrui
 	public PiglinBruiserRenderer(EntityRendererProvider.Context context) {
 		super(context, new PiglinBruiserModel<>(context.bakeLayer(ModelLayerInit.PIGLIN_BRUISER)), 0.75F);
 		CustomArmourLayer.addCustomArmourLayers(this, context, ModelLayerInit.PIGLIN_BRUISER_INNER_ARMOUR, ModelLayerInit.PIGLIN_BRUISER_OUTER_ARMOUR);
-	    this.addLayer(new HeadItemLayer(this, context.getModelSet(), context.getItemInHandRenderer()));
+	    this.addLayer(new HeadItemLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
 	}
 	

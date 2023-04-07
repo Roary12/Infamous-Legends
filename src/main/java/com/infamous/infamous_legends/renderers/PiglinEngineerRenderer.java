@@ -26,7 +26,7 @@ public class PiglinEngineerRenderer extends MobRenderer<PiglinEngineer, PiglinEn
 	public PiglinEngineerRenderer(EntityRendererProvider.Context context) {
 		super(context, new PiglinEngineerModel<>(context.bakeLayer(ModelLayerInit.PIGLIN_ENGINEER)), 1F);
 		CustomArmourLayer.addCustomArmourLayers(this, context, ModelLayerInit.PIGLIN_ENGINEER_INNER_ARMOUR, ModelLayerInit.PIGLIN_ENGINEER_OUTER_ARMOUR);
-	    this.addLayer(new HeadItemLayer(this, context.getModelSet(), context.getItemInHandRenderer()));
+	    this.addLayer(new HeadItemLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()) {		
 			@Override
 			protected void renderArmWithItem(LivingEntity p_117185_, ItemStack p_117186_, TransformType p_117187_,

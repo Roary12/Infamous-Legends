@@ -23,7 +23,7 @@ public class MaceRuntRenderer extends MobRenderer<MaceRunt, MaceRuntModel<MaceRu
 	public MaceRuntRenderer(EntityRendererProvider.Context context) {
 		super(context, new MaceRuntModel<>(context.bakeLayer(ModelLayerInit.MACE_RUNT)), 0.5F);
 		CustomArmourLayer.addCustomArmourLayers(this, context, ModelLayerInit.MACE_RUNT_INNER_ARMOUR, ModelLayerInit.MACE_RUNT_OUTER_ARMOUR);
-	    this.addLayer(new HeadItemLayer(this, context.getModelSet(), context.getItemInHandRenderer()));
+	    this.addLayer(new HeadItemLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
 	}
 	

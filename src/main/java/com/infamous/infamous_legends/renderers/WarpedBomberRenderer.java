@@ -18,7 +18,7 @@ public class WarpedBomberRenderer extends MobRenderer<WarpedBomber, WarpedBomber
 	public WarpedBomberRenderer(EntityRendererProvider.Context context) {
 		super(context, new WarpedBomberModel<>(context.bakeLayer(ModelLayerInit.WARPED_BOMBER)), 0.75F);
 		CustomArmourLayer.addCustomArmourLayers(this, context, ModelLayerInit.WARPED_BOMBER_INNER_ARMOUR, ModelLayerInit.WARPED_BOMBER_OUTER_ARMOUR);
-	    this.addLayer(new HeadItemLayer(this, context.getModelSet(), context.getItemInHandRenderer()));
+	    this.addLayer(new HeadItemLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
 	}
 	

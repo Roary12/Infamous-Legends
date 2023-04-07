@@ -48,7 +48,7 @@ public class PiglinBomb extends ThrowableProjectile {
 		   
 		   @Override
 			protected boolean canHitEntity(Entity p_36743_) {
-				boolean piglinThatCantBeHurt = this.getOwner() != null && this.getOwner() instanceof AbstractPiglin && p_36743_.getTeam() == null && this.getOwner().getTeam() == null && p_36743_ instanceof AbstractPiglin;
+				boolean piglinThatCantBeHurt = this.getOwner() != null && this.getOwner() instanceof AbstractPiglin && MiscUtils.piglinAllies(this.getOwner(), p_36743_);
 				return !piglinThatCantBeHurt && super.canHitEntity(p_36743_);
 			}
 

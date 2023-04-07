@@ -51,7 +51,7 @@ public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion 
 	public final int attackAnimationActionPoint = 1;
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super WarpedBomber>>> SENSOR_TYPES = ImmutableList
-			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
+			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
@@ -144,10 +144,11 @@ public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion 
 	protected boolean canHunt() {
 		return false;
 	}
-
-	public boolean wantsToPickUp(ItemStack p_35078_) {
-		return p_35078_.is(ItemInit.PIGLIN_MACE.get()) ? super.wantsToPickUp(p_35078_) : false;
-	}
+	
+    @Override
+    public boolean canPickUpLoot() {
+    	return false;
+    }
 
 	protected void customServerAiStep() {
 		this.level.getProfiler().push("warpedBomberBrain");
@@ -213,6 +214,6 @@ public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion 
 	
 	@Override
 	public boolean canHarmWithExplosion(Entity target) {
-		return (target.getTeam() == null && this.getTeam() == null && target instanceof AbstractPiglin) ? false : true;
+		return MiscUtils.piglinAllies(this, target) ? false : true;
 	}
 }

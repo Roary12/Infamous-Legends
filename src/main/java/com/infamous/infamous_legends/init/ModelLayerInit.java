@@ -16,6 +16,9 @@ public class ModelLayerInit {
     public static final ModelLayerLocation BLAZE_RUNT = register("blaze_runt");
     public static final ModelLayerLocation BLAZE_RUNT_INNER_ARMOUR = register("blaze_runt_inner_armour");
     public static final ModelLayerLocation BLAZE_RUNT_OUTER_ARMOUR = register("blaze_runt_outer_armour");
+    public static final ModelLayerLocation SPORE_MEDIC = register("spore_medic");
+    public static final ModelLayerLocation SPORE_MEDIC_INNER_ARMOUR = register("spore_medic_inner_armour");
+    public static final ModelLayerLocation SPORE_MEDIC_OUTER_ARMOUR = register("spore_medic_outer_armour");
     public static final ModelLayerLocation PIGLIN_BRUISER = register("piglin_bruiser");
     public static final ModelLayerLocation PIGLIN_BRUISER_INNER_ARMOUR = register("piglin_bruiser_inner_armour");
     public static final ModelLayerLocation PIGLIN_BRUISER_OUTER_ARMOUR = register("piglin_bruiser_outer_armour");

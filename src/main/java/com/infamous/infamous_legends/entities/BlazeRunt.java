@@ -45,7 +45,7 @@ public class BlazeRunt extends AbstractPiglin {
 	public final int throwAnimationActionPoint = 22;
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super BlazeRunt>>> SENSOR_TYPES = ImmutableList
-			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
+			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
@@ -126,7 +126,7 @@ public class BlazeRunt extends AbstractPiglin {
 	}
 
 	public boolean wantsToPickUp(ItemStack p_35078_) {
-		return p_35078_.is(ItemInit.PIGLIN_MACE.get()) ? super.wantsToPickUp(p_35078_) : false;
+		return p_35078_.is(Items.BLAZE_ROD) ? super.wantsToPickUp(p_35078_) : false;
 	}
 
 	protected void customServerAiStep() {

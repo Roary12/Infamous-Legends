@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 import com.infamous.infamous_legends.explosions.CustomExplosion;
+import com.infamous.infamous_legends.init.TagInit;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
@@ -106,5 +107,15 @@ public class MiscUtils {
 		explosion.explode();
 		explosion.finalizeExplosion(true);
 		return explosion;
+	}
+	
+	public static boolean piglinAllies(Entity piglin, Entity target) {
+		if (target.getTeam() == null && piglin.getTeam() == null && target.getType().is(TagInit.EntityTypes.PIGLIN_ALLIES)) {
+			return true;
+		} else if (piglin.getTeam() != null && target.getTeam() != null && piglin.getTeam() == target.getTeam()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

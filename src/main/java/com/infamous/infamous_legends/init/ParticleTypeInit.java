@@ -21,6 +21,8 @@ public class ParticleTypeInit {
             PARTICLE_TYPES.register("spark", () -> new SimpleParticleType(true));
     public static final RegistryObject<SimpleParticleType> DUST =
             PARTICLE_TYPES.register("dust", () -> new SimpleParticleType(true));
+    public static final RegistryObject<SimpleParticleType> SPORE_CLOUD =
+            PARTICLE_TYPES.register("spore_cloud", () -> new SimpleParticleType(true));
 	
 	   private static <T extends ParticleOptions> RegistryObject<ParticleType<T>> registerAdvancedParticle(String p_235906_, boolean p_235907_, ParticleOptions.Deserializer<T> p_235908_, final Function<ParticleType<T>, Codec<T>> p_235909_) {
 		      return PARTICLE_TYPES.register(p_235906_, () -> new ParticleType<T>(p_235907_, p_235908_) {

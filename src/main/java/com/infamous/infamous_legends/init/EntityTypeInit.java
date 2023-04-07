@@ -6,6 +6,7 @@ import com.infamous.infamous_legends.entities.ExplosiveFungus;
 import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
+import com.infamous.infamous_legends.entities.SporeMedic;
 import com.infamous.infamous_legends.entities.BlazeRunt;
 import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.ThrownBlazeRod;
@@ -32,6 +33,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<BlazeRunt>> BLAZE_RUNT = ENTITY_TYPES.register("blaze_runt",
 			() -> EntityType.Builder.<BlazeRunt>of(BlazeRunt::new, MobCategory.MONSTER).sized(0.6F, 1.6F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "blaze_runt").toString()));
+	
+	public static final RegistryObject<EntityType<SporeMedic>> SPORE_MEDIC = ENTITY_TYPES.register("spore_medic",
+			() -> EntityType.Builder.<SporeMedic>of(SporeMedic::new, MobCategory.MONSTER).sized(0.6F, 1.4F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "spore_medic").toString()));
 	
 	public static final RegistryObject<EntityType<PiglinBruiser>> PIGLIN_BRUISER = ENTITY_TYPES.register("piglin_bruiser",
 			() -> EntityType.Builder.<PiglinBruiser>of(PiglinBruiser::new, MobCategory.MONSTER).sized(0.7F, 2.1F)

@@ -6,6 +6,8 @@ import com.google.common.collect.ImmutableList;
 import com.infamous.infamous_legends.ai.brains.BigFungusThrowerAi;
 import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
+import com.infamous.infamous_legends.interfaces.IHasCustomExplosion;
+import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
 
@@ -20,6 +22,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.AnimationState;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -41,7 +44,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class BigFungusThrower extends AbstractPiglin {
+public class BigFungusThrower extends AbstractPiglin implements IHasCustomExplosion {
 
 	public AnimationState throwAnimationState = new AnimationState();
 	public int throwAnimationTick;
@@ -53,7 +56,7 @@ public class BigFungusThrower extends AbstractPiglin {
 	public final int noveltyAnimationLength = 27;
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super BigFungusThrower>>> SENSOR_TYPES = ImmutableList
-			.of(SensorType.NEAREST_LIVING_ENTITIES, SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
+			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
@@ -158,7 +161,7 @@ public class BigFungusThrower extends AbstractPiglin {
 	}
 
 	public boolean wantsToPickUp(ItemStack p_35078_) {
-		return p_35078_.is(ItemInit.PIGLIN_MACE.get()) ? super.wantsToPickUp(p_35078_) : false;
+		return p_35078_.is(ItemInit.EXPLOSIVE_FUNGUS.get()) ? super.wantsToPickUp(p_35078_) : false;
 	}
 
 	protected void customServerAiStep() {
@@ -222,5 +225,9 @@ public class BigFungusThrower extends AbstractPiglin {
 	protected void playConvertedSound() {
 		this.playSound(SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED, 1.0F, this.getVoicePitch());
 	}
-	   
+	
+	@Override
+	public boolean canHarmWithExplosion(Entity target) {
+		return MiscUtils.piglinAllies(this, target) ? false : true;
+	}
 }

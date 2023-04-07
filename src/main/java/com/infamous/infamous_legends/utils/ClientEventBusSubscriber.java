@@ -4,21 +4,23 @@ import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ModelLayerInit;
 import com.infamous.infamous_legends.models.BigFungusThrowerModel;
+import com.infamous.infamous_legends.models.BlazeRuntModel;
 import com.infamous.infamous_legends.models.ExplosiveFungusModel;
+import com.infamous.infamous_legends.models.MaceRuntModel;
 import com.infamous.infamous_legends.models.PiglinBombModel;
 import com.infamous.infamous_legends.models.PiglinBruiserModel;
 import com.infamous.infamous_legends.models.PiglinEngineerModel;
-import com.infamous.infamous_legends.models.BlazeRuntModel;
-import com.infamous.infamous_legends.models.MaceRuntModel;
+import com.infamous.infamous_legends.models.SporeMedicModel;
 import com.infamous.infamous_legends.models.ThrownBlazeRodModel;
 import com.infamous.infamous_legends.models.WarpedBomberModel;
 import com.infamous.infamous_legends.renderers.BigFungusThrowerRenderer;
+import com.infamous.infamous_legends.renderers.BlazeRuntRenderer;
 import com.infamous.infamous_legends.renderers.ExplosiveFungusRenderer;
+import com.infamous.infamous_legends.renderers.MaceRuntRenderer;
 import com.infamous.infamous_legends.renderers.PiglinBombRenderer;
 import com.infamous.infamous_legends.renderers.PiglinBruiserRenderer;
 import com.infamous.infamous_legends.renderers.PiglinEngineerRenderer;
-import com.infamous.infamous_legends.renderers.BlazeRuntRenderer;
-import com.infamous.infamous_legends.renderers.MaceRuntRenderer;
+import com.infamous.infamous_legends.renderers.SporeMedicRenderer;
 import com.infamous.infamous_legends.renderers.ThrownBlazeRodRenderer;
 import com.infamous.infamous_legends.renderers.WarpedBomberRenderer;
 
@@ -46,6 +48,9 @@ public class ClientEventBusSubscriber {
         event.registerLayerDefinition(ModelLayerInit.BLAZE_RUNT, BlazeRuntModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.BLAZE_RUNT_INNER_ARMOUR, ClientEventBusSubscriber::createInnerArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.BLAZE_RUNT_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
+        event.registerLayerDefinition(ModelLayerInit.SPORE_MEDIC, SporeMedicModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.SPORE_MEDIC_INNER_ARMOUR, ClientEventBusSubscriber::createInnerArmourLayer);
+        event.registerLayerDefinition(ModelLayerInit.SPORE_MEDIC_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BRUISER, PiglinBruiserModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BRUISER_INNER_ARMOUR, ClientEventBusSubscriber::createInnerArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BRUISER_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
@@ -75,6 +80,7 @@ public class ClientEventBusSubscriber {
 	public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(EntityTypeInit.MACE_RUNT.get(), MaceRuntRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.BLAZE_RUNT.get(), BlazeRuntRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.SPORE_MEDIC.get(), SporeMedicRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_BRUISER.get(), PiglinBruiserRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_ENGINEER.get(), PiglinEngineerRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomberRenderer::new);

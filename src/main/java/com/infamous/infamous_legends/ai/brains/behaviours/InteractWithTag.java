@@ -62,7 +62,7 @@ public class InteractWithTag<E extends LivingEntity, T extends LivingEntity> ext
    }
 
    private boolean isTargetValid(LivingEntity p_23279_) {
-      return p_23279_.getType().is(TagInit.EntityTypes.PIGLINS) && this.targetFilter.test((T)p_23279_);
+      return p_23279_.getType().is(this.tag) && this.targetFilter.test((T)p_23279_);
    }
 
    protected void start(ServerLevel p_23257_, E p_23258_, long p_23259_) {
@@ -81,6 +81,6 @@ public class InteractWithTag<E extends LivingEntity, T extends LivingEntity> ext
    }
 
    private boolean canInteract(E p_186039_, LivingEntity p_186040_) {
-      return p_186040_.getType().is(TagInit.EntityTypes.PIGLINS) && p_186040_.distanceToSqr(p_186039_) <= (double)this.interactionRangeSqr && this.targetFilter.test((T)p_186040_);
+      return p_186040_.getType().is(this.tag) && p_186040_.distanceToSqr(p_186039_) <= (double)this.interactionRangeSqr && this.targetFilter.test((T)p_186040_);
    }
 }

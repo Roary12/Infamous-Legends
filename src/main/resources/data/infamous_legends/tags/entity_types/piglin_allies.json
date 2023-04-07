@@ -1,14 +1,14 @@
-
 {
 	"replace": false,
 	"values": [
 		"minecraft:piglin",
 		"minecraft:piglin_brute",
-		"infamous_legends:piglin_runt",
-		"infamous_legends:piglin_grunter",
+		"infamous_legends:mace_runt",
+		"infamous_legends:blaze_runt",
 		"infamous_legends:piglin_bruiser",
 		"infamous_legends:piglin_engineer",
 		"infamous_legends:warped_bomber",
-		"infamous_legends:big_fungus_thrower"
+		"infamous_legends:big_fungus_thrower",
+		"infamous_legends:spore_medic"
 	]
 }

@@ -64,8 +64,7 @@ public class PiglinBruiserMeleeAttack extends Behavior<PiglinBruiser> {
 		if (livingentity != null && (p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint1 || p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint2) && p_22552_.distanceTo(livingentity) <= 3.5 && p_22552_.hasLineOfSight(livingentity)) {					
 			p_22552_.doHurtTarget(livingentity);
 			for (LivingEntity entity : p_22551_.getNearbyEntities(LivingEntity.class, TargetingConditions.forCombat(), p_22552_, livingentity.getBoundingBox().inflate(2, 0, 2))) {
-				boolean piglinThatCantBeHurt = entity.getTeam() == null && p_22552_.getTeam() == null && entity instanceof AbstractPiglin;
-				if (!piglinThatCantBeHurt && entity != livingentity) {
+				if (!MiscUtils.piglinAllies(p_22552_, entity) && entity != livingentity) {
 					p_22552_.doHurtTarget(entity, p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint1 ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND);
 				}
 			}

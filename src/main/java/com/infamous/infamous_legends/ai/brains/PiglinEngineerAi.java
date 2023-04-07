@@ -11,6 +11,7 @@ import com.infamous.infamous_legends.ai.brains.behaviours.StopAtDistanceSetWalkT
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.init.TagInit;
+import com.infamous.infamous_legends.utils.MiscUtils;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.core.GlobalPos;
@@ -69,11 +70,11 @@ public class PiglinEngineerAi {
 		   }
 
 	   private static RunOne<PiglinEngineer> createIdleLookBehaviors() {
-		      return new RunOne<>(ImmutableList.of(Pair.of(new SetEntityLookTarget(EntityType.PLAYER, 8.0F), 1), Pair.of(new SetEntityLookTarget(TagInit.EntityTypes.PIGLINS, 8.0F), 1), Pair.of(new SetEntityLookTarget(8.0F), 1), Pair.of(new DoNothing(30, 60), 1)));
+		      return new RunOne<>(ImmutableList.of(Pair.of(new SetEntityLookTarget(EntityType.PLAYER, 8.0F), 1), Pair.of(new SetEntityLookTarget(TagInit.EntityTypes.PIGLIN_ALLIES, 8.0F), 1), Pair.of(new SetEntityLookTarget(8.0F), 1), Pair.of(new DoNothing(30, 60), 1)));
 		   }
 
 		   private static RunOne<PiglinEngineer> createIdleMovementBehaviors() {
-		      return new RunOne<>(ImmutableList.of(Pair.of(new RandomStroll(0.6F), 2), Pair.of(InteractWithTag.of(TagInit.EntityTypes.PIGLINS, 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(new StrollToPoi(MemoryModuleType.HOME, 0.6F, 2, 100), 2), Pair.of(new StrollAroundPoi(MemoryModuleType.HOME, 0.6F, 5), 2), Pair.of(new DoNothing(30, 60), 1)));
+		      return new RunOne<>(ImmutableList.of(Pair.of(new RandomStroll(0.6F), 2), Pair.of(InteractWithTag.of(TagInit.EntityTypes.PIGLIN_ALLIES, 8, MemoryModuleType.INTERACTION_TARGET, 0.6F, 2), 2), Pair.of(new StrollToPoi(MemoryModuleType.HOME, 0.6F, 2, 100), 2), Pair.of(new StrollAroundPoi(MemoryModuleType.HOME, 0.6F, 5), 2), Pair.of(new DoNothing(30, 60), 1)));
 		   }
 
 	   public static void updateActivity(PiglinEngineer p_35110_) {
@@ -111,9 +112,9 @@ public class PiglinEngineerAi {
 	   }
 
 	   public static void wasHurtBy(PiglinEngineer p_35097_, LivingEntity p_35098_) {
-	      if (!(p_35098_ instanceof AbstractPiglin)) {
-	         PiglinAi.maybeRetaliate(p_35097_, p_35098_);
-	      }
+		      if (!MiscUtils.piglinAllies(p_35097_, p_35098_)) {
+			         PiglinAi.maybeRetaliate(p_35097_, p_35098_);
+			      }
 	   }
 
 	   protected static void setAngerTarget(PiglinEngineer p_149989_, LivingEntity p_149990_) {

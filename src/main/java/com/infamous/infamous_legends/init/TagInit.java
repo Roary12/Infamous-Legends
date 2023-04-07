@@ -10,7 +10,7 @@ import net.minecraft.world.entity.EntityType;
 public class TagInit {
 	
     public static class EntityTypes {
-    	public static final TagKey<EntityType<?>> PIGLINS = tag("piglins");  	
+    	public static final TagKey<EntityType<?>> PIGLIN_ALLIES = tag("piglin_allies");  	
     	
     	   private static TagKey<EntityType<?>> tag(String p_203849_) {
     		      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(InfamousLegends.MOD_ID, p_203849_));

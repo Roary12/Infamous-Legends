@@ -1,6 +1,7 @@
 {
 	"entity.infamous_legends.mace_runt" : "Mace Runt",
 	"entity.infamous_legends.blaze_runt" : "Blaze Runt",
+	"entity.infamous_legends.spore_medic" : "Spore Medic",
 	"entity.infamous_legends.piglin_bruiser" : "Piglin Bruiser",
 	"entity.infamous_legends.piglin_engineer" : "Piglin Engineer",
 	"entity.infamous_legends.warped_bomber" : "Warped Bomber",
@@ -11,6 +12,7 @@
 	
 	"item.infamous_legends.mace_runt_spawn_egg" : "Mace Runt Spawn Egg",
 	"item.infamous_legends.blaze_runt_spawn_egg" : "Blaze Runt Spawn Egg",
+	"item.infamous_legends.spore_medic_spawn_egg" : "Spore Medic Spawn Egg",
 	"item.infamous_legends.piglin_bruiser_spawn_egg" : "Piglin Bruiser Spawn Egg",
 	"item.infamous_legends.piglin_engineer_spawn_egg" : "Piglin Engineer Spawn Egg",
 	"item.infamous_legends.warped_bomber_spawn_egg" : "Warped Bomber Spawn Egg",

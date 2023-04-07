@@ -26,7 +26,7 @@ public class BigFungusThrowerRenderer extends MobRenderer<BigFungusThrower, BigF
 	public BigFungusThrowerRenderer(EntityRendererProvider.Context context) {
 		super(context, new BigFungusThrowerModel<>(context.bakeLayer(ModelLayerInit.BIG_FUNGUS_THROWER)), 1F);
 		CustomArmourLayer.addCustomArmourLayers(this, context, ModelLayerInit.BIG_FUNGUS_THROWER_INNER_ARMOUR, ModelLayerInit.BIG_FUNGUS_THROWER_OUTER_ARMOUR);
-	    this.addLayer(new HeadItemLayer(this, context.getModelSet(), context.getItemInHandRenderer()));
+	    this.addLayer(new HeadItemLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()) {		
 			@Override
 			protected void renderArmWithItem(LivingEntity p_117185_, ItemStack p_117186_, TransformType p_117187_,
