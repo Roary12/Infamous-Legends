@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.infamous.infamous_legends.ai.brains.behaviours.InteractWithTag;
+import com.infamous.infamous_legends.ai.brains.behaviours.LookAtAttackTarget;
 import com.infamous.infamous_legends.ai.brains.behaviours.BlazeRuntThrowAttack;
 import com.infamous.infamous_legends.ai.brains.behaviours.StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
@@ -64,7 +65,7 @@ public class BlazeRuntAi {
 	   private static void initFightActivity(BlazeRunt p_35125_, Brain<BlazeRunt> p_35126_) {
 	      p_35126_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(new StopAttackingIfTargetInvalid<>((p_35118_) -> {
 	         return !isNearestValidAttackTarget(p_35125_, p_35118_);
-	      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 20.0D), new BlazeRuntThrowAttack(40)), MemoryModuleType.ATTACK_TARGET);
+	      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 20.0D), new BlazeRuntThrowAttack(40), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
 	   }
 
 	   private static RunOne<BlazeRunt> createIdleLookBehaviors() {

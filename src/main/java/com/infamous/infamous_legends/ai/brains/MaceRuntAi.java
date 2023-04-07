@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.infamous.infamous_legends.ai.brains.behaviours.InteractWithTag;
+import com.infamous.infamous_legends.ai.brains.behaviours.LookAtAttackTarget;
 import com.infamous.infamous_legends.ai.brains.behaviours.MaceRuntMeleeAttack;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
 import com.infamous.infamous_legends.entities.MaceRunt;
@@ -64,7 +65,7 @@ public class MaceRuntAi {
 	   private static void initFightActivity(MaceRunt p_35125_, Brain<MaceRunt> p_35126_) {
 	      p_35126_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(new StopAttackingIfTargetInvalid<>((p_35118_) -> {
 	         return !isNearestValidAttackTarget(p_35125_, p_35118_);
-	      }), new SetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F), new MaceRuntMeleeAttack(20)), MemoryModuleType.ATTACK_TARGET);
+	      }), new SetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F), new MaceRuntMeleeAttack(20), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
 	   }
 
 	   private static RunOne<MaceRunt> createIdleLookBehaviors() {

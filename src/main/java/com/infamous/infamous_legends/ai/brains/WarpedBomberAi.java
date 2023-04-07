@@ -5,6 +5,7 @@ import java.util.Optional;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.infamous.infamous_legends.ai.brains.behaviours.InteractWithTag;
+import com.infamous.infamous_legends.ai.brains.behaviours.LookAtAttackTarget;
 import com.infamous.infamous_legends.ai.brains.behaviours.WarpedBomberMeleeAttack;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
 import com.infamous.infamous_legends.entities.WarpedBomber;
@@ -64,7 +65,7 @@ public class WarpedBomberAi {
 	   private static void initFightActivity(WarpedBomber p_35125_, Brain<WarpedBomber> p_35126_) {
 	      p_35126_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(new StopAttackingIfTargetInvalid<>((p_35118_) -> {
 	         return !isNearestValidAttackTarget(p_35125_, p_35118_);
-	      }), new SetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F), new WarpedBomberMeleeAttack(20)), MemoryModuleType.ATTACK_TARGET);
+	      }), new SetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F), new WarpedBomberMeleeAttack(20), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
 	   }
 
 	   private static RunOne<WarpedBomber> createIdleLookBehaviors() {
