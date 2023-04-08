@@ -100,8 +100,8 @@ public class BlazeRuntModel<T extends BlazeRunt> extends HierarchicalModel<T> im
 		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && entity.throwAnimationTick <= 0;	
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		BlazeRuntSineWaveAnimations.blazeRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
-		BlazeRuntSineWaveAnimations.blazeRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation ? 1 : 0);
+		BlazeRuntSineWaveAnimations.blazeRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
+		BlazeRuntSineWaveAnimations.blazeRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), 1, shouldPlayIdleAnimation ? 1 : 0);
 		this.animate(entity.throwAnimationState, BlazeRuntKeyframeAnimations.BLAZE_RUNT_THROW, ageInTicks);
 	}
 	

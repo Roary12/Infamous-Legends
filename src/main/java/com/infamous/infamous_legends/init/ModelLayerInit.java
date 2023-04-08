@@ -31,6 +31,9 @@ public class ModelLayerInit {
     public static final ModelLayerLocation BIG_FUNGUS_THROWER = register("big_fungus_thrower");
     public static final ModelLayerLocation BIG_FUNGUS_THROWER_INNER_ARMOUR = register("big_fungus_thrower_inner_armour");
     public static final ModelLayerLocation BIG_FUNGUS_THROWER_OUTER_ARMOUR = register("big_fungus_thrower_outer_armour");
+    public static final ModelLayerLocation PIGMADILLO = register("pigmadillo");
+    public static final ModelLayerLocation PIGMADILLO_INNER_ARMOUR = register("pigmadillo_inner_armour");
+    public static final ModelLayerLocation PIGMADILLO_OUTER_ARMOUR = register("pigmadillo_outer_armour");
     public static final ModelLayerLocation THROWN_BLAZE_ROD = register("thrown_blaze_rod");
     public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
     public static final ModelLayerLocation EXPLOSIVE_FUNGUS = register("explosive_fungus");

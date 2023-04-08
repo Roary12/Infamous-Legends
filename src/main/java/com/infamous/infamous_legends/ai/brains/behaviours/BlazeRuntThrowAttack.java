@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.infamous.infamous_legends.entities.BlazeRunt;
 import com.infamous.infamous_legends.entities.ThrownBlazeRod;
 
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,12 +26,12 @@ public class BlazeRuntThrowAttack extends Behavior<BlazeRunt> {
 
    protected boolean checkExtraStartConditions(ServerLevel level, BlazeRunt mob) {
       LivingEntity livingentity = this.getAttackTarget(mob);
-      return mob.isHolding(Items.BLAZE_ROD) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 20 && mob.hasLineOfSight(livingentity);
+      return mob.isHolding(Items.BLAZE_ROD) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 20;
    }
 
    protected void start(ServerLevel p_23524_, BlazeRunt p_23525_, long p_23526_) {
       LivingEntity livingentity = this.getAttackTarget(p_23525_);
-      BehaviorUtils.lookAtEntity(p_23525_, livingentity);
+      p_23525_.lookAt(Anchor.EYES, livingentity.position());
       p_23525_.getNavigation().stop();
 		
       p_23525_.throwAnimationTick = p_23525_.throwAnimationLength;
@@ -43,7 +44,7 @@ public class BlazeRuntThrowAttack extends Behavior<BlazeRunt> {
 		
 		LivingEntity livingentity = this.getAttackTarget(p_22552_);
 		if (livingentity != null) {
-			BehaviorUtils.lookAtEntity(p_22552_, livingentity);
+			p_22552_.lookAt(Anchor.EYES, livingentity.position());
 		}
 		
 		p_22552_.getNavigation().stop();

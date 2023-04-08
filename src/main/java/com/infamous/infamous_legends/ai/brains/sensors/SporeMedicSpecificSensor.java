@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.infamous.infamous_legends.entities.SporeMedic;
 import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
+import com.infamous.infamous_legends.init.TagInit;
 import com.infamous.infamous_legends.utils.MiscUtils;
 
 import net.minecraft.server.level.ServerLevel;
@@ -36,7 +37,7 @@ public class SporeMedicSpecificSensor extends CustomSensor<SporeMedic> {
 	      }).map(Mob.class::cast);
 	      
 	      Optional<Mob> nemeses = nearestvisiblelivingentities.findClosest((p_186155_) -> {
-	          return p_186155_ instanceof WitherSkeleton || p_186155_ instanceof WitherBoss;
+	          return p_186155_.getType().is(TagInit.EntityTypes.LEGENDS_PIGLIN_NEMESES);
 	       }).map(Mob.class::cast);
 
 	      for(LivingEntity livingentity : brain.getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES).orElse(ImmutableList.of())) {

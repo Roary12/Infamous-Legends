@@ -32,6 +32,14 @@ public class SineWaveAnimationUtils {
 		affectModelPartBasedOnMotionType(modelPart, MiscUtils.degToRad(newAmount) * amountMultiplier, newPositionAmount * amountMultiplier, motionType);
 	}
 	
+	public static float getSineWaveKeyframe(float amount, float speed, float tick, float min, float max, float offset) {
+		return Mth.clamp(Mth.cos(tick * (1 * speed) + offset) * amount, min, max);
+	}
+	
+	public static float getConstantMotionKeyframe(float speed, float tick) {
+		return tick * speed;
+	}
+	
 	public static void affectModelPartBasedOnMotionType(ModelPart modelPart, float rotationMotion, float motion, SineWaveMotionTypes motionType) {
 		switch(motionType) {
 		case ROTATION_X: {
@@ -97,8 +105,8 @@ public class SineWaveAnimationUtils {
 		return newValue;
 	}
 	
-	public static float getTick(Entity entity) {
-		return MiscUtils.degToRad((entity.tickCount + Minecraft.getInstance().getFrameTime())) / 20;
+	public static float getTick(int tick, boolean convertToRadians) {
+		return convertToRadians ? (MiscUtils.degToRad((tick + Minecraft.getInstance().getFrameTime())) / 20) : ((tick + Minecraft.getInstance().getFrameTime()) / 20);
 	}
 	
 }

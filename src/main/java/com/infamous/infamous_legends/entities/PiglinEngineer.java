@@ -54,7 +54,7 @@ public class PiglinEngineer extends AbstractPiglin implements IHasCustomExplosio
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinEngineer>>> SENSOR_TYPES = ImmutableList
 			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
-					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
+					SensorType.HURT_BY, SensorTypeInit.LEGENDS_PIGLIN_SPECIFIC_SENSOR.get());
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
 			MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER,
@@ -89,7 +89,7 @@ public class PiglinEngineer extends AbstractPiglin implements IHasCustomExplosio
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 20.0D).add(Attributes.ARMOR, 10.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.2F).add(Attributes.FOLLOW_RANGE, 25.0D);
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.2F).add(Attributes.FOLLOW_RANGE, 25.0D).add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
 	}
 	
 	@Nullable

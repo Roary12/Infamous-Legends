@@ -101,8 +101,8 @@ public class PiglinBruiserModel<T extends PiglinBruiser> extends HierarchicalMod
 		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && entity.attackAnimationTick <= 0;	
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		PiglinBruiserSineWaveAnimations.piglinBruiserWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
-		PiglinBruiserSineWaveAnimations.piglinBruiserIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation ? 1 : 0);
+		PiglinBruiserSineWaveAnimations.piglinBruiserWalkAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
+		PiglinBruiserSineWaveAnimations.piglinBruiserIdleAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), 1, shouldPlayIdleAnimation ? 1 : 0);
 		this.animate(entity.attackAnimationState, PiglinBruiserKeyframeAnimations.BRUISER_ATTACK, ageInTicks);
 	}
 	

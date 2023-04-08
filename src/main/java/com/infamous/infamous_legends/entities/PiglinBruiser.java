@@ -52,7 +52,7 @@ public class PiglinBruiser extends AbstractPiglin {
 	
 	protected static final ImmutableList<SensorType<? extends Sensor<? super PiglinBruiser>>> SENSOR_TYPES = ImmutableList
 			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
-					SensorType.HURT_BY, SensorType.PIGLIN_BRUTE_SPECIFIC_SENSOR);
+					SensorType.HURT_BY, SensorTypeInit.LEGENDS_PIGLIN_SPECIFIC_SENSOR.get());
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.DOORS_TO_CLOSE, MemoryModuleType.NEAREST_LIVING_ENTITIES,
 			MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES, MemoryModuleType.NEAREST_VISIBLE_PLAYER,
@@ -64,7 +64,7 @@ public class PiglinBruiser extends AbstractPiglin {
 	   
 	public PiglinBruiser(EntityType<? extends PiglinBruiser> type, Level level) {
 		super(type, level);		
-		this.xpReward = 25;
+		this.xpReward = 10;
 	}
 	
 	@Override
@@ -74,7 +74,7 @@ public class PiglinBruiser extends AbstractPiglin {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 30.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.ARMOR, 5.0D).add(Attributes.FOLLOW_RANGE, 17.5D);
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.3F).add(Attributes.ATTACK_DAMAGE, 2.0D).add(Attributes.ARMOR, 5.0D).add(Attributes.FOLLOW_RANGE, 17.5D).add(Attributes.KNOCKBACK_RESISTANCE, 0.5D);
 	}
 	
 	@Nullable

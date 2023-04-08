@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.infamous.infamous_legends.entities.SporeMedic;
 import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.Behavior;
@@ -19,12 +20,12 @@ public class SporeMedicHealAllies extends Behavior<SporeMedic> {
 
    protected boolean checkExtraStartConditions(ServerLevel level, SporeMedic mob) {
       LivingEntity livingentity = this.getHealTarget(mob);
-      return mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 4 && mob.hasLineOfSight(livingentity);
+      return mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 4;
    }
 
    protected void start(ServerLevel p_23524_, SporeMedic p_23525_, long p_23526_) {
       LivingEntity livingentity = this.getHealTarget(p_23525_);
-      BehaviorUtils.lookAtEntity(p_23525_, livingentity);
+      p_23525_.lookAt(Anchor.EYES, livingentity.position());
       p_23525_.getNavigation().stop();
 		
       p_23525_.shooting = true;
@@ -38,7 +39,7 @@ public class SporeMedicHealAllies extends Behavior<SporeMedic> {
 		LivingEntity livingentity = this.getHealTarget(p_22552_);
 		
 		if (livingentity != null) {
-			BehaviorUtils.lookAtEntity(p_22552_, livingentity);
+			p_22552_.lookAt(Anchor.EYES, livingentity.position());
 		}
 		
 		p_22552_.getNavigation().stop();

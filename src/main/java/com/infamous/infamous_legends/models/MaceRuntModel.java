@@ -95,9 +95,9 @@ public class MaceRuntModel<T extends MaceRunt> extends HierarchicalModel<T> impl
 		float speed = Mth.sqrt((float) ((velocity.x * velocity.x) + (velocity.z * velocity.z)));				
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		MaceRuntSineWaveAnimations.maceRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 25, entity.runAnimationAmountMultiplier);
-		MaceRuntSineWaveAnimations.maceRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, entity.walkAnimationAmountMultiplier);
-		MaceRuntSineWaveAnimations.maceRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, entity.idleAnimationAmountMultiplier);
+		MaceRuntSineWaveAnimations.maceRuntRunAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 25, entity.runAnimationAmountMultiplier);
+		MaceRuntSineWaveAnimations.maceRuntWalkAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 17, entity.walkAnimationAmountMultiplier);
+		MaceRuntSineWaveAnimations.maceRuntIdleAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), 1, entity.idleAnimationAmountMultiplier);
 		this.animate(entity.attackAnimationState, MaceRuntKeyframeAnimations.MACE_RUNT_ATTACK, ageInTicks);
 	}
 	

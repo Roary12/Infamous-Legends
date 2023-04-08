@@ -5,6 +5,7 @@ import com.infamous.infamous_legends.entities.BlazeRunt;
 import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
+import com.infamous.infamous_legends.entities.Pigmadillo;
 import com.infamous.infamous_legends.entities.SporeMedic;
 import com.infamous.infamous_legends.entities.WarpedBomber;
 import com.infamous.infamous_legends.init.ActivityInit;
@@ -57,6 +58,7 @@ public class InfamousLegends {
 	        event.put(EntityTypeInit.PIGLIN_ENGINEER.get(), PiglinEngineer.createAttributes().build());
 	        event.put(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomber.createAttributes().build());
 	        event.put(EntityTypeInit.BIG_FUNGUS_THROWER.get(), BigFungusThrower.createAttributes().build());
+	        event.put(EntityTypeInit.PIGMADILLO.get(), Pigmadillo.createAttributes().build());
 	}
 	
     public void commonSetup(final FMLCommonSetupEvent event) {    

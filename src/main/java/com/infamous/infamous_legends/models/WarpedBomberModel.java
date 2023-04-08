@@ -144,9 +144,9 @@ public class WarpedBomberModel<T extends WarpedBomber> extends HierarchicalModel
 		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && !shouldPlayRunAnimation && entity.attackAnimationTick <= 0;	
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		WarpedBomberSineWaveAnimations.warpedBomberRunAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 20, shouldPlayRunAnimation ? 1 : 0);
-		WarpedBomberSineWaveAnimations.warpedBomberWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 15, shouldPlayWalkAnimation ? 1 : 0);
-		WarpedBomberSineWaveAnimations.warpedBomberIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation ? 1 : 0);
+		WarpedBomberSineWaveAnimations.warpedBomberRunAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 20, shouldPlayRunAnimation ? 1 : 0);
+		WarpedBomberSineWaveAnimations.warpedBomberWalkAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 15, shouldPlayWalkAnimation ? 1 : 0);
+		WarpedBomberSineWaveAnimations.warpedBomberIdleAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), 1, shouldPlayIdleAnimation ? 1 : 0);
 		this.animate(entity.attackAnimationState, WarpedBomberKeyframeAnimations.WARPED_BOMBER_ATTACK, ageInTicks);
 	}
 	

@@ -3,6 +3,7 @@ package com.infamous.infamous_legends.init;
 import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomNearestLivingEntitySensor;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomPlayerSensor;
+import com.infamous.infamous_legends.ai.brains.sensors.LegendsPiglinSpecificSensor;
 import com.infamous.infamous_legends.ai.brains.sensors.SporeMedicSpecificSensor;
 import com.infamous.infamous_legends.entities.SporeMedic;
 
@@ -23,5 +24,8 @@ public class SensorTypeInit {
 	
 	public static final RegistryObject<SensorType<SporeMedicSpecificSensor>> SPORE_MEDIC_SPECIFIC_SENSOR = SENSOR_TYPES.register("spore_medic_specific_sensor",
 	        () -> new SensorType<>(SporeMedicSpecificSensor::new));
+	
+	public static final RegistryObject<SensorType<LegendsPiglinSpecificSensor>> LEGENDS_PIGLIN_SPECIFIC_SENSOR = SENSOR_TYPES.register("legends_piglin_specific_sensor",
+	        () -> new SensorType<>(LegendsPiglinSpecificSensor::new));
 }
 

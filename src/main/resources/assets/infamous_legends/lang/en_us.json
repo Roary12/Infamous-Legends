@@ -6,6 +6,7 @@
 	"entity.infamous_legends.piglin_engineer" : "Piglin Engineer",
 	"entity.infamous_legends.warped_bomber" : "Warped Bomber",
 	"entity.infamous_legends.big_fungus_thrower" : "Big Fungus Thrower",
+	"entity.infamous_legends.pigmadillo" : "Pigmadillo",
 	"entity.infamous_legends.thrown_blaze_rod" : "Thrown Blaze Rod",
 	"entity.infamous_legends.piglin_bomb" : "Piglin Bomb",
 	"entity.infamous_legends.explosive_fungus" : "Explosive Fungus",
@@ -17,6 +18,7 @@
 	"item.infamous_legends.piglin_engineer_spawn_egg" : "Piglin Engineer Spawn Egg",
 	"item.infamous_legends.warped_bomber_spawn_egg" : "Warped Bomber Spawn Egg",
 	"item.infamous_legends.big_fungus_thrower_spawn_egg" : "Big Fungus Thrower Spawn Egg",
+	"item.infamous_legends.pigmadillo_spawn_egg" : "Pigmadillo Spawn Egg",
 	
 	"item.infamous_legends.piglin_mace" : "Piglin Mace",
 	"item.infamous_legends.piglin_saw" : "Piglin Saw",

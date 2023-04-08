@@ -95,7 +95,7 @@ public class SporeMedic extends AbstractPiglin {
 		super.baseTick();
 		
 		if (this.level.isClientSide && this.shooting) {
-			Vec3 particlePos = PositionUtils.getOffsetPos(this, Math.cos(SineWaveAnimationUtils.getTick(this) * (1 * 100)) * (1 * -0.6), 18 / 16.0F, 18 / 16.0F, this.yBodyRot);
+			Vec3 particlePos = PositionUtils.getOffsetPos(this, Math.cos(SineWaveAnimationUtils.getTick(this.tickCount, true) * (1 * 100)) * (1 * -0.6), 18 / 16.0F, 18 / 16.0F, this.yBodyRot);
 			Vec3 particleMotion = PositionUtils.getOffsetMotion(this, this.random.nextGaussian() * 0.125, this.random.nextGaussian() * 0.125, 0.25, this.yBodyRot);
 			this.level.addParticle(ParticleTypeInit.SPORE_CLOUD.get(), particlePos.x, particlePos.y, particlePos.z, particleMotion.x, particleMotion.y, particleMotion.z);
 		}

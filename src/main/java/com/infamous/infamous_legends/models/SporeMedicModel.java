@@ -120,9 +120,9 @@ public class SporeMedicModel<T extends SporeMedic> extends HierarchicalModel<T> 
 		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && !shouldPlayShootAnimation;	
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		SporeMedicSineWaveAnimations.sporeMedicShootAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayShootAnimation ? 1 : 0);
-		SporeMedicSineWaveAnimations.sporeMedicWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
-		SporeMedicSineWaveAnimations.sporeMedicIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation ? 1 : 0);
+		SporeMedicSineWaveAnimations.sporeMedicShootAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), 1, shouldPlayShootAnimation ? 1 : 0);
+		SporeMedicSineWaveAnimations.sporeMedicWalkAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
+		SporeMedicSineWaveAnimations.sporeMedicIdleAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), 1, shouldPlayIdleAnimation ? 1 : 0);
 	}
 	
 	private void animateHeadLookTarget(float yRot, float xRot) {

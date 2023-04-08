@@ -15,5 +15,8 @@ public class MemoryModuleTypeInit {
 
 	    public static final RegistryObject<MemoryModuleType<LivingEntity>> HEAL_TARGET = MEMORY_MODULE_TYPES.register("heal_target",
 	            () -> new MemoryModuleType<>(Optional.empty()));
+	    
+	    public static final RegistryObject<MemoryModuleType<Boolean>> ROLL_COOLING_DOWN = MEMORY_MODULE_TYPES.register("roll_cooling_down",
+	            () -> new MemoryModuleType<>(Optional.empty()));
 }
 

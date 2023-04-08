@@ -6,6 +6,7 @@ import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
 
+import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,7 +30,7 @@ public class MaceRuntMeleeAttack extends Behavior<MaceRunt> {
 
    protected boolean checkExtraStartConditions(ServerLevel level, MaceRunt mob) {
       LivingEntity livingentity = this.getAttackTarget(mob);
-      return !this.isHoldingUsableProjectileWeapon(mob) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 2 && mob.hasLineOfSight(livingentity);
+      return !this.isHoldingUsableProjectileWeapon(mob) && mob.hasLineOfSight(livingentity) && mob.distanceTo(livingentity) <= 2;
    }
 
    private boolean isHoldingUsableProjectileWeapon(MaceRunt p_23528_) {
@@ -41,7 +42,7 @@ public class MaceRuntMeleeAttack extends Behavior<MaceRunt> {
 
    protected void start(ServerLevel p_23524_, MaceRunt p_23525_, long p_23526_) {
       LivingEntity livingentity = this.getAttackTarget(p_23525_);
-      BehaviorUtils.lookAtEntity(p_23525_, livingentity);
+      p_23525_.lookAt(Anchor.EYES, livingentity.position());
       p_23525_.getNavigation().stop();
 		
       p_23525_.attackAnimationTick = p_23525_.attackAnimationLength;
@@ -55,7 +56,7 @@ public class MaceRuntMeleeAttack extends Behavior<MaceRunt> {
 		LivingEntity livingentity = this.getAttackTarget(p_22552_);
 		
 		if (livingentity != null) {
-			BehaviorUtils.lookAtEntity(p_22552_, livingentity);
+			p_22552_.lookAt(Anchor.EYES, livingentity.position());
 		}
 		
 		p_22552_.getNavigation().stop();

@@ -2,13 +2,14 @@ package com.infamous.infamous_legends.init;
 
 import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.entities.BigFungusThrower;
+import com.infamous.infamous_legends.entities.BlazeRunt;
 import com.infamous.infamous_legends.entities.ExplosiveFungus;
+import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
+import com.infamous.infamous_legends.entities.Pigmadillo;
 import com.infamous.infamous_legends.entities.SporeMedic;
-import com.infamous.infamous_legends.entities.BlazeRunt;
-import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.ThrownBlazeRod;
 import com.infamous.infamous_legends.entities.WarpedBomber;
 
@@ -53,6 +54,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<BigFungusThrower>> BIG_FUNGUS_THROWER = ENTITY_TYPES.register("big_fungus_thrower",
 			() -> EntityType.Builder.<BigFungusThrower>of(BigFungusThrower::new, MobCategory.MONSTER).sized(0.8F, 2.4F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "warped_bomber").toString()));
+	
+	public static final RegistryObject<EntityType<Pigmadillo>> PIGMADILLO = ENTITY_TYPES.register("pigmadillo",
+			() -> EntityType.Builder.<Pigmadillo>of(Pigmadillo::new, MobCategory.MONSTER).sized(1.5F, 2.9F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "pigmadillo").toString()));
 	
 	// PROJECTILES
 

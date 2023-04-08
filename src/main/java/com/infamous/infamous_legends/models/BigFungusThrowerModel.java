@@ -138,8 +138,8 @@ public class BigFungusThrowerModel<T extends BigFungusThrower> extends Hierarchi
 		boolean shouldPlayIdleAnimation = !shouldPlayWalkAnimation && entity.throwAnimationTick <= 0 && entity.noveltyAnimationTick <= 0;	
 		
 		this.animateHeadLookTarget(netHeadYaw, headPitch);
-		BigFungusThrowerSineWaveAnimations.bigFungusThrowerWalkAnimation(this, SineWaveAnimationUtils.getTick(entity), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
-		BigFungusThrowerSineWaveAnimations.bigFungusThrowerIdleAnimation(this, SineWaveAnimationUtils.getTick(entity), 1, shouldPlayIdleAnimation ? 1 : 0);
+		BigFungusThrowerSineWaveAnimations.bigFungusThrowerWalkAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), speed * 17, shouldPlayWalkAnimation ? 1 : 0);
+		BigFungusThrowerSineWaveAnimations.bigFungusThrowerIdleAnimation(this, SineWaveAnimationUtils.getTick(entity.tickCount, true), 1, shouldPlayIdleAnimation ? 1 : 0);
 		this.animate(entity.throwAnimationState, BigFungusThrowerKeyframeAnimations.BIG_FUNGUS_THROWER_THROW, ageInTicks);
 		this.animate(entity.noveltyAnimationState, BigFungusThrowerKeyframeAnimations.BIG_FUNGUS_THROWER_NOVELTY, ageInTicks);
 	}

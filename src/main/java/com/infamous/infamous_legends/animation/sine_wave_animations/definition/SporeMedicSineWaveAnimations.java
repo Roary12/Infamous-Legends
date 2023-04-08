@@ -108,5 +108,13 @@ public class SporeMedicSineWaveAnimations {
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.leftArm, -1.9798F, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.leftArm, -10.6209F, amountMultiplier, SineWaveMotionTypes.ROTATION_Y);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.leftArm, -23.6558F, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);
+		
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.nose, -0.025F, 1000, tick, -floatMax, floatMax, -100, speedMultiplier, amountMultiplier, SineWaveMotionTypes.SCALE_X);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.nose, -0.025F, 1000, tick, -floatMax, floatMax, -100, speedMultiplier, amountMultiplier, SineWaveMotionTypes.SCALE_Y);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.nose, -0.025F, 1000, tick, -floatMax, floatMax, -100, speedMultiplier, amountMultiplier, SineWaveMotionTypes.SCALE_Z);
+		
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.chestEquipment, 0.02F, 500, tick, -floatMax, floatMax, -100, speedMultiplier, amountMultiplier, SineWaveMotionTypes.SCALE_X);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.chestEquipment, 0.02F, 500, tick, -floatMax, floatMax, -100, speedMultiplier, amountMultiplier, SineWaveMotionTypes.SCALE_Y);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.chestEquipment, 0.02F, 500, tick, -floatMax, floatMax, -100, speedMultiplier, amountMultiplier, SineWaveMotionTypes.SCALE_Z);
 	}
 }
