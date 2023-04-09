@@ -32,8 +32,12 @@ public class SporeMedicSpecificSensor extends CustomSensor<SporeMedic> {
 	      Brain<?> brain = entity.getBrain();
 	      List<AbstractPiglin> piglins = Lists.newArrayList();
 	      NearestVisibleLivingEntities nearestvisiblelivingentities = brain.getMemory(MemoryModuleType.NEAREST_VISIBLE_LIVING_ENTITIES).orElse(NearestVisibleLivingEntities.empty());
+	      boolean dontHealMedics = nearestvisiblelivingentities.contains((target) -> {
+	    	 return MiscUtils.piglinAllies(entity, target) && !(target instanceof SporeMedic) && target.getHealth() < target.getMaxHealth();
+	      });
 	      Optional<Mob> healTarget = nearestvisiblelivingentities.findClosest((p_186155_) -> {
-	         return MiscUtils.piglinAllies(entity, p_186155_) && !(p_186155_ instanceof SporeMedic) && p_186155_.getHealth() < p_186155_.getMaxHealth();
+	    	 boolean unhealableSporeMedic = dontHealMedics ? p_186155_ instanceof SporeMedic : false;
+	         return MiscUtils.piglinAllies(entity, p_186155_) && !unhealableSporeMedic && p_186155_.getHealth() < p_186155_.getMaxHealth();
 	      }).map(Mob.class::cast);
 	      
 	      Optional<Mob> nemeses = nearestvisiblelivingentities.findClosest((p_186155_) -> {

@@ -55,6 +55,7 @@ public class PigmadilloMeleeAttack extends Behavior<Pigmadillo> {
 		p_22552_.getNavigation().stop();
 		
 		if (p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint) {
+			p_22552_.playSound(SoundEvents.ANVIL_LAND, 1, p_22552_.getVoicePitch());
 			Vec3 particlePos = PositionUtils.getOffsetPos(p_22552_, -0.25, 0, 3, p_22552_.yBodyRot);
 			p_22551_.sendParticles(ParticleTypeInit.DUST.get(), particlePos.x, particlePos.y, particlePos.z, 8, 0.2D, 0.2D, 0.2D, 0.0D);
 		}

@@ -38,6 +38,8 @@ public class PigmadilloRollAttack extends Behavior<Pigmadillo> {
       LivingEntity livingentity = this.getAttackTarget(p_23525_);
       p_23525_.lookAt(Anchor.EYES, livingentity.position());
       p_23525_.getNavigation().stop();
+      
+      p_23525_.playSound(SoundEvents.IRON_GOLEM_ATTACK, 2, 0.5F);
 		
       p_23525_.rollAnimationTick = p_23525_.rollAnimationLength;
       p_23524_.broadcastEntityEvent(p_23525_, (byte) 11);
@@ -51,6 +53,18 @@ public class PigmadilloRollAttack extends Behavior<Pigmadillo> {
 		
 		if (p_22552_.rollAnimationTick > 85 && livingentity != null) {
 			p_22552_.lookAt(Anchor.EYES, livingentity.position());
+		}
+		
+		if (p_22552_.rollAnimationTick == p_22552_.rollAnimationLength - 16) {
+			p_22552_.playSound(SoundEvents.BONE_BLOCK_PLACE, 2, 0.5F);
+		}
+		
+		if (p_22552_.rollAnimationTick == p_22552_.rollAnimationLength - 27) {
+			p_22552_.playSound(SoundEvents.BONE_BLOCK_BREAK, 2, 0.5F);
+		}
+		
+		if (p_22552_.rollAnimationTick == p_22552_.rollAnimationLength - 85) {
+			p_22552_.playSound(SoundEvents.IRON_GOLEM_ATTACK, 2, 0.5F);
 		}
 		
 		p_22552_.getNavigation().stop();

@@ -47,7 +47,10 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 public class Pigmadillo extends AbstractPiglin {
@@ -148,6 +151,22 @@ public class Pigmadillo extends AbstractPiglin {
 		}
 		
 		if (this.rolling()) {
+			if (this.tickCount % 5 == 0 && this.horizontalCollision && net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(this.level, this)) {
+	            boolean flag = false;
+	            AABB aabb = this.getBoundingBox().inflate(0.2D, 0, 0.2D);
+
+	            for(BlockPos blockpos : BlockPos.betweenClosed(Mth.floor(aabb.minX), Mth.floor(aabb.minY), Mth.floor(aabb.minZ), Mth.floor(aabb.maxX), Mth.floor(aabb.maxY), Mth.floor(aabb.maxZ))) {
+	               BlockState blockstate = this.level.getBlockState(blockpos);
+	               if (blockstate.canEntityDestroy(this.level, blockpos, this)) {
+	                  flag = this.level.destroyBlock(blockpos, true, this) || flag;
+	               }
+	            }
+
+	            if (!flag && this.onGround) {
+	               this.jumpFromGround();
+	            }
+	         }
+			
 			for (LivingEntity entity : this.level.getNearbyEntities(LivingEntity.class, TargetingConditions.forCombat(), this, getBoundingBox())) {
 				if (!MiscUtils.piglinAllies(this, entity)) {
 					entity.hurt(DamageSource.mobAttack(this), 15);
@@ -155,6 +174,7 @@ public class Pigmadillo extends AbstractPiglin {
 					double d1 = entity.getZ() - this.getZ();
 					double d2 = Math.max(d0 * d0 + d1 * d1, 0.001D);
 					entity.push(d0 / d2 * 2.0D, 0.3D, d1 / d2 * 2.0D);
+					MiscUtils.disableShield(entity, 60);
 				}
 			}
 		}
@@ -257,7 +277,9 @@ public class Pigmadillo extends AbstractPiglin {
 
 	protected void playStepSound(BlockPos p_35066_, BlockState p_35067_) {
 		if (!this.rolling()) {
-			this.playSound(SoundEvents.PIGLIN_BRUTE_STEP, 0.15F, 1.0F);
+			this.playSound(SoundEvents.PIGLIN_BRUTE_STEP, 0.5F, 1.0F);
+		} else {
+			this.playSound(SoundEvents.BONE_BLOCK_STEP, 1.0F, 0.75F);
 		}
 	}
 

@@ -58,7 +58,7 @@ public class WarpedBomberMeleeAttack extends Behavior<WarpedBomber> {
 		
 		if (p_22552_.attackAnimationTick == p_22552_.attackAnimationActionPoint) {
 			MiscUtils.customExplosion(p_22551_, p_22552_, DamageSource.explosion(p_22552_), null, p_22552_.getX(), p_22552_.getY(),
-					p_22552_.getZ(), 5.0F, false, Explosion.BlockInteraction.BREAK, SoundEvents.GENERIC_EXPLODE,
+					p_22552_.getZ(), 5.0F, false, net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(p_22551_, p_22552_) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE, SoundEvents.GENERIC_EXPLODE,
 					p_22552_.getSoundSource(), ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER, 15.0F, false);
 			p_22552_.discard();
 		}
