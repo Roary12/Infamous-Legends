@@ -13,6 +13,7 @@ import com.infamous.infamous_legends.entities.PortalGuard;
 import com.infamous.infamous_legends.entities.PortalGuardWreckingBall;
 import com.infamous.infamous_legends.entities.SporeMedic;
 import com.infamous.infamous_legends.entities.ThrownBlazeRod;
+import com.infamous.infamous_legends.entities.WarBoar;
 import com.infamous.infamous_legends.entities.WarpedBomber;
 
 import net.minecraft.resources.ResourceLocation;
@@ -44,6 +45,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PiglinBruiser>> PIGLIN_BRUISER = ENTITY_TYPES.register("piglin_bruiser",
 			() -> EntityType.Builder.<PiglinBruiser>of(PiglinBruiser::new, MobCategory.MONSTER).sized(0.7F, 2.1F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "piglin_bruiser").toString()));
+	
+	public static final RegistryObject<EntityType<WarBoar>> WAR_BOAR = ENTITY_TYPES.register("war_boar",
+			() -> EntityType.Builder.<WarBoar>of(WarBoar::new, MobCategory.MONSTER).sized(1.6F, 1.8F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "war_boar").toString()));
 	
 	public static final RegistryObject<EntityType<PiglinEngineer>> PIGLIN_ENGINEER = ENTITY_TYPES.register("piglin_engineer",
 			() -> EntityType.Builder.<PiglinEngineer>of(PiglinEngineer::new, MobCategory.MONSTER).sized(0.6F, 1.4F)

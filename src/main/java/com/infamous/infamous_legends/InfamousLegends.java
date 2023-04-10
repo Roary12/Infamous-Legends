@@ -8,6 +8,7 @@ import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.entities.Pigmadillo;
 import com.infamous.infamous_legends.entities.PortalGuard;
 import com.infamous.infamous_legends.entities.SporeMedic;
+import com.infamous.infamous_legends.entities.WarBoar;
 import com.infamous.infamous_legends.entities.WarpedBomber;
 import com.infamous.infamous_legends.init.ActivityInit;
 import com.infamous.infamous_legends.init.EntityTypeInit;
@@ -56,6 +57,7 @@ public class InfamousLegends {
 	        event.put(EntityTypeInit.BLAZE_RUNT.get(), BlazeRunt.createAttributes().build());
 	        event.put(EntityTypeInit.SPORE_MEDIC.get(), SporeMedic.createAttributes().build());
 	        event.put(EntityTypeInit.PIGLIN_BRUISER.get(), PiglinBruiser.createAttributes().build());
+	        event.put(EntityTypeInit.WAR_BOAR.get(), WarBoar.createAttributes().build());
 	        event.put(EntityTypeInit.PIGLIN_ENGINEER.get(), PiglinEngineer.createAttributes().build());
 	        event.put(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomber.createAttributes().build());
 	        event.put(EntityTypeInit.BIG_FUNGUS_THROWER.get(), BigFungusThrower.createAttributes().build());

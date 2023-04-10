@@ -37,6 +37,7 @@ public class ModelLayerInit {
     public static final ModelLayerLocation PORTAL_GUARD = register("portal_guard");
     public static final ModelLayerLocation PORTAL_GUARD_INNER_ARMOUR = register("portal_guard_inner_armour");
     public static final ModelLayerLocation PORTAL_GUARD_OUTER_ARMOUR = register("portal_guard_outer_armour");
+    public static final ModelLayerLocation WAR_BOAR = register("war_boar");
     public static final ModelLayerLocation THROWN_BLAZE_ROD = register("thrown_blaze_rod");
     public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
     public static final ModelLayerLocation EXPLOSIVE_FUNGUS = register("explosive_fungus");
