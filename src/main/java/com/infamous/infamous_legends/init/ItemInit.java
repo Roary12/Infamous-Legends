@@ -54,6 +54,10 @@ public class ItemInit {
 			() -> new ForgeSpawnEggItem(EntityTypeInit.PIGMADILLO, 0xbc768e, 0x5c2821,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
+	public static final RegistryObject<Item> PORTAL_GUARD_SPAWN_EGG = ITEMS.register("portal_guard_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.PORTAL_GUARD, 0xffd83d, 0x584c2f,
+					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
+	
 	// WEAPONS
 	
 	public static final RegistryObject<Item> PIGLIN_MACE = ITEMS.register("piglin_mace",

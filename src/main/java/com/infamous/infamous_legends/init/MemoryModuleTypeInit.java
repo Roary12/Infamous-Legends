@@ -18,5 +18,8 @@ public class MemoryModuleTypeInit {
 	    
 	    public static final RegistryObject<MemoryModuleType<Boolean>> ROLL_COOLING_DOWN = MEMORY_MODULE_TYPES.register("roll_cooling_down",
 	            () -> new MemoryModuleType<>(Optional.empty()));
+	    
+	    public static final RegistryObject<MemoryModuleType<Boolean>> SHOOT_COOLING_DOWN = MEMORY_MODULE_TYPES.register("shoot_cooling_down",
+	            () -> new MemoryModuleType<>(Optional.empty()));
 }
 

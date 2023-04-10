@@ -3,11 +3,12 @@ package com.infamous.infamous_legends.entities;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
-import com.infamous.infamous_legends.ai.brains.MaceRuntAi;
-import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
+import com.infamous.infamous_legends.ai.brains.PortalGuardAi;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
+import com.infamous.infamous_legends.interfaces.IHasCustomExplosion;
 import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
@@ -40,29 +41,34 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.monster.piglin.PiglinArmPose;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
-public class MaceRunt extends AbstractPiglin {
+public class PortalGuard extends AbstractPiglin {
 
 	public AnimationState attackAnimationState = new AnimationState();
 	public int attackAnimationTick;
-	public final int attackAnimationLength = 58;
-	public final int attackAnimationActionPoint = 27;
+	public final int attackAnimationLength = 45;
+	public final int attackAnimationActionPoint = 23;
 	
-	public boolean shouldPlayRunAnimation;
-	public boolean shouldPlayWalkAnimation;
-	public boolean shouldPlayIdleAnimation;
+	public AnimationState shootAnimationState = new AnimationState();
+	public int shootAnimationTick;
+	public final int shootAnimationLength = 60;
+	public final int shootAnimationActionPoint = 26;
 	
-	public float runAnimationAmountMultiplier;
-	public float walkAnimationAmountMultiplier;
-	public float idleAnimationAmountMultiplier;
+	public AnimationState reelInBallAnimationState = new AnimationState();
+	public int reelInBallAnimationTick;
+	public final int reelInBallAnimationLength = 60;
+	public final int reelInBallAnimationActionPoint = 11;
 	
-	public final float animationTransitionSpeed = 0.5F;
+	public boolean playingIdleShootingAnimation;
 	
-	protected static final ImmutableList<SensorType<? extends Sensor<? super MaceRunt>>> SENSOR_TYPES = ImmutableList
+	public int hasWreckingBallTime;
+	
+	protected static final ImmutableList<SensorType<? extends Sensor<? super PortalGuard>>> SENSOR_TYPES = ImmutableList
 			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorType.NEAREST_ITEMS,
 					SensorType.HURT_BY, SensorTypeInit.LEGENDS_PIGLIN_SPECIFIC_SENSOR.get());
 	protected static final ImmutableList<MemoryModuleType<?>> MEMORY_TYPES = ImmutableList.of(
@@ -72,97 +78,111 @@ public class MaceRunt extends AbstractPiglin {
 			MemoryModuleType.NEARBY_ADULT_PIGLINS, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY,
 			MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.ATTACK_TARGET,
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
-			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME);
+			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME, 
+			MemoryModuleTypeInit.SHOOT_COOLING_DOWN.get());
 	   
-	public MaceRunt(EntityType<? extends MaceRunt> type, Level level) {
+	public PortalGuard(EntityType<? extends PortalGuard> type, Level level) {
 		super(type, level);		
-		this.xpReward = 5;
+		this.xpReward = 20;
+	}
+	
+	@Override
+	public float getStepHeight() {
+		return 1.0F;
 	}
 	
 	@Override
 	public float getVoicePitch() {
-		return super.getVoicePitch() * 1.5F;
+		return super.getVoicePitch() * 0.45F;
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {
-		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 17.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.35F).add(Attributes.ATTACK_DAMAGE, 1.0D).add(Attributes.FOLLOW_RANGE, 17.5D);
+		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 150.0D)
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.275F).add(Attributes.FOLLOW_RANGE, 25.0D).add(Attributes.ATTACK_DAMAGE, 17.5D).add(Attributes.KNOCKBACK_RESISTANCE, 1D).add(Attributes.ARMOR, 12.5D);
+	}
+	
+	@Override
+	public boolean doHurtTarget(Entity p_21372_) {
+		boolean flag = super.doHurtTarget(p_21372_);
+		System.out.print("\r\n" + "hurting");
+		if (p_21372_ instanceof LivingEntity) {
+			System.out.print("\r\n" + "disabling shield");
+			MiscUtils.disableShield(((LivingEntity)p_21372_), 120);
+		}
+		return flag;
 	}
 	
 	@Nullable
 	public SpawnGroupData finalizeSpawn(ServerLevelAccessor p_35058_, DifficultyInstance p_35059_,
 			MobSpawnType p_35060_, @Nullable SpawnGroupData p_35061_, @Nullable CompoundTag p_35062_) {
-		MaceRuntAi.initMemories(this);
-		this.populateDefaultEquipmentSlots(p_35058_.getRandom(), p_35059_);
+		PortalGuardAi.initMemories(this);
 		return super.finalizeSpawn(p_35058_, p_35059_, p_35060_, p_35061_, p_35062_);
-	}
-	
-	@Override
-	protected void populateDefaultEquipmentSlots(RandomSource p_219209_, DifficultyInstance p_219210_) {
-		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ItemInit.PIGLIN_MACE.get()));
-		this.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
 	}
 	
 	@Override
 	public void baseTick() {
 		super.baseTick();
 		
-		this.tickAnimations();
-		
-		if (this.level.isClientSide) {			
-		      if (this.shouldPlayRunAnimation && this.random.nextBoolean()) {
-		          int i = Mth.floor(this.getX());
-		          int j = Mth.floor(this.getY() - (double)0.2F);
-		          int k = Mth.floor(this.getZ());
-		          BlockPos pos = new BlockPos(i, j, k);
-		          BlockState blockstate = this.level.getBlockState(pos);
-		          if (!blockstate.isAir()) {
-		             this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
-		          }
-		       }
-		      
-			if (this.shouldPlayWalkAnimation && this.random.nextInt(10) == 0) {
-				Vec3 particlePos = PositionUtils.getOffsetPos(this, -0.5, 0, -0.5, this.yBodyRot);
-				this.level.addParticle(ParticleTypeInit.DUST.get(), particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
-			}
-		}			
-	}
-	
-	public void tickAnimations() {		
 		Vec3 velocity = this.getDeltaMovement();
 		float speed = Mth.sqrt((float) ((velocity.x * velocity.x) + (velocity.z * velocity.z)));				
 		
-		this.shouldPlayRunAnimation = speed > 0.1 && this.attackAnimationTick <= 0;
+		boolean shouldPlayIdleShootingAnimation = this.playingIdleShootingAnimation && this.attackAnimationTick <= 0 && this.shootAnimationTick <= 0 && this.reelInBallAnimationTick <= 0;
 		
-		this.shouldPlayWalkAnimation = !shouldPlayRunAnimation && speed > 0 && this.attackAnimationTick <= 0;
-		
-		this.shouldPlayIdleAnimation = !shouldPlayWalkAnimation && !shouldPlayRunAnimation && this.attackAnimationTick <= 0;			
-
-		if (this.shouldPlayRunAnimation) {
-			this.runAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.runAnimationAmountMultiplier, 1);
-		} else {
-			this.runAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.runAnimationAmountMultiplier, 0);
-		}
-		
-		if (this.shouldPlayWalkAnimation) {
-			this.walkAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.walkAnimationAmountMultiplier, 1);
-		} else {
-			this.walkAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.walkAnimationAmountMultiplier, 0);
-		}
-		
-		if (this.shouldPlayIdleAnimation) {
-			this.idleAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.idleAnimationAmountMultiplier, 1);
-		} else {
-			this.idleAnimationAmountMultiplier = (float)Mth.lerp(this.animationTransitionSpeed, this.idleAnimationAmountMultiplier, 0);
+		boolean shouldPlayWalkAnimation = speed > 0 && !shouldPlayIdleShootingAnimation && this.attackAnimationTick <= 0 && this.shootAnimationTick <= 0 && this.reelInBallAnimationTick <= 0;
+			
+		if (shouldPlayWalkAnimation) {
+			Vec3 particlePos = PositionUtils.getOffsetPos(this, 1.25, 0, -1.5, this.yBodyRot);
+			if (this.random.nextInt(5) == 0) {
+				this.level.addParticle(ParticleTypeInit.DUST.get(), particlePos.x, particlePos.y, particlePos.z, 0, 0, 0);
+			}
+			if (this.random.nextBoolean()) {
+		         int i = Mth.floor(this.getX());
+		         int j = Mth.floor(this.getY() - (double)0.2F);
+		         int k = Mth.floor(this.getZ());
+		         BlockPos pos = new BlockPos(i, j, k);
+		         BlockState blockstate = this.level.getBlockState(pos);
+		         if (!blockstate.isAir()) {
+		            this.level.addParticle(new BlockParticleOption(ParticleTypes.BLOCK, blockstate).setPos(pos), this.getX() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), this.getY() + 0.1D, this.getZ() + ((double)this.random.nextFloat() - 0.5D) * (double)this.getBbWidth(), 4.0D * ((double)this.random.nextFloat() - 0.5D), 0.5D, ((double)this.random.nextFloat() - 0.5D) * 4.0D);
+		         }
+			}
 		}
 		
 		if (this.attackAnimationTick > 0) {
 			this.attackAnimationTick--;
 		}
 		
-		if (this.attackAnimationTick <= 0 && this.attackAnimationState.isStarted()) {
+		if (this.level.isClientSide && this.attackAnimationTick <= 0) {
 			this.attackAnimationState.stop();
-			this.idleAnimationAmountMultiplier = 1;
+		}
+
+		if (this.shootAnimationTick > 0) {
+			this.shootAnimationTick--;
+		}
+		
+		if (this.level.isClientSide && this.shootAnimationTick <= 0) {
+			this.shootAnimationState.stop();
+		}
+		
+		if (!this.level.isClientSide && this.shootAnimationTick == 1) {
+			this.playingIdleShootingAnimation = true;
+			this.level.broadcastEntityEvent(this, (byte)9);
+		}
+		
+		if (this.reelInBallAnimationTick > 0) {
+			this.reelInBallAnimationTick--;
+		}
+		
+		if (this.level.isClientSide && this.reelInBallAnimationTick <= 0) {
+			this.reelInBallAnimationState.stop();
+		}
+		
+		if (this.hasWreckingBallTime > 0) {
+			this.hasWreckingBallTime --;
+		}
+		
+		if (!this.level.isClientSide && this.hasWreckingBallTime <= 0 && this.playingIdleShootingAnimation == true) {
+			this.playingIdleShootingAnimation = false;
+			this.level.broadcastEntityEvent(this, (byte)10);
 		}
 	}
 	
@@ -170,31 +190,32 @@ public class MaceRunt extends AbstractPiglin {
 		if (p_219360_ == 4) {
 			this.attackAnimationTick = this.attackAnimationLength;
 			this.attackAnimationState.start(this.tickCount);
+		} else if (p_219360_ == 11) {
+			this.shootAnimationTick = this.shootAnimationLength;
+			this.shootAnimationState.start(this.tickCount);
+		} else if (p_219360_ == 8) {
+			this.reelInBallAnimationTick = this.reelInBallAnimationLength;
+			this.reelInBallAnimationState.start(this.tickCount);
+		} else if (p_219360_ == 9) {
+			this.playingIdleShootingAnimation = true;
+		} else if (p_219360_ == 10) {
+			this.playingIdleShootingAnimation = false;
 		} else {
 			super.handleEntityEvent(p_219360_);
 		}
 
 	}
 
-	protected Brain.Provider<MaceRunt> brainProvider() {
+	protected Brain.Provider<PortalGuard> brainProvider() {
 		return Brain.provider(MEMORY_TYPES, SENSOR_TYPES);
 	}
 
 	protected Brain<?> makeBrain(Dynamic<?> p_35064_) {
-		return MaceRuntAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
+		return PortalGuardAi.makeBrain(this, this.brainProvider().makeBrain(p_35064_));
 	}
 
-	public Brain<MaceRunt> getBrain() {
-		return (Brain<MaceRunt>) super.getBrain();
-	}
-	
-	@Override
-	public boolean doHurtTarget(Entity p_21372_) {
-		boolean flag = super.doHurtTarget(p_21372_);
-		if (p_21372_ instanceof LivingEntity) {
-			MiscUtils.disableShield(((LivingEntity)p_21372_), 60);
-		}
-		return flag;
+	public Brain<PortalGuard> getBrain() {
+		return (Brain<PortalGuard>) super.getBrain();
 	}
 		   
 	@Override
@@ -203,15 +224,15 @@ public class MaceRunt extends AbstractPiglin {
 	}
 
 	public boolean wantsToPickUp(ItemStack p_35078_) {
-		return p_35078_.is(ItemInit.PIGLIN_MACE.get()) ? super.wantsToPickUp(p_35078_) : false;
+		return false;
 	}
 
 	protected void customServerAiStep() {
-		this.level.getProfiler().push("maceRuntBrain");
+		this.level.getProfiler().push("portalGuardBrain");
 		this.getBrain().tick((ServerLevel) this.level, this);
 		this.level.getProfiler().pop();
-		MaceRuntAi.updateActivity(this);
-		MaceRuntAi.maybePlayActivitySound(this);
+		PortalGuardAi.updateActivity(this);
+		PortalGuardAi.maybePlayActivitySound(this);
 		super.customServerAiStep();
 	}
 	
@@ -232,7 +253,7 @@ public class MaceRunt extends AbstractPiglin {
 			return false;
 		} else {
 			if (flag && p_35055_.getEntity() instanceof LivingEntity) {
-				MaceRuntAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
+				PortalGuardAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
 			}
 
 			return flag;
@@ -257,7 +278,7 @@ public class MaceRunt extends AbstractPiglin {
 	}
 
 	protected void playStepSound(BlockPos p_35066_, BlockState p_35067_) {
-		this.playSound(SoundEvents.PIGLIN_BRUTE_STEP, 0.15F, 1.0F);
+		this.playSound(SoundEvents.PIGLIN_BRUTE_STEP, 1.0F, 1.0F);
 	}
 
 	public void playAngrySound() {
@@ -267,5 +288,4 @@ public class MaceRunt extends AbstractPiglin {
 	protected void playConvertedSound() {
 		this.playSound(SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED, 1.0F, this.getVoicePitch());
 	}
-	   
 }

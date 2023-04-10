@@ -16,7 +16,7 @@ import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 public class PigmadilloRenderer extends MobRenderer<Pigmadillo, PigmadilloModel<Pigmadillo>> {
 
 	public PigmadilloRenderer(EntityRendererProvider.Context context) {
-		super(context, new PigmadilloModel<>(context.bakeLayer(ModelLayerInit.PIGMADILLO)), 0.5F);
+		super(context, new PigmadilloModel<>(context.bakeLayer(ModelLayerInit.PIGMADILLO)), 1.25F);
 		CustomArmourLayer.addCustomArmourLayers(this, context, ModelLayerInit.PIGMADILLO_INNER_ARMOUR, ModelLayerInit.PIGMADILLO_OUTER_ARMOUR);
 	    this.addLayer(new HeadItemLayer<>(this, context.getModelSet(), context.getItemInHandRenderer()));
 		this.addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));

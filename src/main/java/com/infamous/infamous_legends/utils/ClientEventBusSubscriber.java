@@ -1,6 +1,7 @@
 package com.infamous.infamous_legends.utils;
 
 import com.infamous.infamous_legends.InfamousLegends;
+import com.infamous.infamous_legends.entities.PortalGuardWreckingBall;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ModelLayerInit;
 import com.infamous.infamous_legends.models.BigFungusThrowerModel;
@@ -11,6 +12,8 @@ import com.infamous.infamous_legends.models.PiglinBombModel;
 import com.infamous.infamous_legends.models.PiglinBruiserModel;
 import com.infamous.infamous_legends.models.PiglinEngineerModel;
 import com.infamous.infamous_legends.models.PigmadilloModel;
+import com.infamous.infamous_legends.models.PortalGuardModel;
+import com.infamous.infamous_legends.models.PortalGuardWreckingBallModel;
 import com.infamous.infamous_legends.models.SporeMedicModel;
 import com.infamous.infamous_legends.models.ThrownBlazeRodModel;
 import com.infamous.infamous_legends.models.WarpedBomberModel;
@@ -22,6 +25,8 @@ import com.infamous.infamous_legends.renderers.PiglinBombRenderer;
 import com.infamous.infamous_legends.renderers.PiglinBruiserRenderer;
 import com.infamous.infamous_legends.renderers.PiglinEngineerRenderer;
 import com.infamous.infamous_legends.renderers.PigmadilloRenderer;
+import com.infamous.infamous_legends.renderers.PortalGuardRenderer;
+import com.infamous.infamous_legends.renderers.PortalGuardWreckingBallRenderer;
 import com.infamous.infamous_legends.renderers.SporeMedicRenderer;
 import com.infamous.infamous_legends.renderers.ThrownBlazeRodRenderer;
 import com.infamous.infamous_legends.renderers.WarpedBomberRenderer;
@@ -68,9 +73,13 @@ public class ClientEventBusSubscriber {
         event.registerLayerDefinition(ModelLayerInit.PIGMADILLO, PigmadilloModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGMADILLO_INNER_ARMOUR, ClientEventBusSubscriber::createInnerArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGMADILLO_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
+        event.registerLayerDefinition(ModelLayerInit.PORTAL_GUARD, PortalGuardModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.PORTAL_GUARD_INNER_ARMOUR, ClientEventBusSubscriber::createInnerArmourLayer);
+        event.registerLayerDefinition(ModelLayerInit.PORTAL_GUARD_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.THROWN_BLAZE_ROD, ThrownBlazeRodModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BOMB, PiglinBombModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.EXPLOSIVE_FUNGUS, ExplosiveFungusModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.PORTAL_GUARD_WRECKING_BALL, PortalGuardWreckingBallModel::createBodyLayer);
     }
 	
 	public static LayerDefinition createInnerArmourLayer() {
@@ -91,9 +100,11 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(EntityTypeInit.WARPED_BOMBER.get(), WarpedBomberRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.BIG_FUNGUS_THROWER.get(), BigFungusThrowerRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGMADILLO.get(), PigmadilloRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.PORTAL_GUARD.get(), PortalGuardRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.THROWN_BLAZE_ROD.get(), ThrownBlazeRodRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_BOMB.get(), PiglinBombRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.EXPLOSIVE_FUNGUS.get(), ExplosiveFungusRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.PORTAL_GUARD_WRECKING_BALL.get(), PortalGuardWreckingBallRenderer::new);
 	}
 	
 	@SubscribeEvent

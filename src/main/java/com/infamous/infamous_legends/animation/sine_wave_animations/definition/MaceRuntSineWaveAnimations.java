@@ -87,12 +87,12 @@ public class MaceRuntSineWaveAnimations {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightLeg, 25F, 250, tick, -floatMax, floatMax, -25, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightLeg, 2.5F, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightLeg, -1.5F, 250, tick, 0, floatMax, 25, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Y);
-		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightLeg, 0.75F, 250, tick, 0, floatMax, -50, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Z);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightLeg, 0.75F, 250, tick, -floatMax, floatMax, -50, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Z);
 		
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, -25F, 250, tick, -floatMax, floatMax, -25, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.adjustPositionOfModelPart(model.leftLeg, -2.5F, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, 1.5F, 250, tick, 0, floatMax, 25, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Y);
-		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, -0.75F, 250, tick, 0, floatMax, -50, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Z);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, -0.75F, 250, tick, -floatMax, floatMax, -50, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Z);
 	}
 	
 	public static void maceRuntRunAnimation(MaceRuntModel model, float tick, float speedMultiplier, float amountMultiplier) {
@@ -132,6 +132,15 @@ public class MaceRuntSineWaveAnimations {
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, -20F, 250, tick, -floatMax, floatMax, -25, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, 1F, 250, tick, 0, floatMax, 25, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Y);
 		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.leftLeg, -0.5F, 250, tick, -floatMax, floatMax, -50, speedMultiplier, amountMultiplier, SineWaveMotionTypes.POSITION_Z);
+		
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightHand, 7.5F, 50, tick, -floatMax, 0, -150, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
+		SineWaveAnimationUtils.addSineWaveMotionToModelPart(model.rightHand, -25F, 12.5F, tick, -floatMax, floatMax, -150, speedMultiplier, amountMultiplier, SineWaveMotionTypes.ROTATION_Y);
+		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightHand, 4.8489F, amountMultiplier, SineWaveMotionTypes.ROTATION_X);
+		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightHand, 9.8466F, amountMultiplier, SineWaveMotionTypes.ROTATION_Y);
+		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightHand, -1.7538F, amountMultiplier, SineWaveMotionTypes.ROTATION_Z);
+		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightHand, 2.4F, amountMultiplier, SineWaveMotionTypes.POSITION_X);
+		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightHand, -0.4F, amountMultiplier, SineWaveMotionTypes.POSITION_Y);
+		SineWaveAnimationUtils.adjustPositionOfModelPart(model.rightHand, -1F, amountMultiplier, SineWaveMotionTypes.POSITION_Z);
 	}
 	
 }

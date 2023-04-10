@@ -34,6 +34,7 @@ public class ThrownBlazeRod extends AbstractArrow {
 
    public ThrownBlazeRod(Level p_37569_, LivingEntity p_37570_) {
       super(EntityTypeInit.THROWN_BLAZE_ROD.get(), p_37570_, p_37569_);
+      this.pickup = AbstractArrow.Pickup.DISALLOWED;
    }
 
    public void tick() {
