@@ -1,8 +1,17 @@
 buildscript {
     repositories {
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        jcenter()
+        mavenCentral()
+        maven { url = 'https://dist.creeper.host/Sponge/maven' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
     }
     dependencies {
+        classpath(group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true) { exclude group: 'org.apache.logging.log4j' }
+        classpath 'org.parchmentmc:librarian:1.+'
+        classpath 'org.apache.logging.log4j:log4j-api:2.11.2'
+        classpath 'org.apache.logging.log4j:log4j-core:2.11.2'
         classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
     }
 }
@@ -14,11 +23,12 @@ plugins {
 }
 
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 mixin {
-    add sourceSets.main, "infamous_legends.refmap.json"
+    add sourceSets.main, "${modid}.refmap.json"
 
-    config "infamous_legends.mixins.json"
+    config "${modid}.mixins.json"
 }
 
 dependencies {
@@ -27,14 +37,14 @@ dependencies {
 }
 
 version = '1.0'
-group = 'com.infamous.infamous_legends'
-archivesBaseName = 'modid'
+group = "com.infamous.${modid}"
+archivesBaseName = "${modid}"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'official', version: '1.19.2'
+    mappings channel: "parchment", version:"${parchment_version}"
 
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
@@ -115,13 +125,21 @@ repositories {
             includeGroup "curse.maven"
         }
 	}
-   	maven {
-		name = "GeckoLib Maven" //Geckolib
-		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-	}
-    maven { 
+    maven {
+        name = "Architectury Maven" //Architectury
+        url "https://maven.architectury.dev/"
+    }
+    maven {
+        name = "GeckoLib Maven" //Geckolib
+        url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
+    }
+    maven {
         name = "IllusiveC4 Maven" //Curios
-        url = "https://maven.theillusivec4.top/" 
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        name = "Progwml6 maven" //JEI
+        url = "https://dvs1.progwml6.com/files/maven/"
     }
     flatDir {
         dirs 'mods'
@@ -129,20 +147,33 @@ repositories {
 }
 	
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.19.2-43.2.8'
+    //Base
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     
-    //implementation fg.deobf("dungeons_libraries:dungeons_libraries:${mc_version}-${libraries_version}")
-    
+
+    //Libraries
+    implementation fg.deobf("dungeons_libraries:dungeons_libraries:${mc_version}-${libraries_version}")
     implementation fg.deobf("software.bernie.geckolib:geckolib-forge-1.19:${geckolib_version}")
-    
     runtimeOnly    fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}")
     compileOnly    fg.deobf("top.theillusivec4.curios:curios-forge:${curios_version}:api")
-    
-    
-    
-    runtimeOnly fg.deobf("curse.maven:mob-battle-mod-version-268746:${mob_battle_mod_version}")
-    
+
+    //Extras
+    runtimeOnly fg.deobf("curse.maven:mob-battle-mod-version-268746:${mob_battle_version}")
     runtimeOnly fg.deobf("curse.maven:torohealth-damage-indicators-version-245733:3895068")
+    implementation fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    implementation fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    implementation fg.deobf("curse.maven:just-enough-resources-jer-240630:${jer_version}")
+    implementation fg.deobf("curse.maven:just-enough-effect-descriptions-jeed-532286:${jeed_version}")
+
+    runtimeOnly fg.deobf("curse.maven:appleskin-248787:${appleskin_version}")
+
+    implementation fg.deobf("curse.maven:configured-457570:${configured_version}")
+    implementation fg.deobf("curse.maven:catalogue-459701:${catalogue_version}")
+
+    runtimeOnly fg.deobf("curse.maven:mob-battle-mod-version-268746:${mob_battle_version}")
+
+    runtimeOnly fg.deobf("curse.maven:spark-361579:${spark_version}")
     
 }
 jar {
