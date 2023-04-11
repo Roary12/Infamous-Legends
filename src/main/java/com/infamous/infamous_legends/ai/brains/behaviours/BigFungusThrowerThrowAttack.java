@@ -5,6 +5,7 @@ import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.BigFungusThrower;
 import com.infamous.infamous_legends.entities.ExplosiveFungus;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.utils.PositionUtils;
 
 import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.server.level.ServerLevel;
@@ -54,13 +55,16 @@ public class BigFungusThrowerThrowAttack extends Behavior<BigFungusThrower> {
 
 		if (livingentity != null && p_22552_.throwAnimationTick == p_22552_.throwAnimationActionPoint) {
 			ExplosiveFungus fungus = new ExplosiveFungus(p_22551_, p_22552_);
+			Vec3 fungusPos = PositionUtils.getOffsetPos(p_22552_, 1, 1, -0.5, p_22552_.yBodyRot);
 			Vec3 vec3 = livingentity.getDeltaMovement();
-			double d0 = livingentity.getX() + vec3.x - p_22552_.getX();
-			double d1 = livingentity.getEyeY() - (double) 1.1F - p_22552_.getY();
-			double d2 = livingentity.getZ() + vec3.z - p_22552_.getZ();
+			double d0 = livingentity.getX() + vec3.x - fungusPos.x;
+			double d1 = livingentity.getEyeY() - (double) 1.1F - fungusPos.y;
+			double d2 = livingentity.getZ() + vec3.z - fungusPos.z;
 			double d3 = Math.sqrt(d0 * d0 + d2 * d2);
 			fungus.setXRot(fungus.getXRot() - -80.0F);
-			fungus.shoot(d0, d1 + d3 * 0.4D, d2, 0.75F, 8.0F);
+			fungus.moveTo(fungusPos);
+			double yMultiplier = p_22552_.distanceTo(livingentity) <= 10 ? 0.2 : 0.4;
+			fungus.shoot(d0 * 0.6, d1 + d3 * yMultiplier, d2 * 0.6, 0.75F, 8.0F);
 		    p_22552_.playSound(SoundEvents.SNOWBALL_THROW, 1.0F, 0.4F / (p_22552_.getRandom().nextFloat() * 0.4F + 0.8F));
 		    p_22551_.addFreshEntity(fungus);
 		}
