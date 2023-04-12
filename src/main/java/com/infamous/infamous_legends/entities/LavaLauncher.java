@@ -47,6 +47,8 @@ public class LavaLauncher extends Monster implements Enemy, HoglinBase {
 			.defineId(LavaLauncher.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Float> PIGLIN_HEALTH = SynchedEntityData
 			.defineId(LavaLauncher.class, EntityDataSerializers.FLOAT);
+	private static final EntityDataAccessor<Float> PIGLIN_MAX_HEALTH = SynchedEntityData
+			.defineId(LavaLauncher.class, EntityDataSerializers.FLOAT);
 	   
 	protected static final ImmutableList<? extends SensorType<? extends Sensor<? super LavaLauncher>>> SENSOR_TYPES = ImmutableList
 			.of(SensorTypeInit.CUSTOM_NEAREST_LIVING_ENTITIES.get(), SensorTypeInit.CUSTOM_NEAREST_PLAYERS.get(), SensorTypeInit.LEGENDS_PIGLIN_SPECIFIC_SENSOR.get());
@@ -93,12 +95,14 @@ public class LavaLauncher extends Monster implements Enemy, HoglinBase {
 		super.defineSynchedData();
 		this.entityData.define(CLIENT_ATTACK_TARGET_ID, 0);
 		this.entityData.define(PIGLIN_HEALTH, 20F);
+		this.entityData.define(PIGLIN_MAX_HEALTH, 20F);
 	}
 	
 	@Override
 	public void addAdditionalSaveData(CompoundTag p_21484_) {
 		super.addAdditionalSaveData(p_21484_);
 		p_21484_.putFloat("PiglinHealth", this.getPiglinHealth());
+		p_21484_.putFloat("PiglinMaxHealth", this.getPiglinMaxHealth());
 		p_21484_.putInt("PiglinDeathTime", this.piglinDeathTime);
 	}
 	
@@ -106,6 +110,7 @@ public class LavaLauncher extends Monster implements Enemy, HoglinBase {
 	public void readAdditionalSaveData(CompoundTag p_21450_) {
 		super.readAdditionalSaveData(p_21450_);
 		this.setPiglinHealth(p_21450_.getFloat("PiglinHealth"));
+		this.setPiglinMaxHealth(p_21450_.getFloat("PiglinMaxHealth"));
 		this.piglinDeathTime = p_21450_.getInt("PiglinDeathTime");
 	}
 	
@@ -126,8 +131,25 @@ public class LavaLauncher extends Monster implements Enemy, HoglinBase {
 	   }
 	   
 	   public float getPiglinHealth() {
-		   return this.entityData.get(PIGLIN_HEALTH);
+		   return Mth.clamp(this.entityData.get(PIGLIN_HEALTH), 0, this.getPiglinMaxHealth());
 	   }
+	   
+	   public void setPiglinMaxHealth(float value) {
+		   this.entityData.set(PIGLIN_MAX_HEALTH, value);
+	   }
+	   
+	   public float getPiglinMaxHealth() {
+		   return this.entityData.get(PIGLIN_MAX_HEALTH);
+	   }
+	   
+	   @Override
+	public void heal(float p_21116_) {
+		float f = this.getPiglinHealth();
+		if (f > 0.0F) {
+			this.setPiglinHealth(f + p_21116_);
+		}
+		super.heal(p_21116_);
+	}
 	
 	@Override
 	public float getStepHeight() {

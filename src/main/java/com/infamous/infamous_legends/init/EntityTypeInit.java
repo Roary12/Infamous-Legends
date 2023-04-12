@@ -3,6 +3,7 @@ package com.infamous.infamous_legends.init;
 import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.entities.BigFungusThrower;
 import com.infamous.infamous_legends.entities.BlazeRunt;
+import com.infamous.infamous_legends.entities.CobblestoneGolem;
 import com.infamous.infamous_legends.entities.ExplosiveFungus;
 import com.infamous.infamous_legends.entities.LavaLauncher;
 import com.infamous.infamous_legends.entities.MaceRunt;
@@ -30,7 +31,7 @@ public class EntityTypeInit {
 	public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister
 			.create(ForgeRegistries.ENTITY_TYPES, InfamousLegends.MOD_ID);
 
-	// MOBS
+	// PIGLINS
 
 	public static final RegistryObject<EntityType<MaceRunt>> MACE_RUNT = ENTITY_TYPES.register("mace_runt",
 			() -> EntityType.Builder.<MaceRunt>of(MaceRunt::new, MobCategory.MONSTER).sized(0.6F, 1.4F)
@@ -75,6 +76,12 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PortalGuard>> PORTAL_GUARD = ENTITY_TYPES.register("portal_guard",
 			() -> EntityType.Builder.<PortalGuard>of(PortalGuard::new, MobCategory.MONSTER).sized(2.0F, 3.5F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "portal_guard").toString()));
+	
+	// GOLEMS
+	
+	public static final RegistryObject<EntityType<CobblestoneGolem>> COBBLESTONE_GOLEM = ENTITY_TYPES.register("cobblestone_golem",
+			() -> EntityType.Builder.<CobblestoneGolem>of(CobblestoneGolem::new, MobCategory.MISC).sized(0.9F, 1.2F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "cobblestone_golem").toString()));
 	
 	// PROJECTILES
 

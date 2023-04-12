@@ -22,6 +22,7 @@ public class ModelLayerInit {
     public static final ModelLayerLocation PIGLIN_BRUISER = register("piglin_bruiser");
     public static final ModelLayerLocation PIGLIN_BRUISER_INNER_ARMOUR = register("piglin_bruiser_inner_armour");
     public static final ModelLayerLocation PIGLIN_BRUISER_OUTER_ARMOUR = register("piglin_bruiser_outer_armour");
+    public static final ModelLayerLocation WAR_BOAR = register("war_boar");
     public static final ModelLayerLocation PIGLIN_ENGINEER = register("piglin_engineer");
     public static final ModelLayerLocation PIGLIN_ENGINEER_INNER_ARMOUR = register("piglin_engineer_inner_armour");
     public static final ModelLayerLocation PIGLIN_ENGINEER_OUTER_ARMOUR = register("piglin_engineer_outer_armour");
@@ -40,7 +41,9 @@ public class ModelLayerInit {
     public static final ModelLayerLocation PORTAL_GUARD = register("portal_guard");
     public static final ModelLayerLocation PORTAL_GUARD_INNER_ARMOUR = register("portal_guard_inner_armour");
     public static final ModelLayerLocation PORTAL_GUARD_OUTER_ARMOUR = register("portal_guard_outer_armour");
-    public static final ModelLayerLocation WAR_BOAR = register("war_boar");
+    public static final ModelLayerLocation COBBLESTONE_GOLEM = register("cobblestone_golem");
+    public static final ModelLayerLocation COBBLESTONE_GOLEM_INNER_ARMOUR = register("cobblestone_golem_inner_armour");
+    public static final ModelLayerLocation COBBLESTONE_GOLEM_OUTER_ARMOUR = register("cobblestone_golem_outer_armour");
     public static final ModelLayerLocation THROWN_BLAZE_ROD = register("thrown_blaze_rod");
     public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
     public static final ModelLayerLocation EXPLOSIVE_FUNGUS = register("explosive_fungus");

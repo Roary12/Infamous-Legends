@@ -16,6 +16,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
@@ -113,6 +114,16 @@ public class MiscUtils {
 		if (target.getTeam() == null && piglin.getTeam() == null && target.getType().is(TagInit.EntityTypes.PIGLIN_ALLIES)) {
 			return true;
 		} else if (piglin.getTeam() != null && target.getTeam() != null && piglin.getTeam() == target.getTeam()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public static boolean nonEnemy(Entity mob, Entity target) {
+		if (target.getTeam() == null && mob.getTeam() == null && !(target instanceof Enemy)) {
+			return true;
+		} else if (mob.getTeam() != null && target.getTeam() != null && mob.getTeam() == target.getTeam()) {
 			return true;
 		} else {
 			return false;

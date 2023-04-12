@@ -2,6 +2,7 @@ package com.infamous.infamous_legends;
 
 import com.infamous.infamous_legends.entities.BigFungusThrower;
 import com.infamous.infamous_legends.entities.BlazeRunt;
+import com.infamous.infamous_legends.entities.CobblestoneGolem;
 import com.infamous.infamous_legends.entities.LavaLauncher;
 import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
@@ -65,6 +66,7 @@ public class InfamousLegends {
 	        event.put(EntityTypeInit.LAVA_LAUNCHER.get(), LavaLauncher.createAttributes().build());
 	        event.put(EntityTypeInit.PIGMADILLO.get(), Pigmadillo.createAttributes().build());
 	        event.put(EntityTypeInit.PORTAL_GUARD.get(), PortalGuard.createAttributes().build());
+	        event.put(EntityTypeInit.COBBLESTONE_GOLEM.get(), CobblestoneGolem.createAttributes().build());
 	}
 	
     public void commonSetup(final FMLCommonSetupEvent event) {    
