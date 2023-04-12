@@ -1,5 +1,6 @@
 package com.infamous.infamous_legends.entities;
 
+import com.infamous.infamous_legends.events.ShakeCameraEvent;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.utils.MiscUtils;
 
@@ -57,6 +58,7 @@ public class ExplosiveFungus extends ThrowableProjectile {
 		protected void onHit(HitResult p_37260_) {
 			super.onHit(p_37260_);
 			if (!this.level.isClientSide) {
+				ShakeCameraEvent.shake(this.level, 30, 0.05F, this.blockPosition(), 6);
 				MiscUtils.customExplosion(this.level, this.getOwner() != null ? this.getOwner() instanceof Player ? this : this.getOwner() : this, DamageSource.explosion(this.getOwner() != null && this.getOwner() instanceof LivingEntity ? ((LivingEntity)this.getOwner()) : null).setProjectile(), null, this.getX(), this.getY(),
 						this.getZ(), 2.5F, false, Explosion.BlockInteraction.NONE, SoundEvents.GENERIC_EXPLODE,
 						this.getSoundSource(), ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER, 5.0F, false);

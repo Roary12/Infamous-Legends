@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.infamous.infamous_legends.ai.brains.PigmadilloAi;
+import com.infamous.infamous_legends.events.ShakeCameraEvent;
 import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
@@ -131,6 +132,7 @@ public class Pigmadillo extends AbstractPiglin {
 		this.refreshDimensions();
 		
 		if (this.level.isClientSide && this.rolling()) {
+			ShakeCameraEvent.shake(this.level, 20, 0.01F, this.blockPosition(), 5);
 			this.level.addParticle(ParticleTypeInit.DUST.get(), this.getX(), this.getY(), this.getZ(), 0, 0, 0);
 		}
 		

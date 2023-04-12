@@ -167,11 +167,6 @@ public class WarBoar extends Monster implements Enemy, HoglinBase {
 		this.playSound(SoundEvents.HOGLIN_ANGRY, 1.0F, this.getVoicePitch());
 	}
 
-	protected void sendDebugPackets() {
-		super.sendDebugPackets();
-		DebugPackets.sendEntityBrain(this);
-	}
-
 	@Override
 	public int getAttackAnimationRemainingTicks() {
 		return 0;

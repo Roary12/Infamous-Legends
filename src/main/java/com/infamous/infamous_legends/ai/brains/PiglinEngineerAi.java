@@ -66,7 +66,7 @@ public class PiglinEngineerAi {
 	   private static void initFightActivity(PiglinEngineer p_35125_, Brain<PiglinEngineer> p_35126_) {
 		      p_35126_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(new StopAttackingIfTargetInvalid<>((p_35118_) -> {
 		         return !isNearestValidAttackTarget(p_35125_, p_35118_);
-		      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 10.0D), new PiglinEngineerThrowAttack(20), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
+		      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 10), new PiglinEngineerThrowAttack(20), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
 		   }
 
 	   private static RunOne<PiglinEngineer> createIdleLookBehaviors() {

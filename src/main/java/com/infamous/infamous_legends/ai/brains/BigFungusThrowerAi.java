@@ -66,7 +66,7 @@ public class BigFungusThrowerAi {
 	   private static void initFightActivity(BigFungusThrower p_35125_, Brain<BigFungusThrower> p_35126_) {
 	      p_35126_.addActivityAndRemoveMemoryWhenStopped(Activity.FIGHT, 10, ImmutableList.of(new StopAttackingIfTargetInvalid<>((p_35118_) -> {
 	         return !isNearestValidAttackTarget(p_35125_, p_35118_);
-	      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 22.5D), new BigFungusThrowerThrowAttack(40), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
+	      }), new StopAtDistanceSetWalkTargetFromAttackTargetIfTargetOutOfReach(1.0F, 22), new BigFungusThrowerThrowAttack(40), new LookAtAttackTarget()), MemoryModuleType.ATTACK_TARGET);
 	   }
 
 	   private static RunOne<BigFungusThrower> createIdleLookBehaviors() {

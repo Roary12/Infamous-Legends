@@ -31,6 +31,9 @@ public class ModelLayerInit {
     public static final ModelLayerLocation BIG_FUNGUS_THROWER = register("big_fungus_thrower");
     public static final ModelLayerLocation BIG_FUNGUS_THROWER_INNER_ARMOUR = register("big_fungus_thrower_inner_armour");
     public static final ModelLayerLocation BIG_FUNGUS_THROWER_OUTER_ARMOUR = register("big_fungus_thrower_outer_armour");
+    public static final ModelLayerLocation LAVA_LAUNCHER = register("lava_launcher");
+    public static final ModelLayerLocation LAVA_LAUNCHER_INNER_ARMOUR = register("lava_launcher_inner_armour");
+    public static final ModelLayerLocation LAVA_LAUNCHER_OUTER_ARMOUR = register("lava_launcher_outer_armour");
     public static final ModelLayerLocation PIGMADILLO = register("pigmadillo");
     public static final ModelLayerLocation PIGMADILLO_INNER_ARMOUR = register("pigmadillo_inner_armour");
     public static final ModelLayerLocation PIGMADILLO_OUTER_ARMOUR = register("pigmadillo_outer_armour");
@@ -42,6 +45,7 @@ public class ModelLayerInit {
     public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
     public static final ModelLayerLocation EXPLOSIVE_FUNGUS = register("explosive_fungus");
     public static final ModelLayerLocation PORTAL_GUARD_WRECKING_BALL = register("portal_guard_wrecking_ball");
+    public static final ModelLayerLocation MAGMA_CUBE_PROJECTILE = register("magma_cube_projectile");
 
     private static ModelLayerLocation register(String path) {
         return register("main", new ResourceLocation(InfamousLegends.MOD_ID, path));

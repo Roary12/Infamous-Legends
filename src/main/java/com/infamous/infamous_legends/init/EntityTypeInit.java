@@ -4,7 +4,9 @@ import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.entities.BigFungusThrower;
 import com.infamous.infamous_legends.entities.BlazeRunt;
 import com.infamous.infamous_legends.entities.ExplosiveFungus;
+import com.infamous.infamous_legends.entities.LavaLauncher;
 import com.infamous.infamous_legends.entities.MaceRunt;
+import com.infamous.infamous_legends.entities.MagmaCubeProjectile;
 import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
@@ -62,6 +64,10 @@ public class EntityTypeInit {
 			() -> EntityType.Builder.<BigFungusThrower>of(BigFungusThrower::new, MobCategory.MONSTER).sized(0.8F, 2.4F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "warped_bomber").toString()));
 	
+	public static final RegistryObject<EntityType<LavaLauncher>> LAVA_LAUNCHER = ENTITY_TYPES.register("lava_launcher",
+			() -> EntityType.Builder.<LavaLauncher>of(LavaLauncher::new, MobCategory.MONSTER).sized(4.5F, 5.0F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "lava_launcher").toString()));
+	
 	public static final RegistryObject<EntityType<Pigmadillo>> PIGMADILLO = ENTITY_TYPES.register("pigmadillo",
 			() -> EntityType.Builder.<Pigmadillo>of(Pigmadillo::new, MobCategory.MONSTER).sized(1.5F, 2.9F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "pigmadillo").toString()));
@@ -87,4 +93,8 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PortalGuardWreckingBall>> PORTAL_GUARD_WRECKING_BALL = ENTITY_TYPES.register("portal_guard_wrecking_ball",
 			() -> EntityType.Builder.<PortalGuardWreckingBall>of(PortalGuardWreckingBall::new, MobCategory.MISC).sized(1.25F, 1.25F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "portal_guard_wrecking_ball").toString()));
+	
+	public static final RegistryObject<EntityType<MagmaCubeProjectile>> MAGMA_CUBE_PROJECTILE = ENTITY_TYPES.register("magma_cube_projectile",
+			() -> EntityType.Builder.<MagmaCubeProjectile>of(MagmaCubeProjectile::new, MobCategory.MISC).sized(1.25F, 1.25F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "magma_cube_projectile").toString()));
 }

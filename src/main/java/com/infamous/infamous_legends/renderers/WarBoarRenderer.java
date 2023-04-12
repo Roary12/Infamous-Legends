@@ -4,6 +4,7 @@ import com.infamous.infamous_legends.InfamousLegends;
 import com.infamous.infamous_legends.entities.WarBoar;
 import com.infamous.infamous_legends.init.ModelLayerInit;
 import com.infamous.infamous_legends.models.WarBoarModel;
+import com.infamous.infamous_legends.renderers.layers.WarBoarGlowLayer;
 
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
@@ -13,6 +14,7 @@ public class WarBoarRenderer extends MobRenderer<WarBoar, WarBoarModel<WarBoar>>
 
 	public WarBoarRenderer(EntityRendererProvider.Context context) {
 		super(context, new WarBoarModel<>(context.bakeLayer(ModelLayerInit.WAR_BOAR)), 0.75F);
+		this.addLayer(new WarBoarGlowLayer<>(this));
 	}
 
 	@Override

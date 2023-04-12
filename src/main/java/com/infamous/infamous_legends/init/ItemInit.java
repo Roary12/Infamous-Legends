@@ -54,6 +54,10 @@ public class ItemInit {
 			() -> new ForgeSpawnEggItem(EntityTypeInit.BIG_FUNGUS_THROWER, 0xe5d3c7, 0x119b85,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
+	public static final RegistryObject<Item> LAVA_LAUNCHER_SPAWN_EGG = ITEMS.register("lava_launcher_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.LAVA_LAUNCHER, 0xe5d3c7, 0xa96f7f,
+					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
+	
 	public static final RegistryObject<Item> PIGMADILLO_SPAWN_EGG = ITEMS.register("pigmadillo_spawn_egg",
 			() -> new ForgeSpawnEggItem(EntityTypeInit.PIGMADILLO, 0xbc768e, 0x5c2821,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));

@@ -41,14 +41,13 @@ public class ShakeCameraEvent {
 					}
 	
 					if (handler.time > 0) {
-						handler.amount = (handler.amount - (handler.amount / handler.duration));
 						handler.time--;
 					}
 	
 					if (cameraEntity != null) {
 						if (handler.time > 0
 								&& MiscUtils.distanceToBlockPos(cameraEntity, handler.causePosition) <= handler.range) {
-							shakeCamera(event, cameraEntity, handler.amount);
+							shakeCamera(event, cameraEntity, handler.amount * (float)((float)handler.time / (float)handler.duration));
 						}
 					}
 				}

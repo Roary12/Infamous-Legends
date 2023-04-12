@@ -2,6 +2,7 @@ package com.infamous.infamous_legends.entities;
 
 import javax.annotation.Nullable;
 
+import com.infamous.infamous_legends.events.ShakeCameraEvent;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.utils.MiscUtils;
@@ -36,7 +37,7 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class PortalGuardWreckingBall extends AbstractArrow {
 	   
-	   private static final EntityDataAccessor<Integer> CLIENT_SERVER_ID = SynchedEntityData.defineId(PortalGuardWreckingBall.class, EntityDataSerializers.INT);
+	   private static final EntityDataAccessor<Integer> CLIENT_OWNERR_ID = SynchedEntityData.defineId(PortalGuardWreckingBall.class, EntityDataSerializers.INT);
 	   
 	   public boolean hasLanded;
 	   public boolean playedChainSound;
@@ -58,17 +59,17 @@ public class PortalGuardWreckingBall extends AbstractArrow {
 		   @Override
 		protected void defineSynchedData() {
 			super.defineSynchedData();
-			this.entityData.define(CLIENT_SERVER_ID, 0);
+			this.entityData.define(CLIENT_OWNERR_ID, 0);
 		}
 		   
 	   public void setClientOwner(Entity newOwner) {
 		   if (newOwner != null) {
-			   this.entityData.set(CLIENT_SERVER_ID, newOwner.getId());
+			   this.entityData.set(CLIENT_OWNERR_ID, newOwner.getId());
 		   }
 	   }
 	   
 	   public LivingEntity getClientOwner() {
-		   return this.level.getEntity(this.entityData.get(CLIENT_SERVER_ID)) instanceof LivingEntity ? ((LivingEntity)this.level.getEntity(this.entityData.get(CLIENT_SERVER_ID))) : null;
+		   return this.level.getEntity(this.entityData.get(CLIENT_OWNERR_ID)) instanceof LivingEntity ? ((LivingEntity)this.level.getEntity(this.entityData.get(CLIENT_OWNERR_ID))) : null;
 	   }
 	   
 	   public PortalGuard getPortalGuardOwner() {
@@ -169,6 +170,7 @@ public class PortalGuardWreckingBall extends AbstractArrow {
 				this.landingXRot = this.getXRot();
 				this.landingYRot = this.getYRot();
 				if (!this.level.isClientSide) {
+					ShakeCameraEvent.shake(this.level, 40, 0.075F, this.blockPosition(), 10);
 					((ServerLevel)this.level).sendParticles(ParticleTypeInit.DUST.get(), this.getX(), this.getY(), this.getZ(), 12, 0.2D, 0.2D, 0.2D, 0.0D);
 					this.playSound(SoundEvents.ANVIL_LAND, 2.0F, 0.75F);
 					this.playSound(SoundEvents.GENERIC_EXPLODE, 2.0F, 0.75F);
