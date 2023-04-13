@@ -9,6 +9,7 @@ import com.infamous.infamous_legends.init.ItemInit;
 import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
+import com.infamous.infamous_legends.init.TagInit;
 import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
@@ -78,7 +79,8 @@ public class Pigmadillo extends AbstractPiglin {
 			MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.ATTACK_TARGET,
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
 			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME, 
-			MemoryModuleTypeInit.ROLL_COOLING_DOWN.get());
+			MemoryModuleTypeInit.ROLL_COOLING_DOWN.get(),
+			MemoryModuleTypeInit.NEARBY_ALLIES.get());
 	   
 	public Pigmadillo(EntityType<? extends Pigmadillo> type, Level level) {
 		super(type, level);		
@@ -159,7 +161,7 @@ public class Pigmadillo extends AbstractPiglin {
 
 	            for(BlockPos blockpos : BlockPos.betweenClosed(Mth.floor(aabb.minX), Mth.floor(aabb.minY), Mth.floor(aabb.minZ), Mth.floor(aabb.maxX), Mth.floor(aabb.maxY), Mth.floor(aabb.maxZ))) {
 	               BlockState blockstate = this.level.getBlockState(blockpos);
-	               if (blockstate.canEntityDestroy(this.level, blockpos, this)) {
+	               if (!blockstate.is(TagInit.Blocks.UNBREAKABLE)) {
 	                  flag = this.level.destroyBlock(blockpos, true, this) || flag;
 	               }
 	            }

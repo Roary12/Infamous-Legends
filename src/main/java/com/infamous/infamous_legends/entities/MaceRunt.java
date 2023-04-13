@@ -6,6 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.infamous.infamous_legends.ai.brains.MaceRuntAi;
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.infamous.infamous_legends.utils.MiscUtils;
@@ -72,7 +73,8 @@ public class MaceRunt extends AbstractPiglin {
 			MemoryModuleType.NEARBY_ADULT_PIGLINS, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY,
 			MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.ATTACK_TARGET,
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
-			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME);
+			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME,
+			MemoryModuleTypeInit.NEARBY_ALLIES.get());
 	   
 	public MaceRunt(EntityType<? extends MaceRunt> type, Level level) {
 		super(type, level);		
@@ -86,7 +88,7 @@ public class MaceRunt extends AbstractPiglin {
 
 	public static AttributeSupplier.Builder createAttributes() {
 		return Monster.createMonsterAttributes().add(Attributes.MAX_HEALTH, 17.0D)
-				.add(Attributes.MOVEMENT_SPEED, (double) 0.35F).add(Attributes.ATTACK_DAMAGE, 1.0D).add(Attributes.FOLLOW_RANGE, 17.5D);
+				.add(Attributes.MOVEMENT_SPEED, (double) 0.35F).add(Attributes.ATTACK_DAMAGE, -3.0D).add(Attributes.FOLLOW_RANGE, 17.5D);
 	}
 	
 	@Nullable

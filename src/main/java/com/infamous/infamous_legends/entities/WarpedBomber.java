@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
 import com.infamous.infamous_legends.ai.brains.WarpedBomberAi;
 import com.infamous.infamous_legends.init.ItemInit;
+import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.infamous.infamous_legends.interfaces.IHasCustomExplosion;
@@ -60,7 +61,8 @@ public class WarpedBomber extends AbstractPiglin implements IHasCustomExplosion 
 			MemoryModuleType.NEARBY_ADULT_PIGLINS, MemoryModuleType.HURT_BY, MemoryModuleType.HURT_BY_ENTITY,
 			MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.ATTACK_TARGET,
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
-			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME);
+			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME,
+			MemoryModuleTypeInit.NEARBY_ALLIES.get());
 	   
 	public WarpedBomber(EntityType<? extends WarpedBomber> type, Level level) {
 		super(type, level);		

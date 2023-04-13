@@ -1,17 +1,24 @@
 package com.infamous.infamous_legends.ai.brains;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
 import com.infamous.infamous_legends.ai.brains.behaviours.LookAtAttackTarget;
 import com.infamous.infamous_legends.ai.brains.behaviours.WarBoarMeleeAttack;
 import com.infamous.infamous_legends.ai.brains.behaviours.WarBoarStartAttacking;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
+import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.WarBoar;
+import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
+import com.infamous.infamous_legends.utils.BrainUtils;
+import com.infamous.infamous_legends.utils.MiscUtils;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.Brain;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -27,6 +34,8 @@ import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromAttackTargetIfTar
 import net.minecraft.world.entity.ai.behavior.SetWalkTargetFromLookTarget;
 import net.minecraft.world.entity.ai.behavior.StopAttackingIfTargetInvalid;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
+import net.minecraft.world.entity.ai.sensing.Sensor;
+import net.minecraft.world.entity.monster.hoglin.Hoglin;
 import net.minecraft.world.entity.schedule.Activity;
 
 public class WarBoarAi {
@@ -84,6 +93,10 @@ public class WarBoarAi {
 			      return p_35092_.getBrain().getMemory(p_35093_).filter((p_35108_) -> {
 			         return p_35108_.closerThan(p_35092_, p_35092_.getAttributeValue(Attributes.FOLLOW_RANGE));
 			      });
+			   }
+			   
+			   public static void wasHurtBy(WarBoar p_35097_, LivingEntity p_35098_) {
+				      BrainUtils.piglinMaybeRetaliate(p_35097_, p_35098_);
 			   }
 			   
 				public static void updateActivity(WarBoar p_35100_) {

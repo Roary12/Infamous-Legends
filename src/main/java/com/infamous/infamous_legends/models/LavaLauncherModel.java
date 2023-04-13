@@ -237,9 +237,13 @@ public class LavaLauncherModel<T extends LavaLauncher> extends HierarchicalModel
 		}
 		
 		if (entity.getPiglinHealth() <= 0 && entity.piglinDeathTime >= 20) {
-			this.piglin.visible = false;
+			this.piglin.xScale = 0;
+			this.piglin.yScale = 0;
+			this.piglin.zScale = 0;
 		} else {
-			this.piglin.visible = true;
+			this.piglin.xScale = 1;
+			this.piglin.yScale = 1;
+			this.piglin.zScale = 1;
 		}
 	      
 		this.animateHeadLookTarget(netHeadYaw, headPitch);

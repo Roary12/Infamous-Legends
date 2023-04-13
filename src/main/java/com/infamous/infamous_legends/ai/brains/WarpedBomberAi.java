@@ -10,6 +10,7 @@ import com.infamous.infamous_legends.ai.brains.behaviours.WarpedBomberMeleeAttac
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
 import com.infamous.infamous_legends.entities.WarpedBomber;
 import com.infamous.infamous_legends.init.TagInit;
+import com.infamous.infamous_legends.utils.BrainUtils;
 import com.infamous.infamous_legends.utils.MiscUtils;
 import com.mojang.datafixers.util.Pair;
 
@@ -112,9 +113,7 @@ public class WarpedBomberAi {
 	   }
 
 	   public static void wasHurtBy(WarpedBomber p_35097_, LivingEntity p_35098_) {
-		      if (!MiscUtils.piglinAllies(p_35097_, p_35098_)) {
-			         PiglinAi.maybeRetaliate(p_35097_, p_35098_);
-			      }
+		      BrainUtils.piglinMaybeRetaliate(p_35097_, p_35098_);
 	   }
 
 	   protected static void setAngerTarget(WarpedBomber p_149989_, LivingEntity p_149990_) {

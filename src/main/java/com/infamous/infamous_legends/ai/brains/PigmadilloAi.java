@@ -11,6 +11,7 @@ import com.infamous.infamous_legends.ai.brains.behaviours.PigmadilloRollAttack;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
 import com.infamous.infamous_legends.entities.Pigmadillo;
 import com.infamous.infamous_legends.init.TagInit;
+import com.infamous.infamous_legends.utils.BrainUtils;
 import com.infamous.infamous_legends.utils.MiscUtils;
 import com.mojang.datafixers.util.Pair;
 
@@ -113,9 +114,7 @@ public class PigmadilloAi {
 	   }
 
 	   public static void wasHurtBy(Pigmadillo p_35097_, LivingEntity p_35098_) {
-		      if (!MiscUtils.piglinAllies(p_35097_, p_35098_)) {
-			         PiglinAi.maybeRetaliate(p_35097_, p_35098_);
-			      }
+		      BrainUtils.piglinMaybeRetaliate(p_35097_, p_35098_);
 	   }
 
 	   protected static void setAngerTarget(Pigmadillo p_149989_, LivingEntity p_149990_) {

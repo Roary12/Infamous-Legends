@@ -1,5 +1,6 @@
 package com.infamous.infamous_legends.init;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.infamous.infamous_legends.InfamousLegends;
@@ -20,6 +21,9 @@ public class MemoryModuleTypeInit {
 	            () -> new MemoryModuleType<>(Optional.empty()));
 	    
 	    public static final RegistryObject<MemoryModuleType<Boolean>> SHOOT_COOLING_DOWN = MEMORY_MODULE_TYPES.register("shoot_cooling_down",
+	            () -> new MemoryModuleType<>(Optional.empty()));
+	    
+	    public static final RegistryObject<MemoryModuleType<List<LivingEntity>>> NEARBY_ALLIES = MEMORY_MODULE_TYPES.register("nearby_allies",
 	            () -> new MemoryModuleType<>(Optional.empty()));
 }
 

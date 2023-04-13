@@ -79,7 +79,8 @@ public class PortalGuard extends AbstractPiglin {
 			MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE, MemoryModuleType.ATTACK_TARGET,
 			MemoryModuleType.ATTACK_COOLING_DOWN, MemoryModuleType.INTERACTION_TARGET, MemoryModuleType.PATH,
 			MemoryModuleType.ANGRY_AT, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.HOME, 
-			MemoryModuleTypeInit.SHOOT_COOLING_DOWN.get());
+			MemoryModuleTypeInit.SHOOT_COOLING_DOWN.get(),
+			MemoryModuleTypeInit.NEARBY_ALLIES.get());
 	   
 	public PortalGuard(EntityType<? extends PortalGuard> type, Level level) {
 		super(type, level);		

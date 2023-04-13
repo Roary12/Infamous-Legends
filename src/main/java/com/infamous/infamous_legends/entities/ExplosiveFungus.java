@@ -63,7 +63,7 @@ public class ExplosiveFungus extends ThrowableProjectile {
 						this.getZ(), 2.5F, false, Explosion.BlockInteraction.NONE, SoundEvents.GENERIC_EXPLODE,
 						this.getSoundSource(), ParticleTypes.EXPLOSION, ParticleTypes.EXPLOSION_EMITTER, 5.0F, false);
 				for (LivingEntity entity : this.level.getNearbyEntities(LivingEntity.class, TargetingConditions.forCombat(), null, this.getBoundingBox().inflate(4))) {
-					boolean piglinThatCantBeHurt = this.getOwner() != null && this.getOwner() instanceof AbstractPiglin && entity.getTeam() == null && this.getOwner().getTeam() == null && entity instanceof AbstractPiglin;
+					boolean piglinThatCantBeHurt = this.getOwner() != null && this.getOwner() instanceof AbstractPiglin && MiscUtils.piglinAllies(this.getOwner(), entity);
 					if (!piglinThatCantBeHurt) {
 						entity.addEffect(new MobEffectInstance(MobEffects.POISON, 150, 1));
 					}

@@ -10,6 +10,8 @@ import com.infamous.infamous_legends.ai.brains.behaviours.LavaLauncherShootAttac
 import com.infamous.infamous_legends.ai.brains.behaviours.LookAtAttackTarget;
 import com.infamous.infamous_legends.ai.brains.sensors.CustomSensor;
 import com.infamous.infamous_legends.entities.LavaLauncher;
+import com.infamous.infamous_legends.entities.PiglinBruiser;
+import com.infamous.infamous_legends.utils.BrainUtils;
 import com.mojang.datafixers.util.Pair;
 
 import net.minecraft.util.valueproviders.UniformInt;
@@ -87,6 +89,10 @@ public class LavaLauncherAi {
 			      return p_35092_.getBrain().getMemory(p_35093_).filter((p_35108_) -> {
 			         return p_35108_.closerThan(p_35092_, p_35092_.getAttributeValue(Attributes.FOLLOW_RANGE));
 			      });
+			   }
+			   
+			   public static void wasHurtBy(LavaLauncher p_35097_, LivingEntity p_35098_) {
+				      BrainUtils.piglinMaybeRetaliate(p_35097_, p_35098_);
 			   }
 			   
 				public static void updateActivity(LavaLauncher p_35100_) {

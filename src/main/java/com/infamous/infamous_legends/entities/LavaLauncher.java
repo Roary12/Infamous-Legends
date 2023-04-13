@@ -1,11 +1,13 @@
 package com.infamous.infamous_legends.entities;
 
 import com.google.common.collect.ImmutableList;
+import com.infamous.infamous_legends.ai.brains.BigFungusThrowerAi;
 import com.infamous.infamous_legends.ai.brains.LavaLauncherAi;
 import com.infamous.infamous_legends.animation.sine_wave_animations.SineWaveAnimationUtils;
 import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
+import com.infamous.infamous_legends.interfaces.IHasCustomExplosion;
 import com.infamous.infamous_legends.utils.MiscUtils;
 import com.infamous.infamous_legends.utils.PositionUtils;
 import com.mojang.serialization.Dynamic;
@@ -41,7 +43,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.entity.PartEntity;
 
-public class LavaLauncher extends Monster implements Enemy, HoglinBase {
+public class LavaLauncher extends Monster implements Enemy, HoglinBase, IHasCustomExplosion {
 	
 	private static final EntityDataAccessor<Integer> CLIENT_ATTACK_TARGET_ID = SynchedEntityData
 			.defineId(LavaLauncher.class, EntityDataSerializers.INT);
@@ -58,7 +60,8 @@ public class LavaLauncher extends Monster implements Enemy, HoglinBase {
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
 			MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN,
 			MemoryModuleType.NEARBY_ADULT_PIGLINS, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.ANGRY_AT,
-			MemoryModuleTypeInit.SHOOT_COOLING_DOWN.get());
+			MemoryModuleTypeInit.SHOOT_COOLING_DOWN.get(),
+			MemoryModuleTypeInit.NEARBY_ALLIES.get());
 	
 	public AnimationState attackAnimationState = new AnimationState();
 	public int attackAnimationTick;
@@ -88,6 +91,11 @@ public class LavaLauncher extends Monster implements Enemy, HoglinBase {
 		this.xpReward = 15;
 		
 		this.subEntity = new LavaLauncherPiglin(this);
+	}
+	
+	@Override
+	public boolean canHarmWithExplosion(Entity target) {
+		return MiscUtils.piglinAllies(this, target) ? false : true;
 	}
 	
 	@Override
@@ -221,6 +229,19 @@ public class LavaLauncher extends Monster implements Enemy, HoglinBase {
 		}
 		
 		this.updatePart();
+	}
+	
+	public boolean hurt(DamageSource p_35055_, float p_35056_) {
+		boolean flag = super.hurt(p_35055_, p_35056_);
+		if (this.level.isClientSide) {
+			return false;
+		} else {
+			if (flag && p_35055_.getEntity() instanceof LivingEntity) {
+				LavaLauncherAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
+			}
+
+			return flag;
+		}
 	}
 	
 	public void playPiglinAmbientSound() {

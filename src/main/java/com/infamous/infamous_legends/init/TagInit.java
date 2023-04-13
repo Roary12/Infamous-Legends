@@ -6,6 +6,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.block.Block;
 
 public class TagInit {
 	
@@ -15,6 +16,14 @@ public class TagInit {
     	
     	   private static TagKey<EntityType<?>> tag(String p_203849_) {
     		      return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(InfamousLegends.MOD_ID, p_203849_));
+    	   }
+    }
+    
+    public static class Blocks {
+    	public static final TagKey<Block> UNBREAKABLE = tag("unbreakable");  	
+    	
+    	   private static TagKey<Block> tag(String p_203849_) {
+    		      return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(InfamousLegends.MOD_ID, p_203849_));
     	   }
     }
 }

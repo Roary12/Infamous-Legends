@@ -1,8 +1,10 @@
 package com.infamous.infamous_legends.entities;
 
 import com.google.common.collect.ImmutableList;
+import com.infamous.infamous_legends.ai.brains.BigFungusThrowerAi;
 import com.infamous.infamous_legends.ai.brains.MaceRuntAi;
 import com.infamous.infamous_legends.ai.brains.WarBoarAi;
+import com.infamous.infamous_legends.init.MemoryModuleTypeInit;
 import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.init.SensorTypeInit;
 import com.mojang.serialization.Dynamic;
@@ -40,7 +42,8 @@ public class WarBoar extends Monster implements Enemy, HoglinBase {
 			MemoryModuleType.NEAREST_VISIBLE_PLAYER, MemoryModuleType.NEAREST_VISIBLE_ATTACKABLE_PLAYER,
 			MemoryModuleType.LOOK_TARGET, MemoryModuleType.WALK_TARGET, MemoryModuleType.CANT_REACH_WALK_TARGET_SINCE,
 			MemoryModuleType.PATH, MemoryModuleType.ATTACK_TARGET, MemoryModuleType.ATTACK_COOLING_DOWN,
-			MemoryModuleType.NEARBY_ADULT_PIGLINS, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.ANGRY_AT);
+			MemoryModuleType.NEARBY_ADULT_PIGLINS, MemoryModuleType.NEAREST_VISIBLE_NEMESIS, MemoryModuleType.ANGRY_AT,
+			MemoryModuleTypeInit.NEARBY_ALLIES.get());
 	
 	public AnimationState attackAnimationState = new AnimationState();
 	public int attackAnimationTick;
@@ -98,6 +101,19 @@ public class WarBoar extends Monster implements Enemy, HoglinBase {
 			super.handleEntityEvent(p_219360_);
 		}
 
+	}
+	
+	public boolean hurt(DamageSource p_35055_, float p_35056_) {
+		boolean flag = super.hurt(p_35055_, p_35056_);
+		if (this.level.isClientSide) {
+			return false;
+		} else {
+			if (flag && p_35055_.getEntity() instanceof LivingEntity) {
+				WarBoarAi.wasHurtBy(this, (LivingEntity) p_35055_.getEntity());
+			}
+
+			return flag;
+		}
 	}
 
 	public static AttributeSupplier.Builder createAttributes() {

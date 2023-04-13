@@ -14,6 +14,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.behavior.Behavior;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.phys.Vec3;
 
 public class LavaLauncherShootAttack extends Behavior<LavaLauncher> {
@@ -65,6 +66,7 @@ public class LavaLauncherShootAttack extends Behavior<LavaLauncher> {
 		      double d3 = Math.sqrt(d0 * d0 + d2 * d2);
 		      magmaCube.moveTo(magmaCubePos);
 		      magmaCube.shoot(d0, d1 + d3 * (double)0.15F, d2, 1.5F, 5);
+		      magmaCube.blockInteraction = net.minecraftforge.event.ForgeEventFactory.getMobGriefingEvent(p_22551_, p_22552_) ? Explosion.BlockInteraction.DESTROY : Explosion.BlockInteraction.NONE;
 		      p_22552_.playSound(SoundEvents.PISTON_CONTRACT, 2.0F, MiscUtils.randomSoundPitch() * 0.75F);
 		      p_22552_.playSound(SoundEvents.MAGMA_CUBE_JUMP, 2.0F, MiscUtils.randomSoundPitch() * 0.75F);
 		      p_22551_.addFreshEntity(magmaCube);
