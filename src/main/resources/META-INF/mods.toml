@@ -27,7 +27,7 @@ Infamous Legends is a mod that adds features from Minecraft Legends to Minecraft
     side="BOTH"
 [[dependencies.infamous_legends]]
     modId="dungeons_libraries"
-    mandatory=false #SWITCH TO MANDATORY ONCE DUNGEONS LIBRARIES IS RE-ADDED TO THE PROJECT
+    mandatory=true
     versionRange="[1.19.2-3.0.7-alpha,)"
     ordering="NONE"
     side="BOTH"
