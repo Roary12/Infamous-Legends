@@ -155,7 +155,16 @@ public class PlankGolemModel<T extends PlankGolem> extends HierarchicalModel<T> 
 			stack.scale(0, 0, 0);
 			break;
 		case BODY:
-			stack.scale(0, 0, 0);
+			this.root().translateAndRotate(stack);
+			this.everything.translateAndRotate(stack);
+			this.body.translateAndRotate(stack);
+			if (innerModel) {
+				stack.translate(0, -8.5F / 16.0F, 0);
+				stack.scale(1.85F, 0.75F, 3.25F);	
+			} else {
+				stack.translate(0, -7 / 16.0F, 0);
+				stack.scale(1.75F, 0.75F, 2.8F);
+			}
 			break;
 		case RIGHT_ARM:
 			stack.scale(0, 0, 0);
@@ -167,24 +176,26 @@ public class PlankGolemModel<T extends PlankGolem> extends HierarchicalModel<T> 
 			this.root().translateAndRotate(stack);
 			this.everything.translateAndRotate(stack);
 			this.rightLeg.translateAndRotate(stack);
-			stack.translate(2.25F / 16.0F, -13 / 16.0F, 0);
+			stack.translate(2.5F / 16.0F, -13 / 16.0F, 0);
 			if (innerModel) {
 				stack.scale(1.25F, 0.5F, 1.25F);
 				stack.translate(0, 11 / 16.0F, 0);
 			} else {
-				stack.scale(1, 0.75F, 1.1F);
+				stack.scale(1.1F, 0.75F, 1.1F);
+				stack.translate(-0.25F / 16.0F, 0, 0);
 			}
 			break;
 		case LEFT_LEG:
 			this.root().translateAndRotate(stack);
 			this.everything.translateAndRotate(stack);
 			this.leftLeg.translateAndRotate(stack);
-			stack.translate(-2.25F / 16.0F, -13 / 16.0F, 0);
+			stack.translate(-2.5F / 16.0F, -13 / 16.0F, 0);
 			if (innerModel) {
 				stack.scale(1.25F, 0.5F, 1.25F);
 				stack.translate(0, 11 / 16.0F, 0);
 			} else {
-				stack.scale(1, 0.75F, 1.1F);
+				stack.scale(1.1F, 0.75F, 1.1F);
+				stack.translate(0.25F / 16.0F, 0, 0);
 			}
 			break;
 		}
