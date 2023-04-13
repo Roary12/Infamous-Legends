@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraftforge.api.distmarker.Dist;
@@ -39,6 +40,11 @@ public class MagmaCubeProjectileRenderer extends EntityRenderer<MagmaCubeProject
       p_116114_.popPose();
       super.render(p_116111_, p_116112_, p_116113_, p_116114_, p_116115_, p_116116_);
    }
+   
+   @Override
+	protected int getBlockLightLevel(MagmaCubeProjectile pEntity, BlockPos pPos) {
+		return 15;
+	}
 
    public ResourceLocation getTextureLocation(MagmaCubeProjectile p_116109_) {
       return new ResourceLocation(InfamousLegends.MOD_ID, "textures/entities/lava_launcher.png");

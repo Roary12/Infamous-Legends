@@ -8,6 +8,7 @@ import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.entities.Pigmadillo;
+import com.infamous.infamous_legends.entities.PlankGolem;
 import com.infamous.infamous_legends.entities.PortalGuard;
 import com.infamous.infamous_legends.entities.SporeMedic;
 import com.infamous.infamous_legends.entities.WarBoar;
@@ -67,6 +68,7 @@ public class InfamousLegends {
 	        event.put(EntityTypeInit.PIGMADILLO.get(), Pigmadillo.createAttributes().build());
 	        event.put(EntityTypeInit.PORTAL_GUARD.get(), PortalGuard.createAttributes().build());
 	        event.put(EntityTypeInit.COBBLESTONE_GOLEM.get(), CobblestoneGolem.createAttributes().build());
+	        event.put(EntityTypeInit.PLANK_GOLEM.get(), PlankGolem.createAttributes().build());
 	}
 	
     public void commonSetup(final FMLCommonSetupEvent event) {    

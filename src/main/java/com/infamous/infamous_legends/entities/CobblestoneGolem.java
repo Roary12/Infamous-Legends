@@ -54,7 +54,7 @@ public class CobblestoneGolem extends AbstractGolem {
 		this.goalSelector.addGoal(4, new GolemRandomStrollInVillageGoal(this, 0.6D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));
-		this.targetSelector.addGoal(2, new HurtByTargetGoal(this));
+		this.targetSelector.addGoal(2, new HurtByTargetGoal(this).setAlertOthers());
 		this.targetSelector.addGoal(3,
 				new NearestAttackableTargetGoal<>(this, Mob.class, 10, false, false, (p_28879_) -> {
 					return p_28879_ instanceof Enemy && !(p_28879_ instanceof Creeper);

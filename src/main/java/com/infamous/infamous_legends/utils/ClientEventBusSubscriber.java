@@ -1,7 +1,6 @@
 package com.infamous.infamous_legends.utils;
 
 import com.infamous.infamous_legends.InfamousLegends;
-import com.infamous.infamous_legends.entities.MagmaCubeProjectile;
 import com.infamous.infamous_legends.init.EntityTypeInit;
 import com.infamous.infamous_legends.init.ModelLayerInit;
 import com.infamous.infamous_legends.models.BigFungusThrowerModel;
@@ -15,6 +14,8 @@ import com.infamous.infamous_legends.models.PiglinBombModel;
 import com.infamous.infamous_legends.models.PiglinBruiserModel;
 import com.infamous.infamous_legends.models.PiglinEngineerModel;
 import com.infamous.infamous_legends.models.PigmadilloModel;
+import com.infamous.infamous_legends.models.PlankGolemBoltModel;
+import com.infamous.infamous_legends.models.PlankGolemModel;
 import com.infamous.infamous_legends.models.PortalGuardModel;
 import com.infamous.infamous_legends.models.PortalGuardWreckingBallModel;
 import com.infamous.infamous_legends.models.SporeMedicModel;
@@ -32,6 +33,8 @@ import com.infamous.infamous_legends.renderers.PiglinBombRenderer;
 import com.infamous.infamous_legends.renderers.PiglinBruiserRenderer;
 import com.infamous.infamous_legends.renderers.PiglinEngineerRenderer;
 import com.infamous.infamous_legends.renderers.PigmadilloRenderer;
+import com.infamous.infamous_legends.renderers.PlankGolemBoltRenderer;
+import com.infamous.infamous_legends.renderers.PlankGolemRenderer;
 import com.infamous.infamous_legends.renderers.PortalGuardRenderer;
 import com.infamous.infamous_legends.renderers.PortalGuardWreckingBallRenderer;
 import com.infamous.infamous_legends.renderers.SporeMedicRenderer;
@@ -91,11 +94,15 @@ public class ClientEventBusSubscriber {
         event.registerLayerDefinition(ModelLayerInit.COBBLESTONE_GOLEM, CobblestoneGolemModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.COBBLESTONE_GOLEM_INNER_ARMOUR, ClientEventBusSubscriber::createInnerArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.COBBLESTONE_GOLEM_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
+        event.registerLayerDefinition(ModelLayerInit.PLANK_GOLEM, PlankGolemModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.PLANK_GOLEM_INNER_ARMOUR, ClientEventBusSubscriber::createInnerArmourLayer);
+        event.registerLayerDefinition(ModelLayerInit.PLANK_GOLEM_OUTER_ARMOUR, ClientEventBusSubscriber::createOuterArmourLayer);
         event.registerLayerDefinition(ModelLayerInit.THROWN_BLAZE_ROD, ThrownBlazeRodModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PIGLIN_BOMB, PiglinBombModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.EXPLOSIVE_FUNGUS, ExplosiveFungusModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.PORTAL_GUARD_WRECKING_BALL, PortalGuardWreckingBallModel::createBodyLayer);
         event.registerLayerDefinition(ModelLayerInit.MAGMA_CUBE_PROJECTILE, MagmaCubeProjectileModel::createBodyLayer);
+        event.registerLayerDefinition(ModelLayerInit.PLANK_GOLEM_BOLT, PlankGolemBoltModel::createBodyLayer);
     }
 	
 	public static LayerDefinition createInnerArmourLayer() {
@@ -120,10 +127,13 @@ public class ClientEventBusSubscriber {
 		event.registerEntityRenderer(EntityTypeInit.PIGMADILLO.get(), PigmadilloRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PORTAL_GUARD.get(), PortalGuardRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.COBBLESTONE_GOLEM.get(), CobblestoneGolemRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.PLANK_GOLEM.get(), PlankGolemRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.THROWN_BLAZE_ROD.get(), ThrownBlazeRodRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PIGLIN_BOMB.get(), PiglinBombRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.EXPLOSIVE_FUNGUS.get(), ExplosiveFungusRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.PORTAL_GUARD_WRECKING_BALL.get(), PortalGuardWreckingBallRenderer::new);
 		event.registerEntityRenderer(EntityTypeInit.MAGMA_CUBE_PROJECTILE.get(), MagmaCubeProjectileRenderer::new);
+		event.registerEntityRenderer(EntityTypeInit.PLANK_GOLEM_BOLT.get(), PlankGolemBoltRenderer::new);
 	}
 	
 	@SubscribeEvent

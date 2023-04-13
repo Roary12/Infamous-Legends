@@ -12,6 +12,8 @@ import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.entities.Pigmadillo;
+import com.infamous.infamous_legends.entities.PlankGolem;
+import com.infamous.infamous_legends.entities.PlankGolemBolt;
 import com.infamous.infamous_legends.entities.PortalGuard;
 import com.infamous.infamous_legends.entities.PortalGuardWreckingBall;
 import com.infamous.infamous_legends.entities.SporeMedic;
@@ -83,6 +85,10 @@ public class EntityTypeInit {
 			() -> EntityType.Builder.<CobblestoneGolem>of(CobblestoneGolem::new, MobCategory.MISC).sized(0.9F, 1.2F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "cobblestone_golem").toString()));
 	
+	public static final RegistryObject<EntityType<PlankGolem>> PLANK_GOLEM = ENTITY_TYPES.register("plank_golem",
+			() -> EntityType.Builder.<PlankGolem>of(PlankGolem::new, MobCategory.MISC).sized(0.9F, 1.3F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "plank_golem").toString()));
+	
 	// PROJECTILES
 
 	public static final RegistryObject<EntityType<ThrownBlazeRod>> THROWN_BLAZE_ROD = ENTITY_TYPES.register("thrown_blaze_rod",
@@ -104,4 +110,8 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<MagmaCubeProjectile>> MAGMA_CUBE_PROJECTILE = ENTITY_TYPES.register("magma_cube_projectile",
 			() -> EntityType.Builder.<MagmaCubeProjectile>of(MagmaCubeProjectile::new, MobCategory.MISC).sized(1.25F, 1.25F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "magma_cube_projectile").toString()));
+	
+	public static final RegistryObject<EntityType<PlankGolemBolt>> PLANK_GOLEM_BOLT = ENTITY_TYPES.register("plank_golem_bolt",
+			() -> EntityType.Builder.<PlankGolemBolt>of(PlankGolemBolt::new, MobCategory.MISC).sized(0.5F, 0.5F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "plank_golem_bolt").toString()));
 }
