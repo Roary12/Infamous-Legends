@@ -5,6 +5,7 @@ import com.infamous.infamous_legends.entities.BigFungusThrower;
 import com.infamous.infamous_legends.entities.BlazeRunt;
 import com.infamous.infamous_legends.entities.CobblestoneGolem;
 import com.infamous.infamous_legends.entities.ExplosiveFungus;
+import com.infamous.infamous_legends.entities.GrindstoneGolem;
 import com.infamous.infamous_legends.entities.LavaLauncher;
 import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.MagmaCubeProjectile;
@@ -88,6 +89,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<PlankGolem>> PLANK_GOLEM = ENTITY_TYPES.register("plank_golem",
 			() -> EntityType.Builder.<PlankGolem>of(PlankGolem::new, MobCategory.MISC).sized(0.9F, 1.3F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "plank_golem").toString()));
+	
+	public static final RegistryObject<EntityType<GrindstoneGolem>> GRINDSTONE_GOLEM = ENTITY_TYPES.register("grindstone_golem",
+			() -> EntityType.Builder.<GrindstoneGolem>of(GrindstoneGolem::new, MobCategory.MISC).sized(0.9F, 1.3F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "grindstone_golem").toString()));
 	
 	// PROJECTILES
 

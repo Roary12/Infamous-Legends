@@ -17,6 +17,7 @@
 	"entity.infamous_legends.magma_cube_projectile" : "Magma Cube Projectile",
 	"entity.infamous_legends.cobblestone_golem" : "Cobblestone Golem",
 	"entity.infamous_legends.plank_golem" : "Plank Golem",
+	"entity.infamous_legends.grindstone_golem" : "Grindstone Golem",
 	"entity.infamous_legends.plank_golem_bolt" : "Plank Golem Bolt",
 	
 	"item.infamous_legends.mace_runt_spawn_egg" : "Mace Runt Spawn Egg",
@@ -32,6 +33,7 @@
 	"item.infamous_legends.portal_guard_spawn_egg" : "Portal Guard Spawn Egg",
 	"item.infamous_legends.cobblestone_golem_spawn_egg" : "Cobblestone Golem Spawn Egg",
 	"item.infamous_legends.plank_golem_spawn_egg" : "Plank Golem Spawn Egg",
+	"item.infamous_legends.grindstone_golem_spawn_egg" : "Grindstone Golem Spawn Egg",
 	
 	"item.infamous_legends.piglin_mace" : "Piglin Mace",
 	"item.infamous_legends.piglin_saw" : "Piglin Saw",
