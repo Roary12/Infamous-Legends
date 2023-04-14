@@ -9,6 +9,7 @@ import com.infamous.infamous_legends.entities.GrindstoneGolem;
 import com.infamous.infamous_legends.entities.LavaLauncher;
 import com.infamous.infamous_legends.entities.MaceRunt;
 import com.infamous.infamous_legends.entities.MagmaCubeProjectile;
+import com.infamous.infamous_legends.entities.MossyGolem;
 import com.infamous.infamous_legends.entities.PiglinBomb;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
@@ -93,6 +94,10 @@ public class EntityTypeInit {
 	public static final RegistryObject<EntityType<GrindstoneGolem>> GRINDSTONE_GOLEM = ENTITY_TYPES.register("grindstone_golem",
 			() -> EntityType.Builder.<GrindstoneGolem>of(GrindstoneGolem::new, MobCategory.MISC).sized(0.9F, 1.3F)
 					.build(new ResourceLocation(InfamousLegends.MOD_ID, "grindstone_golem").toString()));
+	
+	public static final RegistryObject<EntityType<MossyGolem>> MOSSY_GOLEM = ENTITY_TYPES.register("mossy_golem",
+			() -> EntityType.Builder.<MossyGolem>of(MossyGolem::new, MobCategory.MISC).sized(0.9F, 1.3F)
+					.build(new ResourceLocation(InfamousLegends.MOD_ID, "mossy_golem").toString()));
 	
 	// PROJECTILES
 

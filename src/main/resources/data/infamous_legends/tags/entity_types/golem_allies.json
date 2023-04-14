@@ -1,8 +1,6 @@
 {
 	"replace": false,
 	"values": [
-		"minecraft:wither_skeleton",
-		"minecraft:wither",
 		"minecraft:iron_golem",
 		"infamous_legends:cobblestone_golem",
 		"infamous_legends:plank_golem",

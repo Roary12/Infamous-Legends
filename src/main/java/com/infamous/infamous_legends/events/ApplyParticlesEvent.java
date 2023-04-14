@@ -5,6 +5,8 @@ import com.infamous.infamous_legends.init.ParticleTypeInit;
 import com.infamous.infamous_legends.particles.DustParticle;
 import com.infamous.infamous_legends.particles.SparkParticle;
 import com.infamous.infamous_legends.particles.SporeCloudParticle;
+import com.infamous.infamous_legends.particles.WaterParticle;
+import com.infamous.infamous_legends.particles.WaterSplashParticle;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
@@ -22,5 +24,9 @@ public class ApplyParticlesEvent {
                 DustParticle.Provider::new);
     	event.register(ParticleTypeInit.SPORE_CLOUD.get(),
                 SporeCloudParticle.Provider::new);
+    	event.register(ParticleTypeInit.WATER_SPLASH.get(),
+                WaterSplashParticle.Provider::new);
+    	event.register(ParticleTypeInit.WATER.get(),
+                WaterParticle.Provider::new);
     }
 }

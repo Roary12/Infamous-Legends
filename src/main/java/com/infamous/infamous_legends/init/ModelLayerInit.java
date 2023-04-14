@@ -50,6 +50,9 @@ public class ModelLayerInit {
     public static final ModelLayerLocation GRINDSTONE_GOLEM = register("grindstone_golem");
     public static final ModelLayerLocation GRINDSTONE_GOLEM_INNER_ARMOUR = register("grindstone_golem_inner_armour");
     public static final ModelLayerLocation GRINDSTONE_GOLEM_OUTER_ARMOUR = register("grindstone_golem_outer_armour");
+    public static final ModelLayerLocation MOSSY_GOLEM = register("mossy_golem");
+    public static final ModelLayerLocation MOSSY_GOLEM_INNER_ARMOUR = register("mossy_golem_inner_armour");
+    public static final ModelLayerLocation MOSSY_GOLEM_OUTER_ARMOUR = register("mossy_golem_outer_armour");
     public static final ModelLayerLocation THROWN_BLAZE_ROD = register("thrown_blaze_rod");
     public static final ModelLayerLocation PIGLIN_BOMB = register("piglin_bomb");
     public static final ModelLayerLocation EXPLOSIVE_FUNGUS = register("explosive_fungus");

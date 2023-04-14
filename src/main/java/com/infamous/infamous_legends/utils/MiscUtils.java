@@ -120,6 +120,16 @@ public class MiscUtils {
 		}
 	}
 	
+	public static boolean golemAllies(Entity golem, Entity target) {
+		if (target.getTeam() == null && golem.getTeam() == null && target.getType().is(TagInit.EntityTypes.GOLEM_ALLIES)) {
+			return true;
+		} else if (golem.getTeam() != null && target.getTeam() != null && golem.getTeam() == target.getTeam()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public static boolean nonEnemy(Entity mob, Entity target) {
 		if (target.getTeam() == null && mob.getTeam() == null && !(target instanceof Enemy)) {
 			return true;

@@ -21,6 +21,18 @@ public class SineWaveAnimationUtils {
 		affectModelPartBasedOnMotionType(modelPart, rotationMotion * amountMultiplier, motion * amountMultiplier, motionType);
 	}
 	
+	public static void addConstantMotionToModelPart(ModelPart modelPart, float speed, float tick, float speedMultiplier, float amountMultiplier, SineWaveMotionTypes motionType) {
+		float rotationMotion = tick * (speed * speedMultiplier);
+		
+		float motion = tick * (speed * speedMultiplier);
+		
+		if (motionType == SineWaveMotionTypes.POSITION_Y) {
+			motion = -motion;
+		}
+		
+		affectModelPartBasedOnMotionType(modelPart, rotationMotion * amountMultiplier, motion * amountMultiplier, motionType);
+	}
+	
 	public static void adjustPositionOfModelPart(ModelPart modelPart, float amount, float amountMultiplier, SineWaveMotionTypes motionType) {
 		float newAmount = amount;
 		float newPositionAmount = amount;

@@ -50,7 +50,7 @@ public class CobblestoneGolem extends AbstractGolem {
 		this.goalSelector.addGoal(0, new CobblestoneGolemMeleeAttackGoal(this));
 		this.goalSelector.addGoal(1, new LookAtTargetGoal(this));
 		this.goalSelector.addGoal(2, new ApproachTargetGoal(this, 0, 1.2, true));
-		this.goalSelector.addGoal(2, new MoveBackToVillageGoal(this, 0.6D, false));
+		this.goalSelector.addGoal(3, new MoveBackToVillageGoal(this, 0.6D, false));
 		this.goalSelector.addGoal(4, new GolemRandomStrollInVillageGoal(this, 0.6D));
 		this.goalSelector.addGoal(7, new LookAtPlayerGoal(this, Player.class, 6.0F));
 		this.goalSelector.addGoal(8, new RandomLookAroundGoal(this));

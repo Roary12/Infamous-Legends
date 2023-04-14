@@ -6,6 +6,7 @@ import com.infamous.infamous_legends.entities.CobblestoneGolem;
 import com.infamous.infamous_legends.entities.GrindstoneGolem;
 import com.infamous.infamous_legends.entities.LavaLauncher;
 import com.infamous.infamous_legends.entities.MaceRunt;
+import com.infamous.infamous_legends.entities.MossyGolem;
 import com.infamous.infamous_legends.entities.PiglinBruiser;
 import com.infamous.infamous_legends.entities.PiglinEngineer;
 import com.infamous.infamous_legends.entities.Pigmadillo;
@@ -71,6 +72,7 @@ public class InfamousLegends {
 	        event.put(EntityTypeInit.COBBLESTONE_GOLEM.get(), CobblestoneGolem.createAttributes().build());
 	        event.put(EntityTypeInit.PLANK_GOLEM.get(), PlankGolem.createAttributes().build());
 	        event.put(EntityTypeInit.GRINDSTONE_GOLEM.get(), GrindstoneGolem.createAttributes().build());
+	        event.put(EntityTypeInit.MOSSY_GOLEM.get(), MossyGolem.createAttributes().build());
 	}
 	
     public void commonSetup(final FMLCommonSetupEvent event) {    

@@ -78,6 +78,10 @@ public class ItemInit {
 			() -> new ForgeSpawnEggItem(EntityTypeInit.GRINDSTONE_GOLEM, 0x2f4a4b, 0x31c5b8,
 					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
 	
+	public static final RegistryObject<Item> MOSSY_GOLEM_SPAWN_EGG = ITEMS.register("mossy_golem_spawn_egg",
+			() -> new ForgeSpawnEggItem(EntityTypeInit.MOSSY_GOLEM, 0x90919b, 0xa2bf62,
+					new Item.Properties().tab(InfamousLegendsMobsItemGroup.INFAMOUS_LEGENDS_MOBS)));
+	
 	// WEAPONS
 	
 	public static final RegistryObject<Item> PIGLIN_MACE = ITEMS.register("piglin_mace",
