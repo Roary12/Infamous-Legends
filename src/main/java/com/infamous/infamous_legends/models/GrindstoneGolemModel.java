@@ -99,7 +99,7 @@ public class GrindstoneGolemModel<T extends GrindstoneGolem> extends Hierarchica
 		this.root().translateAndRotate(stack);
 		this.everything.translateAndRotate(stack);
 		this.getArm(arm).translateAndRotate(stack);
-		stack.translate(arm == HumanoidArm.RIGHT ? -1.5F / 16.0F : 1.5F / 16.0F, 0 / 16.0F, -1 / 16.0F);
+		stack.translate(arm == HumanoidArm.RIGHT ? -1.5F / 16.0F : 1.5F / 16.0F, 3 / 16.0F, -1 / 16.0F);
 	}
 
 	@Override
@@ -116,8 +116,8 @@ public class GrindstoneGolemModel<T extends GrindstoneGolem> extends Hierarchica
 			this.root().translateAndRotate(stack);
 			this.everything.translateAndRotate(stack);
 			this.body.translateAndRotate(stack);
-			stack.scale(1.5F, 1.5F, 1.5F);
-			stack.translate(0, -1 / 16.0F, 0);
+			stack.scale(1.75F, 1.75F, 1.75F);
+			stack.translate(0, 2 / 16.0F, 0);
 			break;
 		case BODY:
 			stack.scale(0, 0, 0);
@@ -126,14 +126,14 @@ public class GrindstoneGolemModel<T extends GrindstoneGolem> extends Hierarchica
 			this.root().translateAndRotate(stack);
 			this.everything.translateAndRotate(stack);
 			this.rightArm.translateAndRotate(stack);
-			stack.translate(5 / 16.0F, -2 / 16.0F, 0);
+			stack.translate(6 / 16.0F, -2 / 16.0F, 0);
 			stack.scale(1.35F, 1.35F, 1.35F);
 			break;
 		case LEFT_ARM:
 			this.root().translateAndRotate(stack);
 			this.everything.translateAndRotate(stack);
 			this.leftArm.translateAndRotate(stack);
-			stack.translate(-5 / 16.0F, -2 / 16.0F, 0);
+			stack.translate(-6 / 16.0F, -2 / 16.0F, 0);
 			stack.scale(1.35F, 1.35F, 1.35F);
 			break;
 		case RIGHT_LEG:
