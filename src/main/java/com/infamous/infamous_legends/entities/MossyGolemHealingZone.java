@@ -5,6 +5,8 @@ import com.infamous.infamous_legends.utils.MiscUtils;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Pose;
@@ -31,7 +33,13 @@ public class MossyGolemHealingZone extends PartEntity<MossyGolem> {
 				if (entity != this.parentMob && MiscUtils.golemAllies(this.parentMob, entity)) {
 					if (entity.tickCount % 10 == 0) {
 						entity.heal(1);
+						if (entity.isOnFire()) {
+							entity.clearFire();
+							entity.playSound(SoundEvents.GENERIC_EXTINGUISH_FIRE);
+						}
 					}
+				} else if (entity != this.parentMob && !MiscUtils.golemAllies(this.parentMob, entity) && entity.isSensitiveToWater() && entity.tickCount % 10 == 0) {
+					entity.hurt(DamageSource.DROWN, 1.0F);
 				}
 			}
 		}
